@@ -17,7 +17,7 @@
 - Corrected the model weight handling to ensure proper communication between the server and clients.
 - Ensured that the client can handle receiving the model from the server correctly.
 
-## [0.1.0] - 2025-03-09
+## [0.0.1] - 2025-03-09
 ### Initial Release
 - Basic implementation of federated learning with Kafka.
 - Server and client communication established.
