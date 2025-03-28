@@ -55,6 +55,24 @@ class FederatedServer:
 
     def federated_averaging(self, client_updates):
         # Perform federated averaging
+        logging.info("Performing federated averaging")
+        logging.info(f"Client updates received: {client_updates}")
+        
+        if client_updates is None or len(client_updates) == 0:
+            logging.warning("No client updates received for federated averaging")
+            return self.global_model
+        client_updates = np.array(client_updates)
+        if client_updates.ndim == 1:
+            client_updates = client_updates.reshape(1, -1)
+        if client_updates.shape[0] == 1:
+            return client_updates[0]
+        if client_updates.shape[1] != len(self.global_model):
+            logging.error("Client updates shape mismatch with global model")
+            return self.global_model
+        # Perform averaging
+        client_updates = np.array(client_updates)
+        client_updates = np.mean(client_updates, axis=0)
+        # Check if client_updates is empty
         if not client_updates:
             return self.global_model
         self.global_model = np.mean(client_updates, axis=0)

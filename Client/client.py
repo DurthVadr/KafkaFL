@@ -8,6 +8,8 @@ import numpy as np
 import logging
 
 class FederatedClient:
+    _client_id_counter = 0  # Class-level counter for unique client IDs
+
     def __init__(self, bootstrap_servers, update_topic, model_topic):
         self.consumer = KafkaConsumer(
             model_topic,
@@ -19,9 +21,17 @@ class FederatedClient:
             value_serializer=lambda v: v.tobytes()
         )
         self.update_topic = update_topic
-        self.client_id = None
+        self.client_id = FederatedClient.generate_client_id()  # Assign unique ID
         self.model = None
         self.X, self.y = self.load_data_cifar10()
+        
+    @classmethod
+    def generate_client_id(cls):
+        """Generates a unique client ID."""
+        client_id = cls._client_id_counter
+        cls._client_id_counter += 1
+        return client_id
+    
 
     def load_data_cifar10(self):
         (X_train, y_train), (X_test, y_test) = cifar10.load_data()
@@ -58,15 +68,20 @@ class FederatedClient:
         # Send a registration request to the server
         self.producer.send(self.update_topic, np.array([0]))  # Sending a dummy message for registration
         self.producer.flush()
-        logging.info("Client: Registration request sent to server")
+        logging.info(f"Client {self.client_id}: Registration request sent to server")
         
         
         
     def start(self):
+        logging.info(f"Client {self.client_id}: Starting")
         self.register_client()
+        logging.info(f"Client {self.client_id}: Waiting for model from server")
         self.consume_model_from_topic()
+        logging.info(f"Client {self.client_id}: Received model from server")
         self.train()
+        logging.info(f"Client {self.client_id}: Training completed")
         self.send_update()
+        logging.info(f"Client {self.client_id}: Update sent to server")
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
@@ -77,6 +92,6 @@ if __name__ == "__main__":
         bootstrap_servers='localhost:9092',
         update_topic='update_topic',
         model_topic='model_topic',
-        client_id=client_id
+        
     )
     client.start()
