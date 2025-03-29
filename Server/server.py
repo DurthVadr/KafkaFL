@@ -1,24 +1,52 @@
+import os
+import time
+import logging
 from kafka import KafkaConsumer, KafkaProducer
 import numpy as np
-import logging
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from kafka.errors import KafkaError, NoBrokersAvailable
 
 class FederatedServer:
     def __init__(self, bootstrap_servers, model_topic, update_topic):
-        self.consumer = KafkaConsumer(
-            update_topic,
-            bootstrap_servers=bootstrap_servers,
-            value_deserializer=lambda m: np.frombuffer(m, dtype=np.float32)
-        )
-        self.producer = KafkaProducer(
-            bootstrap_servers=bootstrap_servers,
-            value_serializer=lambda v: v.tobytes()
-        )
+        self.bootstrap_servers = bootstrap_servers
+        self.consumer = None
+        self.producer = None
         self.model_topic = model_topic
         self.global_model = self.initialize_global_model_cifar10()
         self.num_rounds = 10
         self.client_id_counter = 0  # Counter for client IDs
+
+    def connect_kafka(self):
+        max_attempts = 10
+        attempt = 0
+        initial_delay = 15  # Wait longer initially
+        retry_delay = 10
+        logging.info(f"Waiting {initial_delay} seconds before first Kafka connection attempt...")
+        time.sleep(initial_delay)
+        while attempt < max_attempts:
+            try:
+                self.consumer = KafkaConsumer(
+                    'update_topic',
+                    bootstrap_servers=self.bootstrap_servers,
+                    value_deserializer=lambda m: np.frombuffer(m, dtype=np.float32)
+                )
+                self.producer = KafkaProducer(
+                    bootstrap_servers=self.bootstrap_servers,
+                    value_serializer=lambda v: v.tobytes()
+                )
+                logging.info("Successfully connected to Kafka")
+                return True
+            except NoBrokersAvailable as e:  # Catch NoBrokersAvailable specifically
+                logging.warning(f"No brokers available (attempt {attempt + 1}/{max_attempts}): {e}")
+                attempt += 1
+                time.sleep(retry_delay)  # Wait longer before retrying
+            except KafkaError as e:
+                logging.warning(f"Failed to connect to Kafka (attempt {attempt + 1}/{max_attempts}): {e}")
+                attempt += 1
+                time.sleep(retry_delay)  # Wait longer before retrying
+        logging.error("Failed to connect to Kafka after multiple attempts")
+        return False
 
     def initialize_global_model_cifar10(self):
         # Initialize global model for CIFAR-10 dataset
@@ -85,6 +113,10 @@ class FederatedServer:
         logging.info("Global model sent to all clients")
 
     def start(self):
+        if not self.connect_kafka():
+            logging.error("Failed to start server due to Kafka connection issues")
+            return
+
         for round in range(self.num_rounds):
             logging.info(f"Round {round + 1}/{self.num_rounds}")
             client_updates = []
@@ -106,8 +138,9 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     logging.info("Server started")
     
+    bootstrap_servers = os.environ.get("BOOTSTRAP_SERVERS", "localhost:9092")
     server = FederatedServer(
-        bootstrap_servers='localhost:9092',
+        bootstrap_servers=bootstrap_servers,
         model_topic='model_topic',
         update_topic='update_topic',
     )
