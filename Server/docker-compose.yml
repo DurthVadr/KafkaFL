@@ -49,3 +49,14 @@ services:
       - kafka-net
     environment:
       BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
+
+
+  #TODO: find a better way to use clients
+  client:  # Add your client as a service
+    build: ./client  
+    depends_on:
+      - kafka
+    networks:
+      - kafka-net
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
