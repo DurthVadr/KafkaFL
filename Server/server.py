@@ -117,22 +117,32 @@ class FederatedServer:
             logging.error("Failed to start server due to Kafka connection issues")
             return
 
-        for round in range(self.num_rounds):
-            logging.info(f"Round {round + 1}/{self.num_rounds}")
+        try:
+            for round in range(self.num_rounds):
+                logging.info(f"Round {round + 1}/{self.num_rounds}")
             client_updates = []
 
-            # Collect updates from clients
+            # Collect updates from clients - continuously listen for messages
+            self.consumer.subscribe(['update_topic'])  # Ensure the consumer is subscribed
             for message in self.consumer:
                 client_update = message.value
                 client_id = self.assign_client_id()  # Assign client ID upon receiving update
                 client_updates.append(client_update)
                 logging.info(f"Server: Received update from client {client_id}: {client_update}")
 
+                #  Consider adding a break condition if you want to limit updates per round
+                #  For example, break after receiving a certain number of updates
+
             # Update global model
             self.global_model = self.federated_averaging(client_updates)
             self.send_model()
             logging.info(f"Round {round + 1} completed")
 
+        except Exception as e:
+            logging.error(f"An error occurred: {e}")
+        finally:
+            self.consumer.close()  # Ensure the consumer is closed properly
+            self.producer.close()
 if __name__ == "__main__":
     
     logging.basicConfig(level=logging.INFO)

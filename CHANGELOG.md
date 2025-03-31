@@ -9,6 +9,7 @@
 - Added logging for better debugging and tracking of model updates.
 
 ### Changed
+- Server dockerized to correctly communicate with kafa
 - Modified the server to dynamically assign client IDs upon receiving updates.
 - Updated the client to send a registration request to the server upon startup.
 - Changed the model serialization and deserialization methods to ensure compatibility with Kafka.
@@ -16,6 +17,13 @@
 ### Fixed
 - Corrected the model weight handling to ensure proper communication between the server and clients.
 - Ensured that the client can handle receiving the model from the server correctly.
+
+## [0.0.2] - 2025-03-31
+### Server fixed and server dockerized
+- Server correctly communicates with kafka broker
+- Server can create topics and iterate if no client connected
+- Kafka and server has healtchecking functionalities
+
 
 ## [0.0.1] - 2025-03-09
 ### Initial Release
