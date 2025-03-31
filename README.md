@@ -25,19 +25,15 @@ Make sure you have the required Python packages installed. You can use pip to in
 pip install numpy tensorflow scikit-learn kafka-python
 ```
 
-### 2. Run Kafka
-You can run Kafka using Docker with the provided `docker-compose.yml` file. Navigate to the directory containing the file and run:
+### 2. Run Kafka and server
+You can run Kafka and Server with single compose command using Docker with the provided `docker-compose.yml` file. Navigate to the directory containing the file and run:
 
 ```bash
-docker-compose up
+docker compose build
+docker compose up
 ```
 
-### 3. Start the Server
-In one terminal, run the server:
 
-```bash
-python server.py
-```
 
 ### 4. Start the Client
 In another terminal, run the client:
@@ -57,7 +53,7 @@ You can run multiple instances of the client to simulate multiple clients in the
 
 # To Do List
 
-1. Fix the `WARNING:kafka.conn:DNS lookup failed for 7c96e78b7cd5:9092, exception was [Errno 8] nodename nor servname provided, or not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?` error and succesfully implement synchronous federated learning
+1. fix the server client communication
 2. Get the synch fl benchmarks and compare with Flower 
 3. kafka-pyhon library is very weak in async tasks. It is not like the official java library. Check for aiokafka and if async is not possible with current architecture change the code than library.
 4. Check for async methods like Heartbeat or buffer. There are papers
