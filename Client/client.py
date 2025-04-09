@@ -249,7 +249,7 @@ class FederatedClient:
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
-    bootstrap_servers = os.environ.get("BOOTSTRAP_SERVERS", "localhost:9092")
+    bootstrap_servers = os.environ.get("BOOTSTRAP_SERVERS", "localhost:9094")
     client_id = os.environ.get("CLIENT_ID", None)
 
     if client_id:

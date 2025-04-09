@@ -18,16 +18,19 @@ cd ../Client
 
 # Run client 1
 export CLIENT_ID=1
+export BOOTSTRAP_SERVERS=localhost:9094
 python client.py &
 CLIENT1_PID=$!
 
 # Run client 2
 export CLIENT_ID=2
+export BOOTSTRAP_SERVERS=localhost:9094
 python client.py &
 CLIENT2_PID=$!
 
 # Run client 3
 export CLIENT_ID=3
+export BOOTSTRAP_SERVERS=localhost:9094
 python client.py &
 CLIENT3_PID=$!
 
