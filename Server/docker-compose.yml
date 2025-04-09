@@ -39,7 +39,7 @@ services:
       DYNAMIC_CONFIG_ENABLED: "true"
     networks:
       - kafka-net
-    
+
 
   server:  # Add your server as a service
     build: .  # Use the Dockerfile in the current directory
@@ -51,12 +51,36 @@ services:
       BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
 
 
-  #TODO: find a better way to use clients
-  client:  # Add your client as a service
-    build: ./client  
+  # Run 3 client instances for federated learning
+  client1:  # Client 1
+    build: ../Client
     depends_on:
       - kafka
+      - server
     networks:
       - kafka-net
     environment:
       BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
+      CLIENT_ID: "1"
+
+  client2:  # Client 2
+    build: ../Client
+    depends_on:
+      - kafka
+      - server
+    networks:
+      - kafka-net
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
+      CLIENT_ID: "2"
+
+  client3:  # Client 3
+    build: ../Client
+    depends_on:
+      - kafka
+      - server
+    networks:
+      - kafka-net
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
+      CLIENT_ID: "3"

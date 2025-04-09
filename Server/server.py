@@ -13,6 +13,7 @@ class FederatedServer:
         self.consumer = None
         self.producer = None
         self.model_topic = model_topic
+        self.update_topic = update_topic
         self.global_model = self.initialize_global_model_cifar10()
         self.num_rounds = 10
         self.client_id_counter = 0  # Counter for client IDs
@@ -63,7 +64,7 @@ class FederatedServer:
         outputs = Dense(num_classes, activation='softmax')(x)
         model = Model(inputs=inputs, outputs=outputs)
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-        
+
         logging.info("Global Model CIFAR-10 initialized. Weights: {}".format(model.get_weights()))
         return model.get_weights()
 
@@ -73,8 +74,8 @@ class FederatedServer:
         global_model = np.random.rand(10)
         logging.info(f"Global model initialized with random weights: {global_model}")
         return global_model
-    
-    
+
+
     def assign_client_id(self):
         # Assign a unique client ID
         client_id = self.client_id_counter
@@ -82,35 +83,99 @@ class FederatedServer:
         return client_id
 
     def federated_averaging(self, client_updates):
-        # Perform federated averaging
+        # Perform federated averaging on model weights
         logging.info("Performing federated averaging")
-        logging.info(f"Client updates received: {client_updates}")
-        
+        logging.info(f"Number of client updates received: {len(client_updates)}")
+
         if client_updates is None or len(client_updates) == 0:
             logging.warning("No client updates received for federated averaging")
             return self.global_model
-        client_updates = np.array(client_updates)
-        if client_updates.ndim == 1:
-            client_updates = client_updates.reshape(1, -1)
-        if client_updates.shape[0] == 1:
-            return client_updates[0]
-        if client_updates.shape[1] != len(self.global_model):
-            logging.error("Client updates shape mismatch with global model")
-            return self.global_model
-        # Perform averaging
-        client_updates = np.array(client_updates)
-        client_updates = np.mean(client_updates, axis=0)
-        # Check if client_updates is empty
-        if not client_updates:
-            return self.global_model
-        self.global_model = np.mean(client_updates, axis=0)
-        logging.info(f"Global model updated with federated averaging: {self.global_model}")
+
+        # For TensorFlow model weights, we need to average each layer separately
+        # Each client update is a list of numpy arrays (one per layer)
+        averaged_weights = []
+
+        # Get the number of layers in the model
+        num_layers = len(self.global_model)
+
+        # For each layer in the model
+        for i in range(num_layers):
+            # Extract the weights for this layer from all clients
+            layer_updates = [update[i] for update in client_updates]
+            # Average the weights for this layer
+            layer_avg = np.mean(layer_updates, axis=0)
+            averaged_weights.append(layer_avg)
+
+        self.global_model = averaged_weights
+        logging.info(f"Global model updated with federated averaging. Model has {len(self.global_model)} layers.")
         return self.global_model
 
     def send_model(self):
-        self.producer.send(self.model_topic, np.array(self.global_model).astype(np.float32))
+        # Serialize the model weights
+        # We need to flatten and concatenate all weights with metadata to reconstruct
+        # First, calculate total size and create a buffer
+        total_size = sum(w.size for w in self.global_model)
+        buffer = np.zeros(total_size + len(self.global_model) * 2, dtype=np.float32)
+
+        # Store metadata and weights in the buffer
+        idx = 0
+        for _, weights in enumerate(self.global_model):
+            # Store shape information (limited to 2D for simplicity)
+            if weights.ndim == 1:
+                buffer[idx] = weights.shape[0]
+                buffer[idx+1] = 1
+                idx += 2
+            else:
+                buffer[idx] = weights.shape[0]
+                buffer[idx+1] = weights.shape[1] if weights.ndim > 1 else 1
+                idx += 2
+
+            # Flatten and store the weights
+            flat_weights = weights.flatten()
+            buffer[idx:idx+flat_weights.size] = flat_weights
+            idx += flat_weights.size
+
+        # Send the serialized weights
+        self.producer.send(self.model_topic, buffer)
         self.producer.flush()
-        logging.info("Global model sent to all clients")
+        logging.info(f"Global model sent to all clients. Buffer size: {buffer.size}")
+
+    def deserialize_client_update(self, buffer):
+        # Deserialize the client update from the buffer
+        # Extract metadata and reconstruct the weights
+        weights = []
+        idx = 0
+
+        while idx < buffer.size:
+            # Check if we have enough data for metadata
+            if idx + 2 > buffer.size:
+                break
+
+            # Extract shape information
+            shape_dim1 = int(buffer[idx])
+            shape_dim2 = int(buffer[idx+1])
+            idx += 2
+
+            # Calculate the size of this weight matrix
+            weight_size = shape_dim1 * shape_dim2
+
+            # Check if we have enough data for the weights
+            if idx + weight_size > buffer.size:
+                break
+
+            # Extract and reshape the weights
+            flat_weights = buffer[idx:idx+weight_size]
+            if shape_dim2 == 1:
+                # 1D weights
+                weight_matrix = flat_weights
+            else:
+                # 2D weights
+                weight_matrix = flat_weights.reshape(shape_dim1, shape_dim2)
+
+            weights.append(weight_matrix)
+            idx += weight_size
+
+        return weights
 
     def start(self):
         if not self.connect_kafka():
@@ -118,41 +183,70 @@ class FederatedServer:
             return
 
         try:
-            for round in range(self.num_rounds):
-                logging.info(f"Round {round + 1}/{self.num_rounds}")
-            client_updates = []
-
-            # Collect updates from clients - continuously listen for messages
-            self.consumer.subscribe(['update_topic'])  # Ensure the consumer is subscribed
-            for message in self.consumer:
-                client_update = message.value
-                client_id = self.assign_client_id()  # Assign client ID upon receiving update
-                client_updates.append(client_update)
-                logging.info(f"Server: Received update from client {client_id}: {client_update}")
-
-                #  Consider adding a break condition if you want to limit updates per round
-                #  For example, break after receiving a certain number of updates
-
-            # Update global model
-            self.global_model = self.federated_averaging(client_updates)
+            # Send initial model to clients
+            logging.info("Sending initial model to clients")
             self.send_model()
-            logging.info(f"Round {round + 1} completed")
+
+            for round in range(self.num_rounds):
+                logging.info(f"\n\n===== Starting Round {round + 1}/{self.num_rounds} =====\n")
+                client_updates = []
+                clients_this_round = 0
+                max_clients_per_round = 3  # We want exactly 3 clients
+
+                # Collect updates from clients
+                self.consumer.subscribe([self.update_topic])  # Ensure the consumer is subscribed
+
+                # Set a timeout for collecting updates (30 seconds per client)
+                self.consumer.poll(0)  # Clear any old messages
+
+                # Wait for updates from clients with a timeout
+                timeout_ms = 30000 * max_clients_per_round  # 30 seconds per client
+                start_time = time.time()
+
+                while clients_this_round < max_clients_per_round and (time.time() - start_time) < (timeout_ms/1000):
+                    # Poll for messages with a timeout
+                    for _, messages in self.consumer.poll(timeout_ms=5000).items():
+                        for message in messages:
+                            # Deserialize the client update
+                            client_update = self.deserialize_client_update(message.value)
+                            client_id = self.assign_client_id()  # Assign client ID upon receiving update
+                            client_updates.append(client_update)
+                            clients_this_round += 1
+                            logging.info(f"Server: Received update from client {client_id} (Client {clients_this_round}/{max_clients_per_round})")
+
+                            if clients_this_round >= max_clients_per_round:
+                                break
+                        if clients_this_round >= max_clients_per_round:
+                            break
+
+                logging.info(f"Collected {clients_this_round} client updates for round {round + 1}")
+
+                if clients_this_round > 0:
+                    # Update global model
+                    self.global_model = self.federated_averaging(client_updates)
+                    # Send updated model to clients
+                    self.send_model()
+                    logging.info(f"Round {round + 1} completed. Updated model sent to clients.")
+                else:
+                    logging.warning(f"No client updates received in round {round + 1}. Skipping model update.")
 
         except Exception as e:
             logging.error(f"An error occurred: {e}")
+            import traceback
+            logging.error(traceback.format_exc())
         finally:
             self.consumer.close()  # Ensure the consumer is closed properly
             self.producer.close()
 if __name__ == "__main__":
-    
+
     logging.basicConfig(level=logging.INFO)
     logging.info("Server started")
-    
+
     bootstrap_servers = os.environ.get("BOOTSTRAP_SERVERS", "localhost:9092")
     server = FederatedServer(
         bootstrap_servers=bootstrap_servers,
         model_topic='model_topic',
         update_topic='update_topic',
     )
-    
+
     server.start()
