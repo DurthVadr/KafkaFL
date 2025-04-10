@@ -8,6 +8,7 @@ services:
     image: bitnami/kafka:latest
     ports:
       - "9092:9092"
+      - "9094:9094"
     environment:
       KAFKA_HEAP_OPTS: -Xmx512m -Xms512m
       KAFKA_CFG_NODE_ID: 0

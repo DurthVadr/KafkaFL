@@ -10,7 +10,19 @@ docker-compose up -d
 
 # Wait for Kafka and server to start
 echo "Waiting for Kafka and server to start..."
-sleep 30
+sleep 60  # Increased wait time to ensure Kafka is fully started
+
+# Check if Kafka is running
+echo "Checking if Kafka is accessible..."
+for i in {1..5}; do
+  if nc -z localhost 9094; then
+    echo "Kafka is accessible on port 9094"
+    break
+  else
+    echo "Waiting for Kafka to be accessible on port 9094 (attempt $i/5)..."
+    sleep 10
+  fi
+done
 
 # Run 3 client instances
 echo "Starting 3 client instances..."
