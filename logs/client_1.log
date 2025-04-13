@@ -1,4 +1,15 @@
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/layers/core/input_layer.py:27: UserWarning: Argument `input_shape` is deprecated. Use `shape` instead.
+  warnings.warn(
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/utils/file_utils.py:117: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  archive.extractall(
+[92mINFO [0m:      Starting client 1 with broker localhost:9094
+INFO:flwr:Starting client 1 with broker localhost:9094
+[92mINFO [0m:      Using Kafka for communication
+INFO:flwr:Using Kafka for communication
 Traceback (most recent call last):
-  File "/Users/mertcansaglam/cs402/flwr_implementation/client.py", line 4, in <module>
-    import flwr as fl
-ModuleNotFoundError: No module named 'flwr'
+  File "/Users/mertcansaglam/cs402/flwr_implementation/client.py", line 123, in <module>
+    main()
+  File "/Users/mertcansaglam/cs402/flwr_implementation/client.py", line 115, in main
+    fl.client.start_kafka_client(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'flwr.client' has no attribute 'start_kafka_client'. Did you mean: 'start_numpy_client'?

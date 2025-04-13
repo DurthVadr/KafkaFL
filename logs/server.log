@@ -1,4 +1,7 @@
 Traceback (most recent call last):
-  File "/Users/mertcansaglam/cs402/flwr_implementation/server.py", line 3, in <module>
-    import flwr as fl
-ModuleNotFoundError: No module named 'flwr'
+  File "/Users/mertcansaglam/cs402/flwr_implementation/server.py", line 81, in <module>
+    main()
+  File "/Users/mertcansaglam/cs402/flwr_implementation/server.py", line 63, in main
+    strategy = fl.server.strategy.FedAvg(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: FedAvg.__init__() got an unexpected keyword argument 'fraction_eval'
