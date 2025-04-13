@@ -1,0 +1,39 @@
+INFO:root:Server started
+INFO:root:Using Kafka bootstrap servers: localhost:9094
+INFO:root:Global Model CIFAR-10 initialized with 8 layers
+INFO:root:Waiting 15 seconds before first Kafka connection attempt...
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.6.0
+INFO:kafka.conn:Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.6.0
+INFO:kafka.conn:Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+INFO:root:Available Kafka topics: {'update_topic', 'model_topic'}
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ['update_topic']
+INFO:root:Subscribed to topic: update_topic
+INFO:root:Successfully connected to Kafka
+INFO:root:Sending initial model to clients
+INFO:root:Serialized model size: 6505868 bytes
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9094 <connected> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. 
+WARNING:kafka.producer.record_accumulator:Produced messages to topic-partition TopicPartition(topic='model_topic', partition=0) with base offset -1 log start offset -1 and error None.
+ERROR:root:Error sending model: [Error 10] MessageSizeTooLargeError
+ERROR:root:Traceback (most recent call last):
+  File "/Users/mertcansaglam/cs402/Server/server.py", line 198, in send_model
+    record_metadata = future.get(timeout=10)  # Wait for send to complete
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/kafka/producer/future.py", line 65, in get
+    raise self.exception # pylint: disable-msg=raising-bad-type
+    ^^^^^^^^^^^^^^^^^^^^
+kafka.errors.MessageSizeTooLargeError: [Error 10] MessageSizeTooLargeError
+
+ERROR:root:Failed to send initial model to clients
+INFO:root:Closing Kafka connections
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connected> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. 
+INFO:kafka.producer.kafka:Closing the Kafka producer with 9223372036.0 secs timeout.
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=localhost:9094 <connected> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. 
