@@ -1,4 +1,4 @@
 Traceback (most recent call last):
-  File "/Users/mertcansaglam/cs402/flwr_implementation/server.py", line 3, in <module>
+  File "/Users/mertcansaglam/cs402/flwr_implementation/client.py", line 4, in <module>
     import flwr as fl
 ModuleNotFoundError: No module named 'flwr'
