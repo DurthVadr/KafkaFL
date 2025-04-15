@@ -6,10 +6,66 @@
 INFO:flwr:Starting client 2 with broker localhost:9094
 [92mINFO [0m:      Using Kafka for communication
 INFO:flwr:Using Kafka for communication
-Traceback (most recent call last):
-  File "/Users/mertcansaglam/cs402/flwr_implementation/client.py", line 123, in <module>
-    main()
-  File "/Users/mertcansaglam/cs402/flwr_implementation/client.py", line 115, in main
-    fl.client.start_kafka_client(
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: module 'flwr.client' has no attribute 'start_kafka_client'. Did you mean: 'start_numpy_client'?
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: connecting to localhost:9094 [('127.0.0.1', 9094) IPv4]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+ERROR:root:Client 2: Failed to connect to Kafka (attempt 1/5): NoBrokersAvailable
+INFO:root:Client 2: Retrying in 5 seconds...
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: connecting to localhost:9094 [('127.0.0.1', 9094) IPv4]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+ERROR:root:Client 2: Failed to connect to Kafka (attempt 2/5): NoBrokersAvailable
+INFO:root:Client 2: Retrying in 5 seconds...
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: connecting to localhost:9094 [('127.0.0.1', 9094) IPv4]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+ERROR:root:Client 2: Failed to connect to Kafka (attempt 3/5): NoBrokersAvailable
+INFO:root:Client 2: Retrying in 5 seconds...
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: connecting to localhost:9094 [('127.0.0.1', 9094) IPv4]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+ERROR:root:Client 2: Failed to connect to Kafka (attempt 4/5): NoBrokersAvailable
+INFO:root:Client 2: Retrying in 5 seconds...
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: connecting to localhost:9094 [('::1', 9094, 0, 0) IPv6]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv6 ('::1', 9094, 0, 0)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: connecting to localhost:9094 [('127.0.0.1', 9094) IPv4]
+ERROR:kafka.conn:Connect attempt to <BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]> returned error 61. Disconnecting.
+ERROR:kafka.conn:<BrokerConnection client_id=kafka-python-2.0.6, node_id=bootstrap-0 host=localhost:9094 <connecting> [IPv4 ('127.0.0.1', 9094)]>: Closing connection. KafkaConnectionError: 61 ECONNREFUSED
+ERROR:root:Client 2: Failed to connect to Kafka (attempt 5/5): NoBrokersAvailable
+ERROR:root:Client 2: Failed to connect to Kafka after 5 attempts
+INFO:root:Client 2: Waiting for model from server on topic model_topic
+ERROR:root:Client 2: Error receiving model: 'NoneType' object has no attribute 'poll'
+ERROR:root:Client 2: Failed to receive model, exiting

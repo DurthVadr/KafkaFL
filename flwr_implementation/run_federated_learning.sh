@@ -51,7 +51,7 @@ fi
 
 # Start the server
 echo "Starting Flower server with broker $BROKER"
-python flwr_implementation/server.py \
+python -m flwr_implementation.server \
   --broker "$BROKER" \
   --num-rounds "$NUM_ROUNDS" \
   --min-clients "$MIN_CLIENTS" \
@@ -68,14 +68,14 @@ sleep 5
 # Start the clients
 for ((i=1; i<=$NUM_CLIENTS; i++)); do
   echo "Starting client $i"
-  python flwr_implementation/client.py \
+  python -m flwr_implementation.client \
     --broker "$BROKER" \
     --client-id "$i" \
     $PROTOCOL_FLAG > logs/client_$i.log 2>&1 &
-  
+
   CLIENT_PID=$!
   echo "Client $i started with PID $CLIENT_PID"
-  
+
   # Wait a bit between client starts to avoid overwhelming the server
   sleep 2
 done

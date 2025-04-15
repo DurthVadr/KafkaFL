@@ -1,6 +1,6 @@
 # Federated Learning with Flower and Kafka
 
-This implementation provides a federated learning solution using the Flower (flwr) framework with Kafka as the communication backend.
+This implementation provides a federated learning solution using the Flower (flwr) framework with a custom Kafka communication backend.
 
 ## Overview
 
@@ -8,6 +8,7 @@ This implementation is based on the FDxKafka approach and includes:
 
 - A server component that coordinates the federated learning process
 - A client component that trains models on local data
+- Custom Kafka communication implementation for Flower
 - Support for both Kafka and gRPC communication
 - A simple CIFAR-10 image classification task as an example
 
@@ -68,6 +69,7 @@ python flwr_implementation/client.py --broker localhost:8080 --grpc --client-id 
 - **Client**: Trains models on local data, sends updates to the server
 - **Model**: Simple CNN for CIFAR-10 image classification
 - **Dataset**: Partitioned CIFAR-10 dataset to simulate distributed data
+- **Kafka Client/Server**: Custom implementation for Flower to communicate via Kafka
 
 ## Customization
 
