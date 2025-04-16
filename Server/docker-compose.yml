@@ -19,6 +19,9 @@ services:
       KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@kafka:9093
       KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_CFG_MESSAGE_MAX_BYTES: "20971520"  # 20MB max message size
+      KAFKA_CFG_REPLICA_FETCH_MAX_BYTES: "20971520"  # 20MB max fetch size
+      KAFKA_CFG_COMPRESSION_TYPE: "gzip"  # Enable compression
       ALLOW_PLAINTEXT_LISTENER: "yes"
     networks:
       - kafka-net

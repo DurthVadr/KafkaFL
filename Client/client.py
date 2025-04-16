@@ -61,12 +61,13 @@ class FederatedClient:
                     fetch_max_bytes=52428800  # 50MB max fetch bytes
                 )
 
-                # Create Kafka producer with larger message size
+                # Create Kafka producer with larger message size and compression
                 self.producer = KafkaProducer(
                     bootstrap_servers=self.bootstrap_servers,
                     value_serializer=lambda v: v,  # Keep raw bytes for now
-                    max_request_size=10485760,  # 10MB max message size
-                    buffer_memory=20971520  # 20MB buffer memory
+                    max_request_size=20971520,  # 20MB max message size (increased)
+                    buffer_memory=41943040,  # 40MB buffer memory (increased)
+                    compression_type='gzip'  # Add compression to reduce message size
                 )
 
                 # Test connection by listing topics
@@ -128,16 +129,17 @@ class FederatedClient:
             return self.model
 
         try:
-            # Initialize the model architecture
+            # Initialize the model architecture with smaller dimensions
+            # to match the server's model and fit within Kafka message size limits
             input_shape = (32, 32, 3)
             num_classes = 10
             inputs = Input(shape=input_shape)
-            x = Conv2D(32, (3, 3), activation='relu')(inputs)
-            x = Conv2D(64, (3, 3), activation='relu')(x)
+            x = Conv2D(16, (3, 3), activation='relu')(inputs)  # 16 filters instead of 32
+            x = Conv2D(32, (3, 3), activation='relu')(x)      # 32 filters instead of 64
             x = MaxPooling2D(pool_size=(2, 2))(x)
             x = Dropout(0.25)(x)
             x = Flatten()(x)
-            x = Dense(128, activation='relu')(x)
+            x = Dense(64, activation='relu')(x)               # 64 units instead of 128
             x = Dropout(0.5)(x)
             outputs = Dense(num_classes, activation='softmax')(x)
             model = Model(inputs=inputs, outputs=outputs)

@@ -51,8 +51,9 @@ class FederatedServer:
                 self.producer = KafkaProducer(
                     bootstrap_servers=self.bootstrap_servers,
                     value_serializer=lambda v: v,  # Keep raw bytes for now
-                    max_request_size=10485760,  # 10MB max message size
-                    buffer_memory=20971520  # 20MB buffer memory
+                    max_request_size=20971520,  # 20MB max message size (increased)
+                    buffer_memory=41943040,  # 40MB buffer memory (increased)
+                    compression_type='gzip'  # Add compression to reduce message size
                 )
 
                 # Test connection by listing topics
@@ -83,15 +84,17 @@ class FederatedServer:
             return self.initialize_random_global_model()
 
         try:
+            # Create a smaller model architecture that will still be compatible with clients
+            # but with fewer parameters to fit within Kafka message size limits
             input_shape = (32, 32, 3)
             num_classes = 10
             inputs = Input(shape=input_shape)
-            x = Conv2D(32, (3, 3), activation='relu')(inputs)
-            x = Conv2D(64, (3, 3), activation='relu')(x)
+            x = Conv2D(16, (3, 3), activation='relu')(inputs)  # 16 filters instead of 32
+            x = Conv2D(32, (3, 3), activation='relu')(x)      # 32 filters instead of 64
             x = MaxPooling2D(pool_size=(2, 2))(x)
             x = Dropout(0.25)(x)
             x = Flatten()(x)
-            x = Dense(128, activation='relu')(x)
+            x = Dense(64, activation='relu')(x)               # 64 units instead of 128
             x = Dropout(0.5)(x)
             outputs = Dense(num_classes, activation='softmax')(x)
             model = Model(inputs=inputs, outputs=outputs)
@@ -107,19 +110,20 @@ class FederatedServer:
 
 
     def initialize_random_global_model(self):
-        # Initialize a very small random global model for testing
+        # Initialize a random global model that matches the client model architecture
+        # but with smaller dimensions to fit within Kafka message size limits
         try:
             # Create a list of numpy arrays to simulate model weights
-            # Using tiny dimensions to reduce message size
+            # Using a smaller version of the client's model architecture
             weights = [
-                np.random.rand(3, 3, 3, 4).astype(np.float32),  # Tiny Conv2D weights
-                np.random.rand(4).astype(np.float32),           # Conv2D bias
-                np.random.rand(3, 3, 4, 8).astype(np.float32),  # Tiny Conv2D weights
-                np.random.rand(8).astype(np.float32),           # Conv2D bias
-                np.random.rand(32, 16).astype(np.float32),      # Tiny Dense weights
-                np.random.rand(16).astype(np.float32),          # Dense bias
-                np.random.rand(16, 10).astype(np.float32),      # Output layer weights
-                np.random.rand(10).astype(np.float32)           # Output layer bias
+                np.random.rand(3, 3, 3, 16).astype(np.float32),  # Conv2D weights (16 filters instead of 32)
+                np.random.rand(16).astype(np.float32),           # Conv2D bias
+                np.random.rand(3, 3, 16, 32).astype(np.float32), # Conv2D weights (32 filters instead of 64)
+                np.random.rand(32).astype(np.float32),           # Conv2D bias
+                np.random.rand(8 * 8 * 32, 64).astype(np.float32), # Dense weights (smaller)
+                np.random.rand(64).astype(np.float32),           # Dense bias
+                np.random.rand(64, 10).astype(np.float32),       # Output layer weights
+                np.random.rand(10).astype(np.float32)            # Output layer bias
             ]
             logging.info(f"Random global model initialized with {len(weights)} layers")
             return weights
