@@ -1,0 +1,741 @@
+2025-04-17 00:03:24 INFO:root:Starting client with ID: 1
+2025-04-17 00:03:24 Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+2025-04-17 00:03:36 
+        0/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0s/step
+     8192/170498071 ━━━━━━━━━━━━━━━━━━━━ 44:50 16us/step
+    32768/170498071 ━━━━━━━━━━━━━━━━━━━━ 22:31 8us/step 
+    90112/170498071 ━━━━━━━━━━━━━━━━━━━━ 13:17 5us/step
+   204800/170498071 ━━━━━━━━━━━━━━━━━━━━ 7:30 3us/step 
+   425984/170498071 ━━━━━━━━━━━━━━━━━━━━ 4:24 2us/step
+   843776/170498071 ━━━━━━━━━━━━━━━━━━━━ 2:42 1us/step
+  1695744/170498071 ━━━━━━━━━━━━━━━━━━━━ 1:25 1us/step
+  1703936/170498071 ━━━━━━━━━━━━━━━━━━━━ 1:33 1us/step
+  2433024/170498071 ━━━━━━━━━━━━━━━━━━━━ 1:08 0us/step
+  3309568/170498071 ━━━━━━━━━━━━━━━━━━━━ 54s 0us/step 
+  4186112/170498071 ━━━━━━━━━━━━━━━━━━━━ 45s 0us/step
+  5095424/170498071 ━━━━━━━━━━━━━━━━━━━━ 42s 0us/step
+  6553600/170498071 ━━━━━━━━━━━━━━━━━━━━ 35s 0us/step
+  8773632/170498071 ━━━━━━━━━━━━━━━━━━━━ 27s 0us/step
+  9584640/170498071 ━━━━━━━━━━━━━━━━━━━━ 25s 0us/step
+ 10682368/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 10862592/170498071 ━━━━━━━━━━━━━━━━━━━━ 25s 0us/step
+ 13402112/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 14016512/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 15581184/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 15736832/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 15769600/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 16285696/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 16637952/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 16801792/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 17121280/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 17424384/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 17555456/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 18325504/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 18350080/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 18415616/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 18776064/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 18849792/170498071 ━━━━━━━━━━━━━━━━━━━━ 25s 0us/step
+ 19062784/170498071 ━━━━━━━━━━━━━━━━━━━━ 25s 0us/step
+ 19283968/170498071 ━━━━━━━━━━━━━━━━━━━━ 25s 0us/step
+ 20201472/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 20365312/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 20889600/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 21479424/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 21684224/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 22487040/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 22749184/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 22970368/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 23183360/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 23543808/170498071 ━━━━━━━━━━━━━━━━━━━━ 24s 0us/step
+ 24403968/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 24838144/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 25067520/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 25362432/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 25796608/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 26017792/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 26558464/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 26828800/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 27099136/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 27557888/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 27762688/170498071 ━━━━━━━━━━━━━━━━━━━━ 23s 0us/step
+ 28221440/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 28557312/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 28868608/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 29302784/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 29573120/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 30007296/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 30375936/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 30629888/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 30982144/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 31408128/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 31703040/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 32071680/170498071 ━━━━━━━━━━━━━━━━━━━━ 22s 0us/step
+ 32423936/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 32792576/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 33234944/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 33538048/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 33882112/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 34234368/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 34611200/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 34971648/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 35307520/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 35692544/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 36159488/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 36462592/170498071 ━━━━━━━━━━━━━━━━━━━━ 21s 0us/step
+ 36913152/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 37240832/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 37568512/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 37978112/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 38387712/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 38731776/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 39092224/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 39452672/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 39927808/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 40370176/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 406978562025-04-16T21:03:36.419030667Z /170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 41066496/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 41410560/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 41861120/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 41902080/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 42631168/170498071 ━━━━━━━━━━━━━━━━━━━━ 20s 0us/step
+ 43319296/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 43819008/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 44163072/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 44433408/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 44630016/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 44957696/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 45236224/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 45498368/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 45891584/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 46104576/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 46407680/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 46686208/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 46948352/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 47366144/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 47529984/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 47882240/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 48160768/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 48439296/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 48840704/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 49037312/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 49389568/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 49684480/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 49946624/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 50388992/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 50577408/170498071 ━━━━━━━━━━━━━━━━━━━━ 19s 0us/step
+ 50864128/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 51216384/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 51535872/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 51953664/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 52142080/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 52371456/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 52772864/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 53067776/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 53354496/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 53706752/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 53968896/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 54427648/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 54681600/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 55033856/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 55296000/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 55574528/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 56057856/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 56328192/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 56770560/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 56999936/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 57180160/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 57679872/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 57950208/170498071 ━━━━━━━━━━━━━━━━━━━━ 18s 0us/step
+ 58310656/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 58597376/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 58810368/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 59318272/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 59580416/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 59703296/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 60235776/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 60448768/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 60981248/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 61259776/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 61530112/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 62111744/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 62365696/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 62930944/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 63193088/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 63774720/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 64028672/170498071 ━━━━━━━━━━━━━━━━━━━━ 17s 0us/step
+ 64585728/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 64864256/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 65437696/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 65699840/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 66256896/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 66543616/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 67100672/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 67387392/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 67936256/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 68231168/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 68796416/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 69066752/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 69632000/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 69910528/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 70483968/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 70754304/170498071 ━━━━━━━━━━━━━━━━━━━━ 16s 0us/step
+ 71303168/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 71606272/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 71991296/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 72450048/170498071 ━━━━━━━━━━━━━━━━━━━━ 2025-04-16T21:03:36.419030667Z 15s 0us/step
+ 72794112/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 73302016/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 73662464/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 74145792/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 74506240/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 74997760/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 75358208/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 75841536/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 76193792/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 76693504/170498071 ━━━━━━━━━━━━━━━━━━━━ 15s 0us/step
+ 77045760/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 77488128/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 77651968/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 78209024/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 78422016/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 78839808/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 79241216/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 79446016/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 80035840/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 80166912/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 80601088/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 80936960/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 81141760/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 81674240/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 81870848/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 82264064/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 82632704/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 82837504/170498071 ━━━━━━━━━━━━━━━━━━━━ 14s 0us/step
+ 83369984/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 83574784/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 84172800/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 84361216/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 84680704/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 85147648/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 85270528/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 85925888/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 86114304/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 86728704/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 86917120/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 87162880/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 87678976/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 87810048/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 88399872/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 88596480/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 88850432/170498071 ━━━━━━━━━━━━━━━━━━━━ 13s 0us/step
+ 89325568/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 89513984/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 90054656/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 90292224/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 90546176/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 91021312/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 91209728/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 91709440/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 91996160/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 92241920/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 92717056/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 92905472/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 93265920/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 93700096/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 93929472/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 94420992/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 94609408/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 95010816/170498071 ━━━━━━━━━━━━━━━━━━━━ 12s 0us/step
+ 95461376/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 95797248/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 96198656/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 96378880/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 96714752/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 97173504/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 97574912/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 98025472/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 98426880/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 98877440/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 99287040/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+ 99737600/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+100139008/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+100605952/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+101007360/170498071 ━━━━━━━━━━━━━━━━━━━━ 11s 0us/step
+101457920/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+101867520/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+102326272/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+102621184/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+102998016/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+103260160/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+103661568/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+104062976/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+104366080/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+104742912/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+105005056/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+105455616/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+105783296/1704982025-04-16T21:03:36.419030667Z 071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+105807872/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+106676224/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+106897408/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+107282432/170498071 ━━━━━━━━━━━━━━━━━━━━ 10s 0us/step
+107724800/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step 
+108118016/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+108429312/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+108675072/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+109109248/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+109543424/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+109928448/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+110313472/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+110747648/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+111116288/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+111329280/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+111755264/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+112115712/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+112607232/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+112975872/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+113139712/170498071 ━━━━━━━━━━━━━━━━━━━━ 9s 0us/step
+113795072/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+114024448/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+114434048/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+114688000/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+115138560/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+115466240/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+116391936/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+116858880/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+117309440/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+117751808/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+118243328/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+118374400/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+118759424/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+119283712/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+119701504/170498071 ━━━━━━━━━━━━━━━━━━━━ 8s 0us/step
+120152064/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+120610816/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+121094144/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+121315328/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+121946112/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+122159104/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+122912768/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+123125760/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+123535360/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+124010496/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+124485632/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+125001728/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+125239296/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+125657088/170498071 ━━━━━━━━━━━━━━━━━━━━ 7s 0us/step
+126083072/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+126951424/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+127098880/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+127631360/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+128114688/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+128647168/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+129138688/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+129662976/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+130121728/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+130252800/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+131080192/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+131235840/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+131735552/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+132055040/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+132063232/170498071 ━━━━━━━━━━━━━━━━━━━━ 6s 0us/step
+133365760/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+133488640/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+133890048/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+134144000/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+134430720/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+134905856/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+135069696/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+135544832/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+135700480/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+135995392/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+136495104/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+136691712/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+137101312/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+137265152/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+138215424/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+138444800/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+138715136/170498071 ━━━━━━━━━━━━━━━━━━━━ 5s 0us/step
+138911744/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+139264000/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+139378688/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+139608064/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+139902976/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+140124160/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+140468224/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+140640256/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+140926976/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+141180928/170498071 ━━━━━━━━━━━━━━━━━━━━21:03:36.419030667Z 0m 4s 0us/step
+141443072/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+141721600/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+141950976/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+142229504/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+142450688/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+142770176/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+142974976/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+143245312/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+143482880/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+143720448/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+144039936/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+144244736/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+144474112/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+144760832/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+145014784/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+145301504/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+145530880/170498071 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step
+145768448/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+146071552/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+146317312/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+146571264/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+146841600/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+147087360/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+147374080/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+147578880/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+147849216/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+148103168/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+148373504/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+148684800/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+148905984/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+149110784/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+149405696/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+149561344/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+149962752/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+150118400/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+150421504/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+150724608/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+151044096/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+151281664/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+151535616/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+151805952/170498071 ━━━━━━━━━━━━━━━━━━━━ 3s 0us/step
+152117248/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+152420352/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+152616960/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+153010176/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+153313280/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+153591808/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+153862144/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+154132480/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+154394624/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+154689536/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+154968064/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+155213824/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+155574272/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+155820032/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+156073984/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+156352512/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+156639232/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+156958720/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+157171712/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+157433856/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+157597696/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+157958144/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+158187520/170498071 ━━━━━━━━━━━━━━━━━━━━ 2s 0us/step
+158539776/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+158826496/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+159031296/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+159301632/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+159547392/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+159940608/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+160120832/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+160530432/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+160768000/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+161120256/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+161423360/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+161521664/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+161882112/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+162193408/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+162340864/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+162922496/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+163348480/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+163586048/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+163856384/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+163995648/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+164339712/170498071 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step
+164749312/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+165027840/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+165412864/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+165732352/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+166109184/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+166387712/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+166567936/1704982025-04-16T21:03:36.419030667Z 071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+166920192/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+167133184/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+167485440/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+167796736/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+167960576/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+168255488/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+168534016/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+168919040/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+169230336/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+169582592/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+169902080/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+170098688/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+170409984/170498071 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+170498071/170498071 ━━━━━━━━━━━━━━━━━━━━ 28s 0us/step
+2025-04-17 00:04:30 INFO:root:Client 1: Loaded CIFAR-10 data with 5000 samples
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.20.0.2', 9092)]>: connecting to kafka:9092 [('172.20.0.2', 9092) IPv4]
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.20.0.2', 9092)]>: Broker version identified as 2.6
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Connection complete.
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.20.0.2', 9092)]>: connecting to kafka:9092 [('172.20.0.2', 9092) IPv4]
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.20.0.2', 9092)]>: Broker version identified as 2.6
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Connection complete.
+2025-04-17 00:04:31 INFO:root:Client 1: Available Kafka topics: {'model_topic', 'update_topic'}
+2025-04-17 00:04:31 INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ['model_topic']
+2025-04-17 00:04:31 INFO:root:Client 1: Subscribed to topic: model_topic
+2025-04-17 00:04:31 INFO:root:Client 1: Successfully connected to Kafka
+2025-04-17 00:04:31 INFO:root:Client 1: Starting
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.20.0.2', 9092)]>: connecting to kafka:9092 [('172.20.0.2', 9092) IPv4]
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.20.0.2', 9092)]>: Broker version identified as 2.6
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Connection complete.
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.20.0.2', 9092)]>: connecting to kafka:9092 [('172.20.0.2', 9092) IPv4]
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.20.0.2', 9092)]>: Broker version identified as 2.6
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Connection complete.
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Closing connection. 
+2025-04-17 00:04:31 INFO:root:Client 1: Available Kafka topics: {'model_topic', 'update_topic'}
+2025-04-17 00:04:31 INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ['model_topic']
+2025-04-17 00:04:31 INFO:root:Client 1: Subscribed to topic: model_topic
+2025-04-17 00:04:31 INFO:root:Client 1: Successfully connected to Kafka
+2025-04-17 00:04:31 INFO:root:Client 1: Starting round 1
+2025-04-17 00:04:31 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:04:31 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=0 host=kafka:9092 <connecting> [IPv4 ('172.20.0.2', 9092)]>: connecting to kafka:9092 [('172.20.0.2', 9092) IPv4]
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Connection complete.
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Closing connection. 
+2025-04-17 00:04:31 INFO:kafka.cluster:Group coordinator for federated_client_1 is BrokerMetadata(nodeId='coordinator-0', host='kafka', port=9092, rack=None)
+2025-04-17 00:04:31 INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group federated_client_1
+2025-04-17 00:04:31 INFO:kafka.coordinator:Starting new heartbeat thread
+2025-04-17 00:04:31 INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group federated_client_1
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=coordinator-0 host=kafka:9092 <connecting> [IPv4 ('172.20.0.2', 9092)]>: connecting to kafka:9092 [('172.20.0.2', 9092) IPv4]
+2025-04-17 00:04:31 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-2.1.5, node_id=coordinator-0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Connection complete.
+2025-04-17 00:04:31 INFO:kafka.coordinator:(Re-)joining group federated_client_1
+2025-04-17 00:04:34 INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+2025-04-17 00:04:35 INFO:kafka.coordinator:Successfully joined group federated_client_1 with generation 5
+2025-04-17 00:04:35 INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='model_topic', partition=0)]
+2025-04-17 00:04:35 INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='model_topic', partition=0)} for group federated_client_1
+2025-04-17 00:04:35 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:04:35 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:04:35 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:04:35 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:04:35 INFO:root:Client 1: Message offset: 1, partition: 0
+2025-04-17 00:04:35 INFO:root:Client 1: Training model with local data
+2025-04-17 00:04:40 ERROR:root:Client 1: Error training model: Layer functional weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:04:41 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:04:41   File "/app/client.py", line 147, in train
+2025-04-17 00:04:41     model.set_weights(global_weights)
+2025-04-17 00:04:41   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:04:41     raise ValueError(
+2025-04-17 00:04:41 ValueError: Layer functional weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:04:41 
+2025-04-17 00:04:41 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:04:41 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=kafka:9092 <connecting> [IPv4 ('172.20.0.2', 9092)]>: connecting to kafka:9092 [('172.20.0.2', 9092) IPv4]
+2025-04-17 00:04:41 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Connection complete.
+2025-04-17 00:04:41 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Closing connection. 
+2025-04-17 00:04:41 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:04:41 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 0
+2025-04-17 00:04:41 INFO:root:Client 1: Round 1 completed
+2025-04-17 00:04:41 INFO:root:Client 1: Starting round 2
+2025-04-17 00:04:41 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:04:41 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:04:46 INFO:root:Client 1: Poll attempt 1, received 0 messages
+2025-04-17 00:04:46 INFO:root:Client 1: No messages received in this poll
+2025-04-17 00:04:52 INFO:root:Client 1: Poll attempt 2, received 0 messages
+2025-04-17 00:04:52 INFO:root:Client 1: No messages received in this poll
+2025-04-17 00:04:58 INFO:root:Client 1: Poll attempt 3, received 0 messages
+2025-04-17 00:04:58 INFO:root:Client 1: No messages received in this poll
+2025-04-17 00:05:04 INFO:root:Client 1: Poll attempt 4, received 0 messages
+2025-04-17 00:05:04 INFO:root:Client 1: No messages received in this poll
+2025-04-17 00:05:10 INFO:root:Client 1: Poll attempt 5, received 0 messages
+2025-04-17 00:05:10 INFO:root:Client 1: No messages received in this poll
+2025-04-17 00:05:16 INFO:root:Client 1: Poll attempt 6, received 0 messages
+2025-04-17 00:05:16 INFO:root:Client 1: No messages received in this poll
+2025-04-17 00:05:22 INFO:root:Client 1: Poll attempt 7, received 0 messages
+2025-04-17 00:05:22 INFO:root:Client 1: No messages received in this poll
+2025-04-17 00:05:28 INFO:root:Client 1: Poll attempt 8, received 0 messages
+2025-04-17 00:05:28 INFO:root:Client 1: No messages received in this poll
+2025-04-17 00:05:31 INFO:root:Client 1: Poll attempt 9, received 1 messages
+2025-04-17 00:05:31 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:31 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:31 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:31 INFO:root:Client 1: Message offset: 2, partition: 0
+2025-04-17 00:05:31 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:32 ERROR:root:Client 1: Error training model: Layer functional_1 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:32 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:32   File "/app/client.py", line 147, in train
+2025-04-17 00:05:32     model.set_weights(global_weights)
+2025-04-17 00:05:32   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:32     raise ValueError(
+2025-04-17 00:05:32 ValueError: Layer functional_1 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:32 
+2025-04-17 00:05:32 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:32 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:32 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 5
+2025-04-17 00:05:32 INFO:root:Client 1: Round 2 completed
+2025-04-17 00:05:32 INFO:root:Client 1: Starting round 3
+2025-04-17 00:05:32 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:05:32 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:05:32 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:05:32 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:32 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:32 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:32 INFO:root:Client 1: Message offset: 3, partition: 0
+2025-04-17 00:05:32 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:32 ERROR:root:Client 1: Error training model: Layer functional_2 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:32 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:32   File "/app/client.py", line 147, in train
+2025-04-17 00:05:32     model.set_weights(global_weights)
+2025-04-17 00:05:32   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:32     raise ValueError(
+2025-04-17 00:05:32 ValueError: Layer functional_2 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:32 
+2025-04-17 00:05:32 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:32 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:32 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 8
+2025-04-17 00:05:32 INFO:root:Client 1: Round 3 completed
+2025-04-17 00:05:32 INFO:root:Client 1: Starting round 4
+2025-04-17 00:05:32 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:05:32 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:05:32 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:05:32 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:32 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:32 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:32 INFO:root:Client 1: Message offset: 4, partition: 0
+2025-04-17 00:05:32 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:32 ERROR:root:Client 1: Error training model: Layer functional_3 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:32 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:32   File "/app/client.py", line 147, in train
+2025-04-17 00:05:32     model.set_weights(global_weights)
+2025-04-17 00:05:32   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:32     raise ValueError(
+2025-04-17 00:05:32 ValueError: Layer functional_3 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:32 
+2025-04-17 00:05:32 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:32 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:32 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 10
+2025-04-17 00:05:32 INFO:root:Client 1: Round 4 completed
+2025-04-17 00:05:32 INFO:root:Client 1: Starting round 5
+2025-04-17 00:05:32 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:05:32 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:05:32 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:05:32 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:32 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:32 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:32 INFO:root:Client 1: Message offset: 5, partition: 0
+2025-04-17 00:05:32 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:33 ERROR:root:Client 1: Error training model: Layer functional_4 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:33 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:33   File "/app/client.py", line 147, in train
+2025-04-17 00:05:33     model.set_weights(global_weights)
+2025-04-17 00:05:33   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:33     raise ValueError(
+2025-04-17 00:05:33 ValueError: Layer functional_4 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:33 
+2025-04-17 00:05:33 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:33 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:33 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 13
+2025-04-17 00:05:33 INFO:root:Client 1: Round 5 completed
+2025-04-17 00:05:33 INFO:root:Client 1: Starting round 6
+2025-04-17 00:05:33 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:05:33 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:05:33 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:05:33 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:33 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:33 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:33 INFO:root:Client 1: Message offset: 6, partition: 0
+2025-04-17 00:05:33 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:33 ERROR:root:Client 1: Error training model: Layer functional_5 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:33 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:33   File "/app/client.py", line 147, in train
+2025-04-17 00:05:33     model.set_weights(global_weights)
+2025-04-17 00:05:33   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:33     raise ValueError(
+2025-04-17 00:05:33 ValueError: Layer functional_5 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:33 
+2025-04-17 00:05:33 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:33 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:33 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 15
+2025-04-17 00:05:33 INFO:root:Client 1: Round 6 completed
+2025-04-17 00:05:33 INFO:root:Client 1: Starting round 7
+2025-04-17 00:05:33 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:05:33 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:05:33 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:05:33 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:33 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:33 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:33 INFO:root:Client 1: Message offset: 7, partition: 0
+2025-04-17 00:05:33 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:33 ERROR:root:Client 1: Error training model: Layer functional_6 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:33 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:33   File "/app/client.py", line 147, in train
+2025-04-17 00:05:33     model.set_weights(global_weights)
+2025-04-17 00:05:33   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:33     raise ValueError(
+2025-04-17 00:05:33 ValueError: Layer functional_6 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:33 
+2025-04-17 00:05:33 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:33 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:33 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 18
+2025-04-17 00:05:33 INFO:root:Client 1: Round 7 completed
+2025-04-17 00:05:33 INFO:root:Client 1: Starting round 8
+2025-04-17 00:05:33 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:05:33 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:05:33 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:05:33 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:33 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:33 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:33 INFO:root:Client 1: Message offset: 8, partition: 0
+2025-04-17 00:05:33 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:33 ERROR:root:Client 1: Error training model: Layer functional_7 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:33 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:33   File "/app/client.py", line 147, in train
+2025-04-17 00:05:33     model.set_weights(global_weights)
+2025-04-17 00:05:33   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:33     raise ValueError(
+2025-04-17 00:05:33 ValueError: Layer functional_7 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:33 
+2025-04-17 00:05:33 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:33 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:33 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 22
+2025-04-17 00:05:33 INFO:root:Client 1: Round 8 completed
+2025-04-17 00:05:33 INFO:root:Client 1: Starting round 9
+2025-04-17 00:05:33 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:05:33 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:05:34 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:05:34 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:34 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:34 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:34 INFO:root:Client 1: Message offset: 9, partition: 0
+2025-04-17 00:05:34 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:34 ERROR:root:Client 1: Error training model: Layer functional_8 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:34 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:34   File "/app/client.py", line 147, in train
+2025-04-17 00:05:34     model.set_weights(global_weights)
+2025-04-17 00:05:34   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:34     raise ValueError(
+2025-04-17 00:05:34 ValueError: Layer functional_8 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:34 
+2025-04-17 00:05:34 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:34 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:34 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 26
+2025-04-17 00:05:34 INFO:root:Client 1: Round 9 completed
+2025-04-17 00:05:34 INFO:root:Client 1: Starting round 10
+2025-04-17 00:05:34 WARNING:kafka.consumer.subscription_state:subscription unchanged by change_subscription(['model_topic'])
+2025-04-17 00:05:34 INFO:root:Client 1: Waiting for model from server on topic model_topic
+2025-04-17 00:05:34 INFO:root:Client 1: Poll attempt 1, received 1 messages
+2025-04-17 00:05:34 INFO:root:Client 1: Processing messages from topic-partition: model_topic-0
+2025-04-17 00:05:34 INFO:root:Client 1: Deserialized model with 8 layers
+2025-04-17 00:05:34 INFO:root:Client 1: Model received from server. Model has 8 layers.
+2025-04-17 00:05:34 INFO:root:Client 1: Message offset: 10, partition: 0
+2025-04-17 00:05:34 INFO:root:Client 1: Training model with local data
+2025-04-17 00:05:34 ERROR:root:Client 1: Error training model: Layer functional_9 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:34 ERROR:root:Traceback (most recent call last):
+2025-04-17 00:05:34   File "/app/client.py", line 147, in train
+2025-04-17 00:05:34     model.set_weights(global_weights)
+2025-04-17 00:05:34   File "/usr/local/lib/python3.9/site-packages/keras/src/layers/layer.py", line 709, in set_weights
+2025-04-17 00:05:34     raise ValueError(
+2025-04-17 00:05:34 ValueError: Layer functional_9 weight shape (3, 3, 3, 32) is not compatible with provided weight shape (3, 3, 3, 4).
+2025-04-17 00:05:34 
+2025-04-17 00:05:34 INFO:root:Client 1: Serialized model weights with 8 layers, size: 4524 bytes
+2025-04-17 00:05:34 INFO:root:Client 1: Model update sent to server. Model has 8 layers.
+2025-04-17 00:05:34 INFO:root:Client 1: Message sent to topic: update_topic, partition: 0, offset: 28
+2025-04-17 00:05:34 INFO:root:Client 1: Round 10 completed
+2025-04-17 00:05:34 INFO:kafka.conn:<BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=kafka:9092 <connected> [IPv4 ('172.20.0.2', 9092)]>: Closing connection. 
+2025-04-17 00:05:40 INFO:kafka.coordinator:Stopping heartbeat thread
