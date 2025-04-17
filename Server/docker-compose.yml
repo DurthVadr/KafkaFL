@@ -31,19 +31,19 @@ services:
       timeout: 5s
       retries: 3
 
-  kafka-ui:
-    image: provectuslabs/kafka-ui:latest
-    ports:
-      - "8080:8080"
-    depends_on:
-      kafka:
-        condition: service_started
-    environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-      DYNAMIC_CONFIG_ENABLED: "true"
-    networks:
-      - kafka-net
+  # kafka-ui:
+#   image: provectuslabs/kafka-ui:latest
+  #   ports:
+  #     - "8080:8080"
+  #  depends_on:
+  #     kafka:
+  #       condition: service_started
+  #   environment:
+  #     KAFKA_CLUSTERS_0_NAME: local
+  #     KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+  #     DYNAMIC_CONFIG_ENABLED: "true"
+  #   networks:
+  #     - kafka-net
 
 
   server:  # Add your server as a service

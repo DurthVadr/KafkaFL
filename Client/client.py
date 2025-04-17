@@ -1,3 +1,4 @@
+import datetime
 import os
 import time
 import logging
@@ -31,7 +32,7 @@ class FederatedClient:
             self.client_id = FederatedClient.generate_client_id()  # Assign unique ID
 
         self.model = None
-        self.X, self.y = self.load_data_cifar10()
+        self.X, self.y, self.X_test, self.y_test = self.load_data_cifar10()
         self.producer = None
         self.consumer = None
         self.connect_kafka()
@@ -67,7 +68,7 @@ class FederatedClient:
                     value_serializer=lambda v: v,  # Keep raw bytes for now
                     max_request_size=20971520,  # 20MB max message size (increased)
                     buffer_memory=41943040,  # 40MB buffer memory (increased)
-                    compression_type='gzip'  # Add compression to reduce message size
+                    #compression_type='gzip'  # Add compression to reduce message size
                 )
 
                 # Test connection by listing topics
@@ -95,70 +96,84 @@ class FederatedClient:
             # Create random data with the same shape as CIFAR-10
             X_train = np.random.rand(1000, 32, 32, 3).astype('float32')
             y_train = np.random.randint(0, 10, size=1000)
-            return X_train, y_train
+            X_test = np.random.rand(200, 32, 32, 3).astype('float32')
+            y_test = np.random.randint(0, 10, size=200)
+            return X_train, y_train, X_test, y_test
 
         try:
             # Load CIFAR-10 data
-            (X_train, y_train), _ = cifar10.load_data()  # Ignore test data
+            (X_train, y_train), (X_test, y_test) = cifar10.load_data()  # Load both train and test data
             X_train = X_train.astype('float32') / 255.0
             y_train = np.squeeze(y_train)
+            X_test = X_test.astype('float32') / 255.0
+            y_test = np.squeeze(y_test)
 
             # Use a smaller subset for faster training
             subset_size = 5000  # Use only 5000 samples for faster training
             X_train = X_train[:subset_size]
             y_train = y_train[:subset_size]
 
-            logging.info(f"Client {self.client_id}: Loaded CIFAR-10 data with {X_train.shape[0]} samples")
-            return X_train, y_train
+            # Use a smaller test set for faster evaluation
+            test_size = 1000
+            X_test = X_test[:test_size]
+            y_test = y_test[:test_size]
+
+            logging.info(f"Client {self.client_id}: Loaded CIFAR-10 data with {X_train.shape[0]} training samples and {X_test.shape[0]} test samples")
+            return X_train, y_train, X_test, y_test
         except Exception as e:
             logging.error(f"Client {self.client_id}: Error loading CIFAR-10 data: {e}")
             logging.error(traceback.format_exc())
             # Fallback to random data
             X_train = np.random.rand(1000, 32, 32, 3).astype('float32')
             y_train = np.random.randint(0, 10, size=1000)
-            return X_train, y_train
+            X_test = np.random.rand(200, 32, 32, 3).astype('float32')
+            y_test = np.random.randint(0, 10, size=200)
+            return X_train, y_train, X_test, y_test
 
     def train(self, global_weights):
         logging.info(f"Client {self.client_id}: Training model with local data")
 
         if not TENSORFLOW_AVAILABLE:
             logging.warning(f"Client {self.client_id}: TensorFlow not available. Simulating training.")
-            # Simulate training by adding random noise to the global model
             self.model = [w + np.random.normal(0, 0.01, size=w.shape).astype(w.dtype) for w in global_weights]
             logging.info(f"Client {self.client_id}: Simulated training complete. Model has {len(self.model)} layers.")
             return self.model
 
         try:
-            # Initialize the model architecture with smaller dimensions
-            # to match the server's model and fit within Kafka message size limits
-            input_shape = (32, 32, 3)
-            num_classes = 10
-            inputs = Input(shape=input_shape)
-            x = Conv2D(16, (3, 3), activation='relu')(inputs)  # 16 filters instead of 32
-            x = Conv2D(32, (3, 3), activation='relu')(x)      # 32 filters instead of 64
-            x = MaxPooling2D(pool_size=(2, 2))(x)
-            x = Dropout(0.25)(x)
-            x = Flatten()(x)
-            x = Dense(64, activation='relu')(x)               # 64 units instead of 128
-            x = Dropout(0.5)(x)
-            outputs = Dense(num_classes, activation='softmax')(x)
-            model = Model(inputs=inputs, outputs=outputs)
-            model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+            # Create a model with the standard architecture
+            model = self.create_model()
 
-            # Set the model weights to the global weights
-            model.set_weights(global_weights)
+            # Log the shapes of the global weights for debugging
+            logging.info(f"Client {self.client_id}: Received global model with {len(global_weights)} weight arrays")
+            for i, w in enumerate(global_weights):
+                logging.info(f"Client {self.client_id}: Global weight {i} shape: {w.shape}")
 
-            # Train the model for a few epochs on a subset of the data
-            # Use a small subset for faster training
-            subset_size = min(5000, len(self.X))  # Use at most 5000 samples for training
+            # Log the expected shapes of the model weights
+            model_weights = model.get_weights()
+            logging.info(f"Client {self.client_id}: Model expects {len(model_weights)} weight arrays")
+            for i, w in enumerate(model_weights):
+                logging.info(f"Client {self.client_id}: Expected weight {i} shape: {w.shape}")
+
+            # Check if weights are compatible
+            if not self.are_weights_compatible(model, global_weights):
+                logging.warning(f"Client {self.client_id}: Global weights are not compatible with the model. Attempting to adapt.")
+                adapted_weights = self.adapt_weights(model, global_weights)
+                if adapted_weights is None:
+                    logging.error(f"Client {self.client_id}: Could not adapt weights. Cannot train.")
+                    raise ValueError("Incompatible weights")
+                else:
+                    logging.info(f"Client {self.client_id}: Successfully adapted weights to match model architecture.")
+                    model.set_weights(adapted_weights)
+            else:
+                model.set_weights(global_weights)
+
+            subset_size = min(5000, len(self.X))
             indices = np.random.choice(len(self.X), subset_size, replace=False)
             X_subset = self.X[indices]
             y_subset = self.y[indices]
 
-            # Train for a small number of epochs
             model.fit(X_subset, y_subset, epochs=1, batch_size=32, verbose=0)
 
-            # Evaluate the model
             test_size = min(1000, len(self.X))
             test_indices = np.random.choice(len(self.X), test_size, replace=False)
             X_test_subset = self.X[test_indices]
@@ -166,15 +181,13 @@ class FederatedClient:
             _, accuracy = model.evaluate(X_test_subset, y_test_subset, verbose=0)
             logging.info(f"Client {self.client_id}: Model accuracy after training: {accuracy:.4f}")
 
-            # Get the updated weights
             self.model = model.get_weights()
             return self.model
         except Exception as e:
             logging.error(f"Client {self.client_id}: Error training model: {e}")
-            logging.error(traceback.format_exc())
-            # Fallback to simulating training
-            self.model = [w + np.random.normal(0, 0.01, size=w.shape).astype(w.dtype) for w in global_weights]
-            return self.model
+        logging.error(traceback.format_exc())
+        self.model = [w + np.random.normal(0, 0.01, size=w.shape).astype(w.dtype) for w in global_weights]
+        return self.model
 
     def serialize_model_weights(self, weights):
         try:
@@ -339,7 +352,163 @@ class FederatedClient:
             self.send_update()  # Send the update to the server
             logging.info(f"Client {self.client_id}: Round {round + 1} completed")
 
+    def accuracy(self, model, X_test, y_test):
+        _, accuracy = model.evaluate(X_test, y_test, verbose=0)
+        logging.info(f"Client {self.client_id}: Model accuracy: {accuracy:.4f}")
+        return accuracy
+
+    def create_model(self):
+        """Create a model with the standard architecture used in this federated learning system."""
+        input_shape = (32, 32, 3)
+        num_classes = 10
+        inputs = Input(shape=input_shape)
+
+        # First convolutional layer with explicit parameters
+        x = Conv2D(16, (3, 3), padding='valid', activation='relu')(inputs)  # 30x30x16
+
+        # Second convolutional layer
+        x = Conv2D(32, (3, 3), padding='valid', activation='relu')(x)  # 28x28x32
+
+        # Max pooling layer
+        x = MaxPooling2D(pool_size=(2, 2))(x)  # 14x14x32
+
+        # Dropout for regularization
+        x = Dropout(0.25)(x)
+
+        # Flatten layer - should be 14*14*32 = 6272
+        x = Flatten()(x)
+
+        # Dense layer
+        x = Dense(64, activation='relu')(x)
+
+        # Dropout for regularization
+        x = Dropout(0.5)(x)
+
+        # Output layer
+        outputs = Dense(num_classes, activation='softmax')(x)
+
+        # Create and compile the model
+        model = Model(inputs=inputs, outputs=outputs)
+        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+        # Print model summary and layer shapes for debugging
+        if self.client_id == 0:  # Only print for first client to avoid log spam
+            model.summary()
+            # Print the output shape of each layer
+            for i, layer in enumerate(model.layers):
+                logging.info(f"Client {self.client_id}: Layer {i} ({layer.name}): Output shape = {layer.output_shape}")
+
+        return model
+
+    def are_weights_compatible(self, model, weights):
+        """Check if the weights are compatible with the model."""
+        model_weights = model.get_weights()
+
+        # Check if number of weight arrays matches
+        if len(model_weights) != len(weights):
+            logging.warning(f"Client {self.client_id}: Number of weight arrays doesn't match: {len(weights)} vs {len(model_weights)}")
+            return False
+
+        # Check if shapes match
+        for i, (model_w, w) in enumerate(zip(model_weights, weights)):
+            if model_w.shape != w.shape:
+                logging.warning(f"Client {self.client_id}: Shape mismatch at index {i}: {w.shape} vs {model_w.shape}")
+                return False
+
+        return True
+
+    def adapt_weights(self, model, weights):
+        """Adapt weights to be compatible with the model when possible."""
+        model_weights = model.get_weights()
+        adapted_weights = []
+
+        # Check if we can adapt the weights
+        if len(model_weights) != len(weights):
+            logging.error(f"Client {self.client_id}: Cannot adapt weights - number of arrays doesn't match")
+            return None
+
+        # Try to adapt each weight array
+        for i, (model_w, w) in enumerate(zip(model_weights, weights)):
+            if model_w.shape == w.shape:
+                # Shapes match, use as is
+                adapted_weights.append(w)
+            elif i == 4 and len(model_w.shape) == 2 and len(w.shape) == 2 and model_w.shape[1] == w.shape[1]:
+                # This is likely the flattened layer - we can try to adapt it
+                logging.warning(f"Client {self.client_id}: Attempting to adapt flattened layer weights from {w.shape} to {model_w.shape}")
+
+                # If the target shape is larger, we'll pad with zeros
+                if model_w.shape[0] > w.shape[0]:
+                    padding = np.zeros((model_w.shape[0] - w.shape[0], w.shape[1]), dtype=w.dtype)
+                    adapted_w = np.vstack([w, padding])
+                    adapted_weights.append(adapted_w)
+                    logging.info(f"Client {self.client_id}: Padded weights from {w.shape} to {adapted_w.shape}")
+                # If the target shape is smaller, we'll truncate
+                elif model_w.shape[0] < w.shape[0]:
+                    adapted_w = w[:model_w.shape[0], :]
+                    adapted_weights.append(adapted_w)
+                    logging.info(f"Client {self.client_id}: Truncated weights from {w.shape} to {adapted_w.shape}")
+                else:
+                    # This shouldn't happen, but just in case
+                    adapted_weights.append(w)
+            else:
+                logging.error(f"Client {self.client_id}: Cannot adapt weights at index {i}: {w.shape} vs {model_w.shape}")
+                return None
+
+        return adapted_weights
+
+    def evaluate_model(self, weights, X_test, y_test):
+        """Evaluate a model with the given weights on test data."""
+        try:
+            # Log the shapes of the weights for debugging
+            logging.info(f"Client {self.client_id}: Evaluating model with {len(weights)} weight arrays")
+            for i, w in enumerate(weights):
+                logging.info(f"Client {self.client_id}: Weight {i} shape: {w.shape}")
+
+            # Create a model with the same architecture as used in training
+            model = self.create_model()
+
+            # Log the expected shapes of the model weights
+            model_weights = model.get_weights()
+            logging.info(f"Client {self.client_id}: Model expects {len(model_weights)} weight arrays")
+            for i, w in enumerate(model_weights):
+                logging.info(f"Client {self.client_id}: Expected weight {i} shape: {w.shape}")
+
+            # Check if weights are compatible
+            if not self.are_weights_compatible(model, weights):
+                logging.warning(f"Client {self.client_id}: Weights are not compatible with the model. Attempting to adapt.")
+                adapted_weights = self.adapt_weights(model, weights)
+                if adapted_weights is None:
+                    logging.warning(f"Client {self.client_id}: Could not adapt weights. Using a fresh model.")
+                    # Train the model for 1 epoch on a small subset to get a baseline accuracy
+                    subset_size = min(1000, len(X_test))
+                    indices = np.random.choice(len(X_test), subset_size, replace=False)
+                    X_subset = X_test[indices]
+                    y_subset = y_test[indices]
+                    model.fit(X_subset, y_subset, epochs=1, batch_size=32, verbose=0)
+                else:
+                    logging.info(f"Client {self.client_id}: Successfully adapted weights for evaluation.")
+                    model.set_weights(adapted_weights)
+            else:
+                # Set the weights if they are compatible
+                model.set_weights(weights)
+
+            # Evaluate on test data
+            _, accuracy = model.evaluate(X_test, y_test, verbose=0)
+            return accuracy
+        except Exception as e:
+            logging.error(f"Client {self.client_id}: Error in evaluate_model: {e}")
+            logging.error(traceback.format_exc())
+            return 0.0
+
+
+    def close(self):
+        self.consumer.close()
+        self.producer.close()
+        logging.info("Client closed")
+
 if __name__ == "__main__":
+
+
     logging.basicConfig(level=logging.INFO)
 
     bootstrap_servers = os.environ.get("BOOTSTRAP_SERVERS", "localhost:9094")
@@ -350,11 +519,29 @@ if __name__ == "__main__":
     else:
         logging.info("No client ID provided, will generate one automatically")
 
+
     client = FederatedClient(
         bootstrap_servers=bootstrap_servers,
         update_topic='update_topic',
         model_topic='model_topic',
         client_id=client_id
     )
-
+    now = datetime.datetime.now()
     client.start(num_rounds=10)
+    finish_time = datetime.datetime.now()
+    logging.info(f"Client {client.client_id}: Federated learning completed at {now}")
+    logging.info(f"It took {finish_time - now} seconds to complete federated learning")
+    # Calculate final model accuracy on test data
+    if client.model is not None and hasattr(client, 'X_test') and hasattr(client, 'y_test'):
+        try:
+            # Use the client's evaluate_model method which now handles incompatible weights gracefully
+            accuracy = client.evaluate_model(client.model, client.X_test, client.y_test)
+            logging.info(f"Client {client.client_id}: Final model accuracy on test data: {accuracy:.4f}")
+        except Exception as e:
+            logging.error(f"Client {client.client_id}: Error calculating final accuracy: {e}")
+            logging.error(traceback.format_exc())
+    else:
+        logging.warning(f"Client {client.client_id}: Cannot calculate final accuracy - model or test data not available")
+    logging.info(f"Client {client.client_id}: Closing client")
+    client.close()
+

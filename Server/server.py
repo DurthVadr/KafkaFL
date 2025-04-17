@@ -53,7 +53,7 @@ class FederatedServer:
                     value_serializer=lambda v: v,  # Keep raw bytes for now
                     max_request_size=20971520,  # 20MB max message size (increased)
                     buffer_memory=41943040,  # 40MB buffer memory (increased)
-                    compression_type='gzip'  # Add compression to reduce message size
+                   # compression_type='gzip'  # Add compression to reduce message size
                 )
 
                 # Test connection by listing topics
@@ -86,19 +86,45 @@ class FederatedServer:
         try:
             # Create a smaller model architecture that will still be compatible with clients
             # but with fewer parameters to fit within Kafka message size limits
+            # Create a model with explicit parameters to ensure consistency with clients
             input_shape = (32, 32, 3)
             num_classes = 10
             inputs = Input(shape=input_shape)
-            x = Conv2D(16, (3, 3), activation='relu')(inputs)  # 16 filters instead of 32
-            x = Conv2D(32, (3, 3), activation='relu')(x)      # 32 filters instead of 64
-            x = MaxPooling2D(pool_size=(2, 2))(x)
+
+            # First convolutional layer with explicit parameters
+            x = Conv2D(16, (3, 3), padding='valid', activation='relu')(inputs)  # 30x30x16
+
+            # Second convolutional layer
+            x = Conv2D(32, (3, 3), padding='valid', activation='relu')(x)  # 28x28x32
+
+            # Max pooling layer
+            x = MaxPooling2D(pool_size=(2, 2))(x)  # 14x14x32
+
+            # Dropout for regularization
             x = Dropout(0.25)(x)
+
+            # Flatten layer - should be 14*14*32 = 6272
             x = Flatten()(x)
-            x = Dense(64, activation='relu')(x)               # 64 units instead of 128
+
+            # Dense layer
+            x = Dense(64, activation='relu')(x)
+
+            # Dropout for regularization
             x = Dropout(0.5)(x)
+
+            # Output layer
             outputs = Dense(num_classes, activation='softmax')(x)
+
+            # Create and compile the model
             model = Model(inputs=inputs, outputs=outputs)
             model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+            # Print model summary to verify the architecture
+            model.summary()
+
+            # Print the output shape of each layer for debugging
+            for i, layer in enumerate(model.layers):
+                logging.info(f"Layer {i} ({layer.name}): Output shape = {layer.output_shape}")
 
             weights = model.get_weights()
             logging.info(f"Global Model CIFAR-10 initialized with {len(weights)} layers")
@@ -115,16 +141,45 @@ class FederatedServer:
         try:
             # Create a list of numpy arrays to simulate model weights
             # Using a smaller version of the client's model architecture
-            weights = [
-                np.random.rand(3, 3, 3, 16).astype(np.float32),  # Conv2D weights (16 filters instead of 32)
-                np.random.rand(16).astype(np.float32),           # Conv2D bias
-                np.random.rand(3, 3, 16, 32).astype(np.float32), # Conv2D weights (32 filters instead of 64)
-                np.random.rand(32).astype(np.float32),           # Conv2D bias
-                np.random.rand(8 * 8 * 32, 64).astype(np.float32), # Dense weights (smaller)
-                np.random.rand(64).astype(np.float32),           # Dense bias
-                np.random.rand(64, 10).astype(np.float32),       # Output layer weights
-                np.random.rand(10).astype(np.float32)            # Output layer bias
-            ]
+            # Create a model with the same architecture as in initialize_global_model_cifar10
+            # to ensure consistent weight shapes
+            input_shape = (32, 32, 3)
+            num_classes = 10
+            inputs = Input(shape=input_shape)
+
+            # First convolutional layer with explicit parameters
+            x = Conv2D(16, (3, 3), padding='valid', activation='relu')(inputs)  # 30x30x16
+
+            # Second convolutional layer
+            x = Conv2D(32, (3, 3), padding='valid', activation='relu')(x)  # 28x28x32
+
+            # Max pooling layer
+            x = MaxPooling2D(pool_size=(2, 2))(x)  # 14x14x32
+
+            # Dropout for regularization
+            x = Dropout(0.25)(x)
+
+            # Flatten layer - should be 14*14*32 = 6272
+            x = Flatten()(x)
+
+            # Dense layer
+            x = Dense(64, activation='relu')(x)
+
+            # Dropout for regularization
+            x = Dropout(0.5)(x)
+
+            # Output layer
+            outputs = Dense(num_classes, activation='softmax')(x)
+
+            # Create the model
+            model = Model(inputs=inputs, outputs=outputs)
+
+            # Initialize with random weights
+            weights = [np.random.rand(*w.shape).astype(np.float32) for w in model.get_weights()]
+
+            # Print the shapes for debugging
+            for i, w in enumerate(weights):
+                logging.info(f"Random weight {i} shape: {w.shape}")
             logging.info(f"Random global model initialized with {len(weights)} layers")
             return weights
         except Exception as e:
@@ -216,23 +271,23 @@ class FederatedServer:
             import io
             import numpy as np
 
-            # Create a BytesIO buffer from the received bytes
+
             buffer_io = io.BytesIO(buffer)
 
-            # Read the number of arrays
+
             num_arrays = np.frombuffer(buffer_io.read(4), dtype=np.int32)[0]
 
-            # Read each array
+
             weights = []
             for _ in range(num_arrays):
-                # Read shape information
+
                 ndim = np.frombuffer(buffer_io.read(4), dtype=np.int32)[0]  # Number of dimensions
                 shape = tuple(np.frombuffer(buffer_io.read(4 * ndim), dtype=np.int32))  # Shape dimensions
 
-                # Calculate the size of the array in bytes
-                size = np.prod(shape) * 4  # Assuming float32 (4 bytes per element)
 
-                # Read the array data
+                size = np.prod(shape) * 4
+
+
                 arr_data = np.frombuffer(buffer_io.read(int(size)), dtype=np.float32).reshape(shape)
                 weights.append(arr_data)
 
@@ -244,7 +299,7 @@ class FederatedServer:
             logging.error(traceback.format_exc())
             return None
 
-    def start(self):
+    def  start(self):
         if not self.connect_kafka():
             logging.error("Failed to start server due to Kafka connection issues")
             return
@@ -330,6 +385,13 @@ class FederatedServer:
             logging.info("Closing Kafka connections")
             self.consumer.close()  # Ensure the consumer is closed properly
             self.producer.close()
+
+
+    def close(self):
+        self.consumer.close()
+        self.producer.close()
+        logging.info("Server closed")
+
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.INFO)
@@ -346,3 +408,4 @@ if __name__ == "__main__":
     )
 
     server.start()
+    server.close()
