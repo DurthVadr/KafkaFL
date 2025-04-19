@@ -1,9 +1,11 @@
-version: "0.0.1"
+version: "3.8"
 
 networks:
   kafka-net:
-services:
+    driver: bridge
 
+services:
+  # Kafka service
   kafka:
     image: bitnami/kafka:latest
     ports:
@@ -32,70 +34,101 @@ services:
       retries: 3
     stop_grace_period: 60s  # Give Kafka more time to shut down gracefully
     restart: on-failure  # Restart if Kafka fails
+    volumes:
+      - kafka_data:/bitnami/kafka
 
-  # kafka-ui:
-#   image: provectuslabs/kafka-ui:latest
-  #   ports:
-  #     - "8080:8080"
-  #  depends_on:
-  #     kafka:
-  #       condition: service_started
-  #   environment:
-  #     KAFKA_CLUSTERS_0_NAME: local
-  #     KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-  #     DYNAMIC_CONFIG_ENABLED: "true"
-  #   networks:
-  #     - kafka-net
-
-
-  server:  # Add your server as a service
-    build: .  # Use the Dockerfile in the current directory
+  # Federated learning server
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
     depends_on:
-      - kafka
+      kafka:
+        condition: service_healthy
     networks:
       - kafka-net
     environment:
-      BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
-    stop_grace_period: 30s  # Give the server time to shut down gracefully
-    restart: on-failure  # Restart if the server fails
+      BOOTSTRAP_SERVERS: kafka:9092
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+    stop_grace_period: 30s
+    restart: on-failure
+    volumes:
+      - ./logs:/app/logs
 
-
-  # Run 3 client instances for federated learning
-  client1:  # Client 1
-    build: ../Client
+  # Federated learning clients
+  client1:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
     depends_on:
       - kafka
       - server
     networks:
       - kafka-net
     environment:
-      BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
+      BOOTSTRAP_SERVERS: kafka:9092
       CLIENT_ID: "1"
-    stop_grace_period: 30s  # Give the client time to shut down gracefully
-    restart: on-failure  # Restart if the client fails
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+    stop_grace_period: 30s
+    restart: on-failure
+    volumes:
+      - ./logs:/app/logs
 
-  client2:  # Client 2
-    build: ../Client
+  client2:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
     depends_on:
       - kafka
       - server
     networks:
       - kafka-net
     environment:
-      BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
+      BOOTSTRAP_SERVERS: kafka:9092
       CLIENT_ID: "2"
-    stop_grace_period: 30s  # Give the client time to shut down gracefully
-    restart: on-failure  # Restart if the client fails
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+    stop_grace_period: 30s
+    restart: on-failure
+    volumes:
+      - ./logs:/app/logs
 
-  client3:  # Client 3
-    build: ../Client
+  client3:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
     depends_on:
       - kafka
       - server
     networks:
       - kafka-net
     environment:
-      BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
+      BOOTSTRAP_SERVERS: kafka:9092
       CLIENT_ID: "3"
-    stop_grace_period: 30s  # Give the client time to shut down gracefully
-    restart: on-failure  # Restart if the client fails
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+    stop_grace_period: 30s
+    restart: on-failure
+    volumes:
+      - ./logs:/app/logs
+
+volumes:
+  kafka_data:
