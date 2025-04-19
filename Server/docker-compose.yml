@@ -30,6 +30,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    stop_grace_period: 60s  # Give Kafka more time to shut down gracefully
+    restart: on-failure  # Restart if Kafka fails
 
   # kafka-ui:
 #   image: provectuslabs/kafka-ui:latest
@@ -54,6 +56,8 @@ services:
       - kafka-net
     environment:
       BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
+    stop_grace_period: 30s  # Give the server time to shut down gracefully
+    restart: on-failure  # Restart if the server fails
 
 
   # Run 3 client instances for federated learning
@@ -67,6 +71,8 @@ services:
     environment:
       BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
       CLIENT_ID: "1"
+    stop_grace_period: 30s  # Give the client time to shut down gracefully
+    restart: on-failure  # Restart if the client fails
 
   client2:  # Client 2
     build: ../Client
@@ -78,6 +84,8 @@ services:
     environment:
       BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
       CLIENT_ID: "2"
+    stop_grace_period: 30s  # Give the client time to shut down gracefully
+    restart: on-failure  # Restart if the client fails
 
   client3:  # Client 3
     build: ../Client
@@ -89,3 +97,5 @@ services:
     environment:
       BOOTSTRAP_SERVERS: kafka:9092 # Pass Kafka address as env variable
       CLIENT_ID: "3"
+    stop_grace_period: 30s  # Give the client time to shut down gracefully
+    restart: on-failure  # Restart if the client fails

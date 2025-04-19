@@ -10,7 +10,7 @@ from kafka.errors import KafkaError, NoBrokersAvailable
 # Import TensorFlow conditionally to handle environments where it might not be available
 try:
     from tensorflow.keras.models import Model
-    from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+    from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
     TENSORFLOW_AVAILABLE = True
 except ImportError:
     logging.warning("TensorFlow not available. Using simplified model initialization.")
@@ -94,8 +94,12 @@ class FederatedServer:
             # First convolutional layer with explicit parameters
             x = Conv2D(16, (3, 3), padding='valid', activation='relu')(inputs)  # 30x30x16
 
+            # Add batch normalization for better training stability
+            x = BatchNormalization()(x)
+
             # Second convolutional layer
             x = Conv2D(32, (3, 3), padding='valid', activation='relu')(x)  # 28x28x32
+            x = BatchNormalization()(x)
 
             # Max pooling layer
             x = MaxPooling2D(pool_size=(2, 2))(x)  # 14x14x32
@@ -103,11 +107,17 @@ class FederatedServer:
             # Dropout for regularization
             x = Dropout(0.25)(x)
 
-            # Flatten layer - should be 14*14*32 = 6272
+            # Add another convolutional layer for better feature extraction
+            x = Conv2D(64, (3, 3), padding='same', activation='relu')(x)  # 14x14x64
+            x = BatchNormalization()(x)
+            x = MaxPooling2D(pool_size=(2, 2))(x)  # 7x7x64
+
+            # Flatten layer - should be 7*7*64 = 3136
             x = Flatten()(x)
 
             # Dense layer
-            x = Dense(64, activation='relu')(x)
+            x = Dense(128, activation='relu')(x)  # Increased units for better capacity
+            x = BatchNormalization()(x)
 
             # Dropout for regularization
             x = Dropout(0.5)(x)
@@ -150,8 +160,12 @@ class FederatedServer:
             # First convolutional layer with explicit parameters
             x = Conv2D(16, (3, 3), padding='valid', activation='relu')(inputs)  # 30x30x16
 
+            # Add batch normalization for better training stability
+            x = BatchNormalization()(x)
+
             # Second convolutional layer
             x = Conv2D(32, (3, 3), padding='valid', activation='relu')(x)  # 28x28x32
+            x = BatchNormalization()(x)
 
             # Max pooling layer
             x = MaxPooling2D(pool_size=(2, 2))(x)  # 14x14x32
@@ -159,11 +173,17 @@ class FederatedServer:
             # Dropout for regularization
             x = Dropout(0.25)(x)
 
-            # Flatten layer - should be 14*14*32 = 6272
+            # Add another convolutional layer for better feature extraction
+            x = Conv2D(64, (3, 3), padding='same', activation='relu')(x)  # 14x14x64
+            x = BatchNormalization()(x)
+            x = MaxPooling2D(pool_size=(2, 2))(x)  # 7x7x64
+
+            # Flatten layer - should be 7*7*64 = 3136
             x = Flatten()(x)
 
             # Dense layer
-            x = Dense(64, activation='relu')(x)
+            x = Dense(128, activation='relu')(x)  # Increased units for better capacity
+            x = BatchNormalization()(x)
 
             # Dropout for regularization
             x = Dropout(0.5)(x)
@@ -388,11 +408,48 @@ class FederatedServer:
 
 
     def close(self):
-        self.consumer.close()
-        self.producer.close()
-        logging.info("Server closed")
+        """Properly close all connections and resources."""
+        try:
+            logging.info("Closing Kafka connections")
+
+            if hasattr(self, 'consumer') and self.consumer:
+                # Unsubscribe and commit offsets before closing
+                self.consumer.unsubscribe()
+                self.consumer.commit()
+                self.consumer.close()
+                logging.info("Consumer closed")
+
+            if hasattr(self, 'producer') and self.producer:
+                # Flush any pending messages before closing
+                self.producer.flush()
+                self.producer.close()
+                logging.info("Producer closed")
+
+            # Clear any large objects to help with memory cleanup
+            self.global_model = None
+
+            logging.info("Server closed - all resources released")
+        except Exception as e:
+            logging.error(f"Error during server shutdown: {e}")
+            logging.error(traceback.format_exc())
+
+# Global variable to store the server instance for signal handlers
+server_instance = None
+
+# Signal handler for graceful shutdown
+def signal_handler(sig, frame):
+    logging.info(f"Received shutdown signal {sig}, closing server gracefully...")
+    if server_instance:
+        server_instance.close()
+    sys.exit(0)
 
 if __name__ == "__main__":
+    import signal
+    import sys
+
+    # Register signal handlers for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)  # Ctrl+C
+    signal.signal(signal.SIGTERM, signal_handler)  # Docker stop
 
     logging.basicConfig(level=logging.INFO)
     logging.info("Server started")
@@ -407,5 +464,15 @@ if __name__ == "__main__":
         update_topic='update_topic',
     )
 
-    server.start()
-    server.close()
+    # Store the server instance for signal handlers
+    server_instance = server
+
+    try:
+        server.start()
+    except KeyboardInterrupt:
+        logging.info("Server interrupted by user")
+    except Exception as e:
+        logging.error(f"Server error: {e}")
+        logging.error(traceback.format_exc())
+    finally:
+        server.close()

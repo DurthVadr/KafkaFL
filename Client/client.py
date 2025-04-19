@@ -9,6 +9,7 @@ from kafka import KafkaConsumer, KafkaProducer
 
 # Import TensorFlow conditionally to handle environments where it might not be available
 try:
+    import tensorflow as tf
     from tensorflow.keras.datasets import cifar10
     from tensorflow.keras.models import Model
     from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Dropout
@@ -172,7 +173,18 @@ class FederatedClient:
             X_subset = self.X[indices]
             y_subset = self.y[indices]
 
-            model.fit(X_subset, y_subset, epochs=1, batch_size=32, verbose=0)
+            # Train for more epochs to improve accuracy
+            epochs = 5
+            batch_size = 32
+            logging.info(f"Client {self.client_id}: Training model for {epochs} epochs with batch size {batch_size}")
+
+            # Use a callback to log progress
+            class LoggingCallback(tf.keras.callbacks.Callback):
+                def on_epoch_end(self, epoch, logs=None):
+                    logging.info(f"Client {self.client_id}: Epoch {epoch+1}/{epochs} - loss: {logs['loss']:.4f} - accuracy: {logs['accuracy']:.4f}")
+
+            # Train the model
+            model.fit(X_subset, y_subset, epochs=epochs, batch_size=batch_size, verbose=0, callbacks=[LoggingCallback()])
 
             test_size = min(1000, len(self.X))
             test_indices = np.random.choice(len(self.X), test_size, replace=False)
@@ -366,8 +378,12 @@ class FederatedClient:
         # First convolutional layer with explicit parameters
         x = Conv2D(16, (3, 3), padding='valid', activation='relu')(inputs)  # 30x30x16
 
+        # Add batch normalization for better training stability
+        x = tf.keras.layers.BatchNormalization()(x)
+
         # Second convolutional layer
         x = Conv2D(32, (3, 3), padding='valid', activation='relu')(x)  # 28x28x32
+        x = tf.keras.layers.BatchNormalization()(x)
 
         # Max pooling layer
         x = MaxPooling2D(pool_size=(2, 2))(x)  # 14x14x32
@@ -375,11 +391,17 @@ class FederatedClient:
         # Dropout for regularization
         x = Dropout(0.25)(x)
 
-        # Flatten layer - should be 14*14*32 = 6272
+        # Add another convolutional layer for better feature extraction
+        x = Conv2D(64, (3, 3), padding='same', activation='relu')(x)  # 14x14x64
+        x = tf.keras.layers.BatchNormalization()(x)
+        x = MaxPooling2D(pool_size=(2, 2))(x)  # 7x7x64
+
+        # Flatten layer - should be 7*7*64 = 3136
         x = Flatten()(x)
 
         # Dense layer
-        x = Dense(64, activation='relu')(x)
+        x = Dense(128, activation='relu')(x)  # Increased units for better capacity
+        x = tf.keras.layers.BatchNormalization()(x)
 
         # Dropout for regularization
         x = Dropout(0.5)(x)
@@ -389,7 +411,15 @@ class FederatedClient:
 
         # Create and compile the model
         model = Model(inputs=inputs, outputs=outputs)
-        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+        # Use a learning rate schedule for better convergence
+        lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
+            initial_learning_rate=0.001,
+            decay_steps=100,
+            decay_rate=0.9)
+        optimizer = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
+
+        model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
         # Print model summary and layer shapes for debugging
         if self.client_id == 0:  # Only print for first client to avoid log spam
@@ -502,12 +532,50 @@ class FederatedClient:
 
 
     def close(self):
-        self.consumer.close()
-        self.producer.close()
-        logging.info("Client closed")
+        """Properly close all connections and resources."""
+        try:
+            if self.consumer:
+                # Unsubscribe and commit offsets before closing
+                self.consumer.unsubscribe()
+                self.consumer.commit()
+                self.consumer.close()
+                logging.info(f"Client {self.client_id}: Consumer closed")
+
+            if self.producer:
+                # Flush any pending messages before closing
+                self.producer.flush()
+                self.producer.close()
+                logging.info(f"Client {self.client_id}: Producer closed")
+
+            # Clear any large objects to help with memory cleanup
+            self.model = None
+            self.X = None
+            self.y = None
+            self.X_test = None
+            self.y_test = None
+
+            logging.info(f"Client {self.client_id}: All resources released")
+        except Exception as e:
+            logging.error(f"Client {self.client_id}: Error during shutdown: {e}")
+            logging.error(traceback.format_exc())
+
+# Global variable to store the client instance for signal handlers
+client_instance = None
+
+# Signal handler for graceful shutdown
+def signal_handler(sig, frame):
+    logging.info("Received shutdown signal, closing client gracefully...")
+    if client_instance:
+        client_instance.close()
+    sys.exit(0)
 
 if __name__ == "__main__":
+    import signal
+    import sys
 
+    # Register signal handlers for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)  # Ctrl+C
+    signal.signal(signal.SIGTERM, signal_handler)  # Docker stop
 
     logging.basicConfig(level=logging.INFO)
 
@@ -526,6 +594,9 @@ if __name__ == "__main__":
         model_topic='model_topic',
         client_id=client_id
     )
+
+    # Store the client instance for signal handlers
+    client_instance = client
     now = datetime.datetime.now()
     client.start(num_rounds=10)
     finish_time = datetime.datetime.now()
