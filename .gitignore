@@ -1,2 +1,3 @@
 /.venv
 /flwr_implementation/__pycache__
+/logs

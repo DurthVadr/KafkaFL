@@ -23,7 +23,7 @@ services:
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_CFG_MESSAGE_MAX_BYTES: "20971520"  # 20MB max message size
       KAFKA_CFG_REPLICA_FETCH_MAX_BYTES: "20971520"  # 20MB max fetch size
-      KAFKA_CFG_COMPRESSION_TYPE: "gzip"  # Enable compression
+      #KAFKA_CFG_COMPRESSION_TYPE: "gzip"  # Enable compression
       ALLOW_PLAINTEXT_LISTENER: "yes"
     networks:
       - kafka-net
@@ -49,12 +49,12 @@ services:
       - kafka-net
     environment:
       BOOTSTRAP_SERVERS: kafka:9092
-    deploy:
-      resources:
-        limits:
-          memory: 2G
-        reservations:
-          memory: 1G
+    #deploy:
+    # resources:
+     #   limits:
+     #     memory: 2G
+      #  reservations:
+      #    memory: 1G
     stop_grace_period: 30s
     restart: on-failure
     volumes:
@@ -76,7 +76,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 3G
         reservations:
           memory: 1G
     stop_grace_period: 30s
@@ -99,7 +99,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 3G
         reservations:
           memory: 1G
     stop_grace_period: 30s
@@ -122,7 +122,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 3G
         reservations:
           memory: 1G
     stop_grace_period: 30s

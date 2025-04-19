@@ -5,6 +5,14 @@ Provides consistent model architecture across server and clients.
 
 import logging
 import numpy as np
+import os
+
+# Check if lightweight model should be used
+USE_LIGHTWEIGHT_MODEL = os.environ.get("USE_LIGHTWEIGHT_MODEL", "0") == "1"
+
+# Import lightweight model if specified
+if USE_LIGHTWEIGHT_MODEL:
+    from common.lightweight_model import create_lightweight_model, get_lightweight_random_weights
 
 # Import TensorFlow conditionally
 try:
@@ -22,16 +30,23 @@ MODEL_VERSION = "v1"
 def create_cifar10_model():
     """
     Create a model for CIFAR-10 classification.
-    
+    Uses lightweight model if specified in environment variable.
+
     Returns:
         A compiled Keras model if TensorFlow is available, None otherwise
     """
     if not TENSORFLOW_AVAILABLE:
         logging.warning("TensorFlow not available. Cannot create model.")
         return None
-    
+
+    # Use lightweight model if specified
+    if USE_LIGHTWEIGHT_MODEL:
+        logging.info("Using lightweight model for CIFAR-10")
+        return create_lightweight_model()
+
     try:
-        # Simple CNN for CIFAR-10
+        # Standard CNN for CIFAR-10
+        logging.info("Using standard model for CIFAR-10")
         model = Sequential([
             # First convolutional block
             Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=(32, 32, 3)),
@@ -40,7 +55,7 @@ def create_cifar10_model():
             BatchNormalization(),
             MaxPooling2D(pool_size=(2, 2)),
             Dropout(0.2),
-            
+
             # Second convolutional block
             Conv2D(64, (3, 3), padding='same', activation='relu'),
             BatchNormalization(),
@@ -48,7 +63,7 @@ def create_cifar10_model():
             BatchNormalization(),
             MaxPooling2D(pool_size=(2, 2)),
             Dropout(0.3),
-            
+
             # Third convolutional block
             Conv2D(128, (3, 3), padding='same', activation='relu'),
             BatchNormalization(),
@@ -56,7 +71,7 @@ def create_cifar10_model():
             BatchNormalization(),
             MaxPooling2D(pool_size=(2, 2)),
             Dropout(0.4),
-            
+
             # Fully connected layers
             Flatten(),
             Dense(128, activation='relu'),
@@ -64,7 +79,7 @@ def create_cifar10_model():
             Dropout(0.5),
             Dense(10, activation='softmax')
         ])
-        
+
         # Compile model with Adam optimizer
         optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
         model.compile(
@@ -72,7 +87,7 @@ def create_cifar10_model():
             loss='sparse_categorical_crossentropy',
             metrics=['accuracy']
         )
-        
+
         return model
     except Exception as e:
         logging.error(f"Error creating CIFAR-10 model: {e}")
@@ -83,16 +98,34 @@ def create_cifar10_model():
 def get_random_weights():
     """
     Generate random weights for the model when TensorFlow is not available.
-    
+    Uses lightweight model weights if specified in environment variable.
+
     Returns:
         List of numpy arrays with random weights
     """
+    # Use lightweight model if specified
+    if USE_LIGHTWEIGHT_MODEL:
+        logging.info("Using lightweight random weights")
+        if TENSORFLOW_AVAILABLE:
+            # Create model and get its weight shapes
+            model = create_lightweight_model()
+            if model is None:
+                return [np.random.rand(10).astype(np.float32)]
+
+            # Initialize with random weights
+            weights = [np.random.normal(0, 0.05, w.shape).astype(np.float32) for w in model.get_weights()]
+            return weights
+        else:
+            # Use predefined lightweight weights
+            return get_lightweight_random_weights()
+
+    # Standard model weights
     if TENSORFLOW_AVAILABLE:
         # Create model and get its weight shapes
         model = create_cifar10_model()
         if model is None:
             return [np.random.rand(10).astype(np.float32)]
-        
+
         # Initialize with random weights
         weights = [np.random.normal(0, 0.05, w.shape).astype(np.float32) for w in model.get_weights()]
         return weights
@@ -102,20 +135,20 @@ def get_random_weights():
             # First conv block
             (3, 3, 3, 32), (32,), (32,), (32,), (32,), (32,),  # Conv2D + BN
             (3, 3, 32, 32), (32,), (32,), (32,), (32,), (32,),  # Conv2D + BN
-            
+
             # Second conv block
             (3, 3, 32, 64), (64,), (64,), (64,), (64,), (64,),  # Conv2D + BN
             (3, 3, 64, 64), (64,), (64,), (64,), (64,), (64,),  # Conv2D + BN
-            
+
             # Third conv block
             (3, 3, 64, 128), (128,), (128,), (128,), (128,), (128,),  # Conv2D + BN
             (3, 3, 128, 128), (128,), (128,), (128,), (128,), (128,),  # Conv2D + BN
-            
+
             # Fully connected layers
             (2048, 128), (128,), (128,), (128,), (128,), (128,),  # Dense + BN
             (128, 10), (10,)  # Output layer
         ]
-        
+
         # Create random weights with the appropriate shapes
         weights = [np.random.normal(0, 0.05, shape).astype(np.float32) for shape in shapes]
         return weights
@@ -123,47 +156,47 @@ def get_random_weights():
 def are_weights_compatible(model, weights):
     """
     Check if weights are compatible with the model.
-    
+
     Args:
         model: Keras model
         weights: List of weight arrays
-        
+
     Returns:
         Boolean indicating compatibility
     """
     if model is None:
         return False
-        
+
     model_weights = model.get_weights()
-    
+
     # Check if number of weight arrays matches
     if len(model_weights) != len(weights):
         return False
-    
+
     # Check if shapes match
     for i, (model_w, w) in enumerate(zip(model_weights, weights)):
         if model_w.shape != w.shape:
             return False
-    
+
     return True
 
 def adapt_weights(model, weights):
     """
     Adapt weights to be compatible with the model when possible.
-    
+
     Args:
         model: Keras model
         weights: List of weight arrays
-        
+
     Returns:
         Adapted weights if possible, None otherwise
     """
     if model is None:
         return None
-        
+
     model_weights = model.get_weights()
     adapted_weights = []
-    
+
     # Check if we can adapt the weights
     if len(model_weights) != len(weights):
         # Try to handle the case where the server model has fewer layers
@@ -176,7 +209,7 @@ def adapt_weights(model, weights):
                     adapted_weights[i] = w
             return adapted_weights
         return None
-    
+
     # Try to adapt each weight array
     for i, (model_w, w) in enumerate(zip(model_weights, weights)):
         if model_w.shape == w.shape:
@@ -193,28 +226,28 @@ def adapt_weights(model, weights):
         else:
             # Different dimensions, cannot adapt
             return None
-    
+
     return adapted_weights
 
 def adapt_tensor(tensor, target_shape):
     """
     Adapt a tensor to a target shape by padding or truncating.
-    
+
     Args:
         tensor: Source tensor
         target_shape: Target shape
-        
+
     Returns:
         Adapted tensor
     """
     # Create a new tensor with the target shape, initialized with zeros
     adapted = np.zeros(target_shape, dtype=tensor.dtype)
-    
+
     # For each dimension, determine the slice to copy
     slices_src = tuple(slice(0, min(s, t)) for s, t in zip(tensor.shape, target_shape))
     slices_dst = tuple(slice(0, min(s, t)) for s, t in zip(tensor.shape, target_shape))
-    
+
     # Copy the data from the source tensor to the adapted tensor
     adapted[slices_dst] = tensor[slices_src]
-    
+
     return adapted
