@@ -156,6 +156,9 @@ class FederatedServer:
         return success
 
     def receive_model_updates(self, max_updates=3, timeout_ms=60000):
+        
+        #3 model geldiğinde de 120 saniye bekliyor mu? bana 120 saniye içerisinde 3 model update geldiğinde average al gönder. gelmezse ve 120 saniye dolarsa 2 gelmişse average al gönder. Sunucu da 10 dakika boyunca koşucak sonra stopluycak
+        
         """
         Receive model updates from clients.
 
@@ -226,6 +229,7 @@ class FederatedServer:
             aggregated_weights = []
 
             # Aggregate each layer
+            
             for layer_idx in range(num_layers):
                 # Get weights for this layer from all updates
                 layer_weights = [update[layer_idx] for update in updates]
@@ -269,6 +273,7 @@ class FederatedServer:
             return
 
         # Run federated learning rounds
+        #TODO: round söylemeyip 
         for round_idx in range(num_rounds):
             self.logger.info(f"=== Round {round_idx + 1}/{num_rounds} ===")
 

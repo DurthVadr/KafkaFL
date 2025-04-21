@@ -48,6 +48,9 @@ def create_cifar10_model():
         # Standard CNN for CIFAR-10
         logging.info("Using standard model for CIFAR-10")
         model = Sequential([
+            #LeNet
+            
+            
             # First convolutional block
             Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=(32, 32, 3)),
             BatchNormalization(),

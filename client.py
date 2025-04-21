@@ -59,6 +59,7 @@ class FederatedClient:
         self.X_train, self.y_train, self.X_test, self.y_test = load_cifar10_data(
             subset_size=5000, test_size=1000, logger=self.logger
         )
+        #burada gelen labellar random mu değil mi?
 
         # Connect to Kafka
         self._connect_to_kafka()
