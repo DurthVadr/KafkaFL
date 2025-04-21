@@ -1,0 +1,134 @@
+version: "3.8"
+
+networks:
+  kafka-net:
+    driver: bridge
+
+services:
+  # Kafka service
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+      - "9094:9094"
+    environment:
+      KAFKA_HEAP_OPTS: -Xmx512m -Xms512m
+      KAFKA_CFG_NODE_ID: 0
+      KAFKA_CFG_PROCESS_ROLES: controller,broker
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@kafka:9093
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_CFG_MESSAGE_MAX_BYTES: "20971520"  # 20MB max message size
+      KAFKA_CFG_REPLICA_FETCH_MAX_BYTES: "20971520"  # 20MB max fetch size
+      #KAFKA_CFG_COMPRESSION_TYPE: "gzip"  # Enable compression
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+    networks:
+      - kafka-net
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server kafka:9092 --list"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    stop_grace_period: 60s  # Give Kafka more time to shut down gracefully
+    restart: on-failure  # Restart if Kafka fails
+    volumes:
+      - kafka_data:/bitnami/kafka
+
+  # Federated learning server
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - kafka-net
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+    #deploy:
+    # resources:
+     #   limits:
+     #     memory: 2G
+      #  reservations:
+      #    memory: 1G
+    stop_grace_period: 30s
+    restart: on-failure
+    volumes:
+      - ./logs:/app/logs
+
+  # Federated learning clients
+  client1:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    depends_on:
+      - kafka
+      - server
+    networks:
+      - kafka-net
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      CLIENT_ID: "1"
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+        reservations:
+          memory: 1G
+    stop_grace_period: 30s
+    restart: on-failure
+    volumes:
+      - ./logs:/app/logs
+
+  client2:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    depends_on:
+      - kafka
+      - server
+    networks:
+      - kafka-net
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      CLIENT_ID: "2"
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+        reservations:
+          memory: 1G
+    stop_grace_period: 30s
+    restart: on-failure
+    volumes:
+      - ./logs:/app/logs
+
+  client3:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    depends_on:
+      - kafka
+      - server
+    networks:
+      - kafka-net
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      CLIENT_ID: "3"
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+        reservations:
+          memory: 1G
+    stop_grace_period: 30s
+    restart: on-failure
+    volumes:
+      - ./logs:/app/logs
+
+volumes:
+  kafka_data:

@@ -1,0 +1,11 @@
+2025-04-19 21:41:21,990 - client_2 - INFO - Logging to file: logs/client_client_2_20250419_214121.log
+2025-04-19 21:41:21,992 - client_2 - INFO - Initializing client 2
+2025-04-19 21:42:35,405 - client_2 - INFO - Loaded CIFAR-10 data with 5000 training samples and 1000 test samples
+2025-04-19 21:42:35,424 - client_2 - INFO - Connecting to Kafka at kafka:9092
+2025-04-19 21:42:35,687 - client_2 - INFO - Successfully created Kafka producer connected to kafka:9092
+2025-04-19 21:42:35,839 - client_2 - INFO - Successfully created Kafka consumer connected to kafka:9092
+2025-04-19 21:42:35,840 - client_2 - INFO - Subscribed to topics: ['global_model']
+2025-04-19 21:42:35,840 - client_2 - INFO - Successfully connected to Kafka
+2025-04-19 21:42:35,841 - client_2 - INFO - Starting federated learning with 10 rounds
+2025-04-19 21:42:35,841 - client_2 - INFO - === Round 1/10 ===
+2025-04-19 21:42:35,841 - client_2 - INFO - Waiting for global model from server on topic global_model

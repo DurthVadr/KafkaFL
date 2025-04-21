@@ -1,0 +1,16 @@
+2025-04-19 21:41:21,986 - server - INFO - Logging to file: logs/server_server_20250419_214121.log
+2025-04-19 21:41:21,987 - server - INFO - Initializing federated learning server
+2025-04-19 21:41:21,988 - server - INFO - Initializing global model
+2025-04-19 21:41:23,087 - server - INFO - Initialized global model with 44 layers
+2025-04-19 21:41:23,089 - server - INFO - Connecting to Kafka at kafka:9092
+2025-04-19 21:41:23,422 - server - INFO - Successfully created Kafka producer connected to kafka:9092
+2025-04-19 21:41:23,543 - server - INFO - Successfully created Kafka consumer connected to kafka:9092
+2025-04-19 21:41:23,543 - server - INFO - Subscribed to topics: ['model_updates']
+2025-04-19 21:41:23,544 - server - INFO - Successfully connected to Kafka
+2025-04-19 21:41:23,544 - server - INFO - Starting federated learning server with 10 rounds
+2025-04-19 21:41:23,544 - server - INFO - Sending global model to clients on topic global_model
+2025-04-19 21:41:23,619 - server - INFO - Serialized 44 weight arrays, size: 2212768 bytes
+2025-04-19 21:41:25,120 - server - INFO - Message sent to topic: global_model, partition: 0, offset: 0
+2025-04-19 21:41:25,121 - server - INFO - Global model sent successfully
+2025-04-19 21:41:25,121 - server - INFO - === Round 1/10 ===
+2025-04-19 21:41:25,121 - server - INFO - Waiting for up to 3 model updates from clients on topic model_updates
