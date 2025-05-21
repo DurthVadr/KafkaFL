@@ -2,3 +2,5 @@
 /flwr_implementation/__pycache__
 /logs
 /.DS_Store
+/data
+/common/__pycache__

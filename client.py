@@ -23,6 +23,13 @@ from common.kafka_utils import create_producer, create_consumer, send_message, r
 # Import TensorFlow conditionally
 try:
     import tensorflow as tf
+    # Configure TensorFlow for CPU-only operation
+    tf.config.set_visible_devices([], 'GPU')  # Hide all GPUs
+
+    # Limit TensorFlow to use only necessary memory
+    tf.config.threading.set_inter_op_parallelism_threads(1)
+    tf.config.threading.set_intra_op_parallelism_threads(1)
+
     TENSORFLOW_AVAILABLE = True
 except ImportError:
     TENSORFLOW_AVAILABLE = False
@@ -140,32 +147,27 @@ class FederatedClient:
             self.model = local_weights
             return local_weights
 
+        # Run garbage collection before training
+        gc.collect()
+
+        # Create model
+        model = create_cifar10_model()
+        if model is None:
+            self.logger.error("Failed to create model")
+            return None
+
         try:
-            # Run garbage collection before training
-            gc.collect()
-
-            # Create model
-            model = create_cifar10_model()
-
-            if model is None:
-                self.logger.error("Failed to create model")
-                return None
-
             # Check if weights are compatible
             if not are_weights_compatible(model, global_weights):
-                self.logger.warning("Global weights are not compatible with the model. Attempting to adapt.")
+                self.logger.warning("Global weights are not compatible. Attempting to adapt.")
                 adapted_weights = adapt_weights(model, global_weights)
-
                 if adapted_weights is None:
-                    self.logger.error("Could not adapt weights. Training with default initialization.")
+                    self.logger.error("Could not adapt weights. Using default initialization.")
                 else:
                     self.logger.info("Successfully adapted weights")
                     model.set_weights(adapted_weights)
             else:
                 model.set_weights(global_weights)
-
-            # Train the model
-            self.logger.info("Training model on local data")
 
             # Use a subset of data for training
             train_size = min(5000, len(self.X_train))
@@ -173,7 +175,7 @@ class FederatedClient:
             X_subset = self.X_train[indices]
             y_subset = self.y_train[indices]
 
-            # Define callbacks
+            # Define logging callback
             class LoggingCallback(tf.keras.callbacks.Callback):
                 def __init__(self, logger):
                     super().__init__()
@@ -182,12 +184,11 @@ class FederatedClient:
                 def on_epoch_end(self, epoch, logs=None):
                     self.logger.info(f"Epoch {epoch+1}: loss={logs['loss']:.4f}, accuracy={logs['accuracy']:.4f}")
 
-        
-            # Train for multiple epochs with smaller batch size
+            # Train the model
             model.fit(
                 X_subset, y_subset,
                 epochs=5,
-                batch_size=32,  # Reduced batch size to save memory
+                batch_size=32,
                 verbose=0,
                 validation_split=0.2,
                 callbacks=[LoggingCallback(self.logger)]
@@ -212,8 +213,6 @@ class FederatedClient:
             return local_weights
         except Exception as e:
             self.logger.error(f"Error training local model: {e}")
-            import traceback
-            self.logger.error(traceback.format_exc())
             return None
 
     def send_model_update(self, weights):
@@ -250,66 +249,98 @@ class FederatedClient:
 
         return success
 
-    def start(self, num_rounds=10):
+    def start(self, duration_minutes=60, training_interval_seconds=120):
         """
-        Start the federated learning process.
+        Start the asynchronous federated learning process.
+
+        The client will continuously check for updated global models, train on them,
+        and send updates back to the server for the specified duration.
 
         Args:
-            num_rounds: Number of federated learning rounds (default: 10)
+            duration_minutes: Total duration to run the client in minutes (default: 60)
+            training_interval_seconds: Minimum interval between training cycles in seconds (default: 120)
         """
-        self.logger.info(f"Starting federated learning with {num_rounds} rounds")
-        
+        self.logger.info(f"Starting client (duration: {duration_minutes}m, interval: {training_interval_seconds}s)")
+
+        # Initialize tracking variables
         start_time = time.time()
-        final_loss = None
-        final_accuracy = None
+        end_time = start_time + (duration_minutes * 60)
+        last_training_time = 0  # Start with 0 to ensure we train immediately
+        training_count = 0
+        best_accuracy = 0.0
 
-        for round_idx in range(num_rounds):
-            self.logger.info(f"=== Round {round_idx + 1}/{num_rounds} ===")
+        try:
+            while time.time() < end_time:
+                current_time = time.time()
 
-            # Receive global model
-            global_weights = self.receive_global_model()
+                # Log progress every minute
+                if int(current_time) % 60 == 0:
+                    time_elapsed_minutes = (current_time - start_time) / 60
+                    time_remaining_minutes = duration_minutes - time_elapsed_minutes
+                    self.logger.info(f"Client running: {time_elapsed_minutes:.1f}m elapsed, {time_remaining_minutes:.1f}m remaining")
 
-            if global_weights is None:
-                self.logger.error(f"Failed to receive global model in round {round_idx + 1}")
-                continue
+                # Check if it's time to train
+                time_since_last_training = current_time - last_training_time
+                if time_since_last_training >= training_interval_seconds:
+                    self.logger.info(f"=== Training cycle {training_count + 1} ===")
 
-            # Train local model
-            local_weights = self.train_local_model(global_weights)
+                    # Receive global model
+                    global_weights = self.receive_global_model()
+                    if global_weights is None:
+                        self.logger.error(f"Failed to receive global model")
+                        time.sleep(5)
+                        continue
 
-            if local_weights is None:
-                self.logger.error(f"Failed to train local model in round {round_idx + 1}")
-                continue
+                    # Train local model
+                    local_weights = self.train_local_model(global_weights)
+                    if local_weights is None:
+                        self.logger.error(f"Failed to train local model")
+                        time.sleep(5)
+                        continue
 
-            # Store the final metrics from the last successful training
-            if TENSORFLOW_AVAILABLE:
-                model = create_cifar10_model()
-                model.set_weights(local_weights)
-                test_size = min(1000, len(self.X_test))
-                test_indices = np.random.choice(len(self.X_test), test_size, replace=False)
-                X_test_subset = self.X_test[test_indices]
-                y_test_subset = self.y_test[test_indices]
-                final_loss, final_accuracy = model.evaluate(X_test_subset, y_test_subset, verbose=0)
+                    # Evaluate the model if TensorFlow is available
+                    if TENSORFLOW_AVAILABLE:
+                        model = create_cifar10_model()
+                        if model is not None:
+                            model.set_weights(local_weights)
+                            test_size = min(1000, len(self.X_test))
+                            test_indices = np.random.choice(len(self.X_test), test_size, replace=False)
+                            X_test_subset = self.X_test[test_indices]
+                            y_test_subset = self.y_test[test_indices]
+                            _, accuracy = model.evaluate(X_test_subset, y_test_subset, verbose=0)
 
-            # Send model update
-            success = self.send_model_update(local_weights)
+                            # Track best accuracy
+                            if accuracy > best_accuracy:
+                                best_accuracy = accuracy
+                                self.logger.info(f"New best accuracy: {best_accuracy:.4f}")
 
-            if not success:
-                self.logger.error(f"Failed to send model update in round {round_idx + 1}")
-                continue
+                    # Send model update
+                    if not self.send_model_update(local_weights):
+                        self.logger.error(f"Failed to send model update")
+                        time.sleep(5)
+                        continue
 
-            self.logger.info(f"Completed round {round_idx + 1}/{num_rounds}")
+                    # Update tracking variables
+                    last_training_time = current_time
+                    training_count += 1
 
-        end_time = time.time()
-        total_time = end_time - start_time
-        
-        self.logger.info("Federated learning completed")
-        self.logger.info(f"Total time: {total_time:.2f} seconds")
-        if final_loss is not None and final_accuracy is not None:
-            self.logger.info(f"Final metrics - Loss: {final_loss:.4f}, Accuracy: {final_accuracy:.4f}")
+                    # Run garbage collection after training
+                    gc.collect()
+
+                # Sleep briefly to avoid tight polling
+                time.sleep(1)
+
+        except KeyboardInterrupt:
+            self.logger.info("Client interrupted by user")
+
+        # Final statistics
+        self.logger.info(f"Federated learning completed: {training_count} training cycles")
+        if best_accuracy > 0:
+            self.logger.info(f"Best accuracy achieved: {best_accuracy:.4f}")
 
     def close(self):
         """Close resources"""
-        
+
         self.logger.info("Closing client resources")
 
         # Close Kafka resources
@@ -331,7 +362,7 @@ class FederatedClient:
 # Global variable for signal handling
 client_instance = None
 
-def signal_handler(sig, frame):
+def signal_handler(*_):
     """Handle termination signals"""
     print("Received termination signal. Closing client gracefully...")
     if client_instance is not None:
@@ -346,8 +377,10 @@ if __name__ == "__main__":
     # Get configuration from environment variables
     bootstrap_servers = os.environ.get("BOOTSTRAP_SERVERS", "localhost:9094")
     client_id = os.environ.get("CLIENT_ID")
+    duration_minutes = int(os.environ.get("DURATION_MINUTES", "60"))
+    training_interval = int(os.environ.get("TRAINING_INTERVAL_SECONDS", "120"))
 
-    # Create and start client
+    # Create client
     client = FederatedClient(
         bootstrap_servers=bootstrap_servers,
         update_topic="model_updates",
@@ -358,8 +391,12 @@ if __name__ == "__main__":
     # Store client instance for signal handling
     client_instance = client
 
-    # Start federated learning
-    client.start(num_rounds=10)
-
-    # Close resources
-    client.close()
+    try:
+        # Start federated learning
+        client.start(
+            duration_minutes=duration_minutes,
+            training_interval_seconds=training_interval
+        )
+    finally:
+        # Close resources
+        client.close()

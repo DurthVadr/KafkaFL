@@ -6,6 +6,7 @@ Provides functions for connecting to Kafka and sending/receiving messages.
 import time
 import logging
 import traceback
+import socket
 from kafka import KafkaConsumer, KafkaProducer
 from kafka.errors import KafkaError, NoBrokersAvailable
 
@@ -32,7 +33,10 @@ def create_producer(bootstrap_servers, logger=None):
                 value_serializer=lambda v: v,  # Keep raw bytes
                 max_request_size=20971520,  # 20MB max message size
                 buffer_memory=41943040,  # 40MB buffer memory
-                compression_type='gzip'  # Enable compression
+                compression_type='gzip',  # Enable compression
+                client_id='kafka-python-producer-ipv4',
+                api_version=(2, 0, 0),
+                security_protocol='PLAINTEXT'
             )
 
             if logger:
@@ -81,7 +85,10 @@ def create_consumer(bootstrap_servers, group_id, topics, logger=None):
                 group_id=group_id,
                 value_deserializer=lambda m: m,  # Keep raw bytes
                 max_partition_fetch_bytes=10485760,  # 10MB max fetch size
-                fetch_max_bytes=52428800  # 50MB max fetch bytes
+                fetch_max_bytes=52428800,  # 50MB max fetch bytes
+                client_id='kafka-python-consumer-ipv4',
+                api_version=(2, 0, 0),
+                security_protocol='PLAINTEXT'
             )
 
             # Subscribe to topics

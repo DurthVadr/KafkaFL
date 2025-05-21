@@ -5,7 +5,6 @@ Provides functions for loading and preprocessing data.
 
 import logging
 import numpy as np
-import traceback
 import os
 
 # Check if reduced data size should be used
@@ -14,6 +13,9 @@ REDUCED_DATA_SIZE = os.environ.get("REDUCED_DATA_SIZE", "0") == "1"
 # Import TensorFlow conditionally
 try:
     import tensorflow as tf
+    # Configure TensorFlow for CPU-only operation
+    tf.config.set_visible_devices([], 'GPU')  # Hide all GPUs
+
     from tensorflow.keras.datasets import cifar10
     TENSORFLOW_AVAILABLE = True
 except ImportError:
@@ -33,26 +35,18 @@ def load_cifar10_data(subset_size=5000, test_size=1000, logger=None):
     Returns:
         Tuple of (X_train, y_train, X_test, y_test)
     """
-    # Use reduced data size if specified
+    # Apply reduced data size if specified
     if REDUCED_DATA_SIZE:
-        original_subset_size = subset_size
-        original_test_size = test_size
         subset_size = min(subset_size, 1000)  # Reduce to 1000 samples
         test_size = min(test_size, 200)       # Reduce to 200 samples
         if logger:
-            logger.info(f"Using reduced data size: {subset_size} training samples (from {original_subset_size}), "
-                       f"{test_size} test samples (from {original_test_size})")
+            logger.info(f"Using reduced data size: {subset_size} training samples, {test_size} test samples")
+
+    # Use random data if TensorFlow is not available
     if not TENSORFLOW_AVAILABLE:
         if logger:
             logger.warning("TensorFlow not available. Using random data instead of CIFAR-10.")
-
-        # Create random data with the same shape as CIFAR-10
-        X_train = np.random.rand(subset_size, 32, 32, 3).astype('float32')
-        y_train = np.random.randint(0, 10, size=subset_size)
-        X_test = np.random.rand(test_size, 32, 32, 3).astype('float32')
-        y_test = np.random.randint(0, 10, size=test_size)
-
-        return X_train, y_train, X_test, y_test
+        return _create_random_data(subset_size, test_size)
 
     try:
         # Load CIFAR-10 data
@@ -64,13 +58,9 @@ def load_cifar10_data(subset_size=5000, test_size=1000, logger=None):
         X_test_full = X_test_full.astype('float32') / 255.0
         y_test_full = np.squeeze(y_test_full)
 
-        # Use a subset for faster training
-        subset_size = min(subset_size, len(X_train_full))
+        # Use subsets for faster training and evaluation
         X_train = X_train_full[:subset_size]
         y_train = y_train_full[:subset_size]
-
-        # Use a subset for faster evaluation
-        test_size = min(test_size, len(X_test_full))
         X_test = X_test_full[:test_size]
         y_test = y_test_full[:test_size]
 
@@ -81,15 +71,17 @@ def load_cifar10_data(subset_size=5000, test_size=1000, logger=None):
     except Exception as e:
         if logger:
             logger.error(f"Error loading CIFAR-10 data: {e}")
-            logger.error(traceback.format_exc())
 
         # Fallback to random data
-        X_train = np.random.rand(subset_size, 32, 32, 3).astype('float32')
-        y_train = np.random.randint(0, 10, size=subset_size)
-        X_test = np.random.rand(test_size, 32, 32, 3).astype('float32')
-        y_test = np.random.randint(0, 10, size=test_size)
+        return _create_random_data(subset_size, test_size)
 
-        return X_train, y_train, X_test, y_test
+def _create_random_data(train_size, test_size):
+    """Create random data with the same shape as CIFAR-10"""
+    X_train = np.random.rand(train_size, 32, 32, 3).astype('float32')
+    y_train = np.random.randint(0, 10, size=train_size)
+    X_test = np.random.rand(test_size, 32, 32, 3).astype('float32')
+    y_test = np.random.randint(0, 10, size=test_size)
+    return X_train, y_train, X_test, y_test
 
 def get_data_batch(X, y, batch_size=32, random=True):
     """
@@ -104,11 +96,14 @@ def get_data_batch(X, y, batch_size=32, random=True):
     Returns:
         Tuple of (X_batch, y_batch)
     """
+    # Ensure batch size doesn't exceed data size
+    batch_size = min(batch_size, len(X))
+
     if random:
-        # Select random indices
-        indices = np.random.choice(len(X), min(batch_size, len(X)), replace=False)
+        # Select random indices without replacement
+        indices = np.random.choice(len(X), batch_size, replace=False)
     else:
         # Select first batch_size samples
-        indices = np.arange(min(batch_size, len(X)))
+        indices = np.arange(batch_size)
 
     return X[indices], y[indices]

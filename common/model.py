@@ -17,6 +17,9 @@ if USE_LIGHTWEIGHT_MODEL:
 # Import TensorFlow conditionally
 try:
     import tensorflow as tf
+    # Configure TensorFlow for CPU-only operation
+    tf.config.set_visible_devices([], 'GPU')  # Hide all GPUs
+
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
     TENSORFLOW_AVAILABLE = True
@@ -243,9 +246,12 @@ def adapt_tensor(tensor, target_shape):
     # Create a new tensor with the target shape, initialized with zeros
     adapted = np.zeros(target_shape, dtype=tensor.dtype)
 
-    # For each dimension, determine the slice to copy
-    slices_src = tuple(slice(0, min(s, t)) for s, t in zip(tensor.shape, target_shape))
-    slices_dst = tuple(slice(0, min(s, t)) for s, t in zip(tensor.shape, target_shape))
+    # Determine the slice sizes for each dimension
+    slice_sizes = [min(s, t) for s, t in zip(tensor.shape, target_shape)]
+
+    # Create slices for source and destination
+    slices_src = tuple(slice(0, size) for size in slice_sizes)
+    slices_dst = tuple(slice(0, size) for size in slice_sizes)
 
     # Copy the data from the source tensor to the adapted tensor
     adapted[slices_dst] = tensor[slices_src]
