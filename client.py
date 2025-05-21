@@ -19,6 +19,7 @@ from common.model import create_lenet_model, are_weights_compatible, adapt_weigh
 from common.data import load_cifar10_data
 from common.serialization import serialize_weights, deserialize_weights
 from common.kafka_utils import create_producer, create_consumer, send_message, receive_messages, close_kafka_resources
+from common.visualization import plot_client_accuracy, plot_client_loss
 
 # Import TensorFlow conditionally
 try:
@@ -66,6 +67,15 @@ class FederatedClient:
         self.X_train, self.y_train, self.X_test, self.y_test = load_cifar10_data(
             subset_size=5000, test_size=1000, logger=self.logger
         )
+
+        # Initialize metrics tracking
+        self.metrics = {
+            'train_accuracy': [],
+            'test_accuracy': [],
+            'train_loss': [],
+            'training_times': []
+        }
+        self.best_accuracy = 0.0
 
         # Connect to Kafka
         self._connect_to_kafka()
@@ -139,12 +149,20 @@ class FederatedClient:
             Updated model weights, or None if training fails
         """
         self.logger.info("Training local model")
+        training_start_time = time.time()
 
         if not TENSORFLOW_AVAILABLE:
             self.logger.warning("TensorFlow not available. Simulating training.")
             # Simulate training by adding noise to the global weights
             local_weights = [w + np.random.normal(0, 0.01, size=w.shape).astype(w.dtype) for w in global_weights]
             self.model = local_weights
+
+            # Add simulated metrics
+            self.metrics['train_accuracy'].append(0.5)  # Simulated accuracy
+            self.metrics['test_accuracy'].append(0.5)   # Simulated accuracy
+            self.metrics['train_loss'].append(1.0)      # Simulated loss
+            self.metrics['training_times'].append(time.time() - training_start_time)
+
             return local_weights
 
         # Run garbage collection before training
@@ -175,24 +193,36 @@ class FederatedClient:
             X_subset = self.X_train[indices]
             y_subset = self.y_train[indices]
 
-            # Define logging callback
-            class LoggingCallback(tf.keras.callbacks.Callback):
-                def __init__(self, logger):
+            # Define metrics tracking callback
+            class MetricsCallback(tf.keras.callbacks.Callback):
+                def __init__(self, client):
                     super().__init__()
-                    self.logger = logger
+                    self.client = client
+                    self.logger = client.logger
+                    self.epoch_metrics = {'loss': [], 'accuracy': []}
 
                 def on_epoch_end(self, epoch, logs=None):
                     self.logger.info(f"Epoch {epoch+1}: loss={logs['loss']:.4f}, accuracy={logs['accuracy']:.4f}")
+                    self.epoch_metrics['loss'].append(logs['loss'])
+                    self.epoch_metrics['accuracy'].append(logs['accuracy'])
+
+            metrics_callback = MetricsCallback(self)
 
             # Train the model
-            model.fit(
+            history = model.fit(
                 X_subset, y_subset,
                 epochs=5,
                 batch_size=32,
                 verbose=0,
                 validation_split=0.2,
-                callbacks=[LoggingCallback(self.logger)]
+                callbacks=[metrics_callback]
             )
+
+            # Store training metrics
+            final_train_loss = metrics_callback.epoch_metrics['loss'][-1]
+            final_train_accuracy = metrics_callback.epoch_metrics['accuracy'][-1]
+            self.metrics['train_loss'].append(final_train_loss)
+            self.metrics['train_accuracy'].append(final_train_accuracy)
 
             # Evaluate the model
             test_size = min(1000, len(self.X_test))
@@ -202,6 +232,15 @@ class FederatedClient:
 
             loss, accuracy = model.evaluate(X_test_subset, y_test_subset, verbose=0)
             self.logger.info(f"Model evaluation: loss={loss:.4f}, accuracy={accuracy:.4f}")
+
+            # Store test metrics
+            self.metrics['test_accuracy'].append(accuracy)
+            self.metrics['training_times'].append(time.time() - training_start_time)
+
+            # Update best accuracy
+            if accuracy > self.best_accuracy:
+                self.best_accuracy = accuracy
+                self.logger.info(f"New best accuracy: {self.best_accuracy:.4f}")
 
             # Get the updated weights
             local_weights = model.get_weights()
@@ -335,8 +374,46 @@ class FederatedClient:
 
         # Final statistics
         self.logger.info(f"Federated learning completed: {training_count} training cycles")
-        if best_accuracy > 0:
-            self.logger.info(f"Best accuracy achieved: {best_accuracy:.4f}")
+        if self.best_accuracy > 0:
+            self.logger.info(f"Best accuracy achieved: {self.best_accuracy:.4f}")
+
+        # Generate visualizations
+        self.generate_visualizations()
+
+    def generate_visualizations(self):
+        """Generate and save visualizations of client metrics"""
+        self.logger.info("Generating visualizations")
+
+        # Only generate visualizations if we have metrics
+        if not self.metrics['train_accuracy'] and not self.metrics['test_accuracy']:
+            self.logger.warning("No metrics available for visualization")
+            return
+
+        try:
+            # Plot accuracy metrics
+            accuracy_plot_path = plot_client_accuracy(
+                {
+                    'train': self.metrics['train_accuracy'],
+                    'test': self.metrics['test_accuracy']
+                },
+                self.client_id,
+                self.logger
+            )
+            self.logger.info(f"Accuracy plot saved to {accuracy_plot_path}")
+
+            # Plot loss metrics
+            if self.metrics['train_loss']:
+                loss_plot_path = plot_client_loss(
+                    self.metrics['train_loss'],
+                    self.client_id,
+                    self.logger
+                )
+                self.logger.info(f"Loss plot saved to {loss_plot_path}")
+
+        except Exception as e:
+            self.logger.error(f"Error generating visualizations: {e}")
+            import traceback
+            self.logger.error(traceback.format_exc())
 
     def close(self):
         """Close resources"""

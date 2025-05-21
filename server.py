@@ -17,6 +17,12 @@ from common.logger import get_server_logger
 from common.model import create_lenet_model, get_random_weights
 from common.serialization import serialize_weights, deserialize_weights
 from common.kafka_utils import create_producer, create_consumer, send_message, receive_messages, close_kafka_resources
+from common.visualization import (
+    plot_server_aggregations,
+    plot_weight_distribution_violin,
+    plot_convergence_visualization,
+    plot_client_similarity_heatmap
+)
 
 # Import TensorFlow conditionally
 try:
@@ -57,6 +63,15 @@ class FederatedServer:
 
         # Initialize global model
         self.global_model = self._initialize_global_model()
+
+        # Initialize metrics tracking
+        self.metrics = {
+            'aggregation_times': [],
+            'update_counts': [],
+            'global_accuracy': [],
+            'weight_history': [],  # Store global model weights after each aggregation
+            'client_updates': {}   # Store client updates for similarity analysis
+        }
 
         # Connect to Kafka
         self._connect_to_kafka()
@@ -192,6 +207,11 @@ class FederatedServer:
             if update is not None:
                 updates.append(update)
 
+                # Store client update for similarity analysis
+                # Use a unique client identifier based on the message
+                client_id = f"client_{int(time.time())}_{i}"
+                self.metrics['client_updates'][client_id] = update
+
         if updates:
             self.logger.info(f"Received {len(updates)} valid model updates from clients")
 
@@ -303,6 +323,13 @@ class FederatedServer:
                     # Send updated global model to clients
                     self.send_global_model()
 
+                    # Track metrics for visualization
+                    self.metrics['aggregation_times'].append(current_time)
+                    self.metrics['update_counts'].append(len(pending_updates))
+
+                    # Store a copy of the global model weights for visualization
+                    self.metrics['weight_history'].append([np.copy(w) for w in self.global_model])
+
                     # Update tracking variables
                     last_aggregation_time = current_time
                     aggregation_count += 1
@@ -330,7 +357,74 @@ class FederatedServer:
         if pending_updates:
             self.logger.info(f"Performing final aggregation with {len(pending_updates)} updates")
             self.global_model = self.aggregate_model_updates(pending_updates)
+
+            # Track final aggregation metrics
+            self.metrics['aggregation_times'].append(time.time())
+            self.metrics['update_counts'].append(len(pending_updates))
+
+            # Store a copy of the final global model weights for visualization
+            self.metrics['weight_history'].append([np.copy(w) for w in self.global_model])
+
             self.send_global_model()
+
+        # Generate visualizations
+        self.generate_visualizations()
+
+    def generate_visualizations(self):
+        """Generate and save visualizations of server metrics"""
+        self.logger.info("Generating server visualizations")
+
+        # Only generate visualizations if we have metrics
+        if not self.metrics['aggregation_times']:
+            self.logger.warning("No metrics available for visualization")
+            return
+
+        try:
+            # Plot server aggregation metrics
+            plot_path = plot_server_aggregations(
+                self.metrics['aggregation_times'],
+                self.metrics['update_counts'],
+                self.logger
+            )
+            self.logger.info(f"Server aggregation plot saved to {plot_path}")
+
+            # Generate weight distribution violin plots
+            if self.metrics['weight_history']:
+                # Use the latest weights for the violin plot
+                latest_weights = self.metrics['weight_history'][-1]
+                round_num = len(self.metrics['weight_history'])
+
+                violin_plot_path = plot_weight_distribution_violin(
+                    latest_weights,
+                    round_num,
+                    logger=self.logger
+                )
+                self.logger.info(f"Weight distribution violin plot saved to {violin_plot_path}")
+
+            # Generate convergence visualization
+            if len(self.metrics['weight_history']) >= 2:
+                # For convergence visualization, we need at least 2 rounds
+                for layer_idx in range(min(3, len(self.global_model))):  # Visualize first 3 layers
+                    convergence_plot_path = plot_convergence_visualization(
+                        self.metrics['weight_history'],
+                        layer_idx=layer_idx,
+                        logger=self.logger
+                    )
+                    self.logger.info(f"Convergence visualization for layer {layer_idx} saved to {convergence_plot_path}")
+
+            # Generate client similarity heatmap
+            if len(self.metrics['client_updates']) >= 2:
+                # For similarity heatmap, we need at least 2 clients
+                similarity_plot_path = plot_client_similarity_heatmap(
+                    self.metrics['client_updates'],
+                    logger=self.logger
+                )
+                self.logger.info(f"Client similarity heatmap saved to {similarity_plot_path}")
+
+        except Exception as e:
+            self.logger.error(f"Error generating server visualizations: {e}")
+            import traceback
+            self.logger.error(traceback.format_exc())
 
     def close(self):
         """Close resources"""

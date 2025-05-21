@@ -39,6 +39,7 @@ Federated Learning is a machine learning approach where multiple clients (e.g., 
 - **Accuracy Evaluation**: Clients evaluate model performance on test data after training.
 - **Comprehensive Logging**: Includes a custom logging system with colored output and file logging.
 - **Resource Optimization**: Includes options to reduce memory usage and optimize performance.
+- **Visualization**: Automatically generates and saves plots of important metrics like accuracy, loss, and aggregation statistics in the 'plots' folder.
 
 ## Requirements
 
@@ -49,6 +50,9 @@ Federated Learning is a machine learning approach where multiple clients (e.g., 
 - scikit-learn
 - NumPy
 - kafka-python
+- matplotlib
+- seaborn
+- scipy
 
 ## Setup Instructions
 
@@ -195,6 +199,27 @@ The system supports several environment variables for configuration:
 - **Model Architecture**: Choose between the standard CNN and LeNet models in `common/model.py`. The system currently uses LeNet by default.
 - **Number of Rounds**: Change the number of federated learning rounds in `server.py`.
 - **Weight Adaptation**: The system includes enhanced weight adaptation mechanisms to handle different model architectures.
+
+### Visualization
+
+The system automatically generates visualizations of important metrics during the federated learning process:
+
+- **Client Metrics**:
+  - Training and test accuracy over time
+  - Training loss over time
+  - Best accuracy achieved
+
+- **Server Metrics**:
+  - Number of client updates received over time
+  - Model aggregation count over time
+  - Updates per aggregation
+
+- **Model Analysis Visualizations**:
+  - **Weight Distribution Violin Plots**: Shows the distribution of weights in different layers of the model, providing insights into how weights evolve during training
+  - **Convergence Visualization**: Tracks weight changes between consecutive rounds to visualize how quickly the model is converging
+  - **Client Similarity Heatmap**: Displays the similarity between different clients' model updates using cosine similarity, helping identify clusters of similar clients
+
+All visualizations are saved in the `plots` directory with timestamped filenames to prevent overwriting. The plots are generated automatically at the end of training for both clients and the server.
 
 ## Troubleshooting
 
