@@ -14,6 +14,7 @@ import sys
 import gc
 import socket
 import atexit
+import argparse
 from kafka.admin import KafkaAdminClient, NewTopic
 from kafka.errors import TopicAlreadyExistsError
 
@@ -184,9 +185,39 @@ def start_kafka_with_custom_config():
         print(f"Error starting Kafka: {e}")
         return False
 
+def parse_arguments():
+    """Parse command line arguments"""
+    parser = argparse.ArgumentParser(description="Run federated learning with Kafka without Docker")
+
+    parser.add_argument("--duration", type=int, default=30,
+                        help="Duration in minutes to run the system (default: 30)")
+    parser.add_argument("--aggregation-interval", type=int, default=30,
+                        help="Interval in seconds between server aggregations (default: 30)")
+    parser.add_argument("--min-updates", type=int, default=1,
+                        help="Minimum updates required for aggregation (default: 1)")
+    parser.add_argument("--training-interval", type=int, default=60,
+                        help="Base interval in seconds between client training cycles (default: 60)")
+    parser.add_argument("--num-clients", type=int, default=3,
+                        help="Number of clients to start (default: 3)")
+    parser.add_argument("--reduced-data", action="store_true", default=True,
+                        help="Use reduced dataset size (default: True)")
+
+    return parser.parse_args()
+
 def main():
     """Run the asynchronous federated learning system"""
     print("=== Federated Learning with Kafka (No Docker) ===")
+
+    # Parse command line arguments
+    args = parse_arguments()
+
+    print(f"Configuration:")
+    print(f"- Duration: {args.duration} minutes")
+    print(f"- Aggregation interval: {args.aggregation_interval} seconds")
+    print(f"- Minimum updates per aggregation: {args.min_updates}")
+    print(f"- Base training interval: {args.training_interval} seconds")
+    print(f"- Number of clients: {args.num_clients}")
+    print(f"- Using reduced data: {args.reduced_data}")
 
     # Check if Kafka is already running
     if check_kafka_running():
@@ -214,13 +245,13 @@ def main():
     # Set environment variables to optimize resource usage
     os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"  # Reduce TensorFlow logging
     os.environ["PYTHONUNBUFFERED"] = "1"      # Unbuffered Python output
-    os.environ["REDUCED_DATA_SIZE"] = "1"     # Use reduced data size
+    os.environ["REDUCED_DATA_SIZE"] = "1" if args.reduced_data else "0"
 
-    # Set time-based configuration with shorter durations for testing
-    os.environ["DURATION_MINUTES"] = "30"                  # Run for 30 minutes
-    os.environ["AGGREGATION_INTERVAL_SECONDS"] = "30"      # Aggregate every 30 seconds
-    os.environ["MIN_UPDATES_PER_AGGREGATION"] = "1"        # Require at least 1 update
-    os.environ["TRAINING_INTERVAL_SECONDS"] = "60"         # Train every 60 seconds
+    # Set time-based configuration based on command line arguments
+    os.environ["DURATION_MINUTES"] = str(args.duration)
+    os.environ["AGGREGATION_INTERVAL_SECONDS"] = str(args.aggregation_interval)
+    os.environ["MIN_UPDATES_PER_AGGREGATION"] = str(args.min_updates)
+    os.environ["TRAINING_INTERVAL_SECONDS"] = str(args.training_interval)
 
     # Use IPv4 for Kafka connections
     os.environ["KAFKA_OPTS"] = "-Djava.net.preferIPv4Stack=true"
@@ -238,10 +269,10 @@ def main():
     time.sleep(10)
 
     # Start clients with staggered training intervals to avoid synchronization
-    for i in range(1, 4):
+    for i in range(1, args.num_clients + 1):
         print(f"Starting client {i}...")
         # Stagger training intervals to avoid all clients training at the same time
-        training_interval = 60 + (i * 10)  # 70, 80, 90 seconds
+        training_interval = args.training_interval + (i * 10)
         client_process = subprocess.Popen(
             [sys.executable, "client.py"],
             env={
@@ -255,7 +286,7 @@ def main():
         time.sleep(2)  # Stagger client starts
 
     print("\nAll processes started. Press Ctrl+C to stop.")
-    print("The system will run for approximately 30 minutes.")
+    print(f"The system will run for approximately {args.duration} minutes.")
     print("You can monitor the logs in the 'logs' directory.")
 
     # Wait for all processes to complete

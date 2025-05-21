@@ -14,7 +14,7 @@ import gc
 
 # Import common modules
 from common.logger import get_server_logger
-from common.model import create_cifar10_model, get_random_weights
+from common.model import create_lenet_model, get_random_weights
 from common.serialization import serialize_weights, deserialize_weights
 from common.kafka_utils import create_producer, create_consumer, send_message, receive_messages, close_kafka_resources
 
@@ -68,22 +68,32 @@ class FederatedServer:
         Returns:
             List of weight arrays representing the global model
         """
-        self.logger.info("Initializing global model")
+        self.logger.info("Initializing global model (LeNet)")
 
         if TENSORFLOW_AVAILABLE:
-            # Create model
-            model = create_cifar10_model()
+            # Create LeNet model
+            model = create_lenet_model()
 
             if model is not None:
                 # Get initial weights
                 weights = model.get_weights()
-                self.logger.info(f"Initialized global model with {len(weights)} layers")
+                self.logger.info(f"Initialized LeNet model with {len(weights)} layers")
+
+                # Log the shapes of the weights for debugging
+                for i, w in enumerate(weights):
+                    self.logger.info(f"Layer {i} shape: {w.shape}")
+
                 return weights
 
         # Fallback to random weights
-        self.logger.warning("Using random weights for global model")
-        weights = get_random_weights()
-        self.logger.info(f"Initialized random global model with {len(weights)} layers")
+        self.logger.warning("Using random weights for LeNet model")
+        weights = get_random_weights(model_type="lenet")
+        self.logger.info(f"Initialized random LeNet model with {len(weights)} layers")
+
+        # Log the shapes of the weights for debugging
+        for i, w in enumerate(weights):
+            self.logger.info(f"Layer {i} shape: {w.shape}")
+
         return weights
 
     def _connect_to_kafka(self):

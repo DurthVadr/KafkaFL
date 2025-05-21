@@ -5,14 +5,6 @@ Provides consistent model architecture across server and clients.
 
 import logging
 import numpy as np
-import os
-
-# Check if lightweight model should be used
-USE_LIGHTWEIGHT_MODEL = os.environ.get("USE_LIGHTWEIGHT_MODEL", "0") == "1"
-
-# Import lightweight model if specified
-if USE_LIGHTWEIGHT_MODEL:
-    from common.lightweight_model import create_lightweight_model, get_lightweight_random_weights
 
 # Import TensorFlow conditionally
 try:
@@ -21,19 +13,66 @@ try:
     tf.config.set_visible_devices([], 'GPU')  # Hide all GPUs
 
     from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
+    from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization, AveragePooling2D
     TENSORFLOW_AVAILABLE = True
 except ImportError:
     logging.warning("TensorFlow not available in model.py")
     TENSORFLOW_AVAILABLE = False
 
 # Current model version
-MODEL_VERSION = "v1"
+MODEL_VERSION = "v2"
+
+def create_lenet_model():
+    """
+    Create a LeNet model for CIFAR-10 classification.
+
+    LeNet is a classic convolutional neural network architecture
+    designed by Yann LeCun in the 1990s, originally for handwritten digit recognition.
+
+    Returns:
+        A compiled Keras model if TensorFlow is available, None otherwise
+    """
+    if not TENSORFLOW_AVAILABLE:
+        logging.warning("TensorFlow not available. Cannot create LeNet model.")
+        return None
+
+    try:
+        # LeNet architecture adapted for CIFAR-10
+        logging.info("Creating LeNet model for CIFAR-10")
+        model = Sequential([
+            # First convolutional layer
+            Conv2D(6, kernel_size=(5, 5), padding='same', activation='relu', input_shape=(32, 32, 3)),
+            AveragePooling2D(pool_size=(2, 2)),
+
+            # Second convolutional layer
+            Conv2D(16, kernel_size=(5, 5), activation='relu'),
+            AveragePooling2D(pool_size=(2, 2)),
+
+            # Fully connected layers
+            Flatten(),
+            Dense(120, activation='relu'),
+            Dense(84, activation='relu'),
+            Dense(10, activation='softmax')
+        ])
+
+        # Compile model with Adam optimizer
+        optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+        model.compile(
+            optimizer=optimizer,
+            loss='sparse_categorical_crossentropy',
+            metrics=['accuracy']
+        )
+
+        return model
+    except Exception as e:
+        logging.error(f"Error creating LeNet model: {e}")
+        import traceback
+        logging.error(traceback.format_exc())
+        return None
 
 def create_cifar10_model():
     """
     Create a model for CIFAR-10 classification.
-    Uses lightweight model if specified in environment variable.
 
     Returns:
         A compiled Keras model if TensorFlow is available, None otherwise
@@ -41,11 +80,6 @@ def create_cifar10_model():
     if not TENSORFLOW_AVAILABLE:
         logging.warning("TensorFlow not available. Cannot create model.")
         return None
-
-    # Use lightweight model if specified
-    if USE_LIGHTWEIGHT_MODEL:
-        logging.info("Using lightweight model for CIFAR-10")
-        return create_lightweight_model()
 
     try:
         # Standard CNN for CIFAR-10
@@ -98,34 +132,23 @@ def create_cifar10_model():
         logging.error(traceback.format_exc())
         return None
 
-def get_random_weights():
+def get_random_weights(model_type="standard"):
     """
     Generate random weights for the model when TensorFlow is not available.
-    Uses lightweight model weights if specified in environment variable.
+
+    Args:
+        model_type: Type of model to generate weights for ("standard" or "lenet")
 
     Returns:
         List of numpy arrays with random weights
     """
-    # Use lightweight model if specified
-    if USE_LIGHTWEIGHT_MODEL:
-        logging.info("Using lightweight random weights")
-        if TENSORFLOW_AVAILABLE:
-            # Create model and get its weight shapes
-            model = create_lightweight_model()
-            if model is None:
-                return [np.random.rand(10).astype(np.float32)]
-
-            # Initialize with random weights
-            weights = [np.random.normal(0, 0.05, w.shape).astype(np.float32) for w in model.get_weights()]
-            return weights
-        else:
-            # Use predefined lightweight weights
-            return get_lightweight_random_weights()
-
-    # Standard model weights
     if TENSORFLOW_AVAILABLE:
         # Create model and get its weight shapes
-        model = create_cifar10_model()
+        if model_type.lower() == "lenet":
+            model = create_lenet_model()
+        else:
+            model = create_cifar10_model()
+
         if model is None:
             return [np.random.rand(10).astype(np.float32)]
 
@@ -133,24 +156,39 @@ def get_random_weights():
         weights = [np.random.normal(0, 0.05, w.shape).astype(np.float32) for w in model.get_weights()]
         return weights
     else:
-        # Approximate shapes for the model defined in create_cifar10_model
-        shapes = [
-            # First conv block
-            (3, 3, 3, 32), (32,), (32,), (32,), (32,), (32,),  # Conv2D + BN
-            (3, 3, 32, 32), (32,), (32,), (32,), (32,), (32,),  # Conv2D + BN
+        if model_type.lower() == "lenet":
+            # Approximate shapes for the LeNet model
+            shapes = [
+                # First conv layer
+                (5, 5, 3, 6), (6,),  # Conv2D
 
-            # Second conv block
-            (3, 3, 32, 64), (64,), (64,), (64,), (64,), (64,),  # Conv2D + BN
-            (3, 3, 64, 64), (64,), (64,), (64,), (64,), (64,),  # Conv2D + BN
+                # Second conv layer
+                (5, 5, 6, 16), (16,),  # Conv2D
 
-            # Third conv block
-            (3, 3, 64, 128), (128,), (128,), (128,), (128,), (128,),  # Conv2D + BN
-            (3, 3, 128, 128), (128,), (128,), (128,), (128,), (128,),  # Conv2D + BN
+                # Fully connected layers
+                (400, 120), (120,),  # Dense (flattened 5x5x16 to 120)
+                (120, 84), (84,),    # Dense
+                (84, 10), (10,)      # Output layer
+            ]
+        else:
+            # Approximate shapes for the standard model defined in create_cifar10_model
+            shapes = [
+                # First conv block
+                (3, 3, 3, 32), (32,), (32,), (32,), (32,), (32,),  # Conv2D + BN
+                (3, 3, 32, 32), (32,), (32,), (32,), (32,), (32,),  # Conv2D + BN
 
-            # Fully connected layers
-            (2048, 128), (128,), (128,), (128,), (128,), (128,),  # Dense + BN
-            (128, 10), (10,)  # Output layer
-        ]
+                # Second conv block
+                (3, 3, 32, 64), (64,), (64,), (64,), (64,), (64,),  # Conv2D + BN
+                (3, 3, 64, 64), (64,), (64,), (64,), (64,), (64,),  # Conv2D + BN
+
+                # Third conv block
+                (3, 3, 64, 128), (128,), (128,), (128,), (128,), (128,),  # Conv2D + BN
+                (3, 3, 128, 128), (128,), (128,), (128,), (128,), (128,),  # Conv2D + BN
+
+                # Fully connected layers
+                (2048, 128), (128,), (128,), (128,), (128,), (128,),  # Dense + BN
+                (128, 10), (10,)  # Output layer
+            ]
 
         # Create random weights with the appropriate shapes
         weights = [np.random.normal(0, 0.05, shape).astype(np.float32) for shape in shapes]
@@ -172,13 +210,24 @@ def are_weights_compatible(model, weights):
 
     model_weights = model.get_weights()
 
+    # Log the number of weight arrays for debugging
+    logging.info(f"Model has {len(model_weights)} weight arrays, received {len(weights)} weight arrays")
+
+    # For LeNet, we might receive weights from a different model
+    # If the model is LeNet (which has 10 weight arrays), try to use just the first 10 arrays
+    if len(model_weights) == 10 and len(weights) > 10:
+        logging.info("LeNet model detected with more weights than expected. Will try to adapt.")
+        return False
+
     # Check if number of weight arrays matches
     if len(model_weights) != len(weights):
+        logging.warning(f"Weight array count mismatch: model has {len(model_weights)}, received {len(weights)}")
         return False
 
     # Check if shapes match
     for i, (model_w, w) in enumerate(zip(model_weights, weights)):
         if model_w.shape != w.shape:
+            logging.warning(f"Shape mismatch at layer {i}: model shape {model_w.shape}, received shape {w.shape}")
             return False
 
     return True
@@ -200,6 +249,48 @@ def adapt_weights(model, weights):
     model_weights = model.get_weights()
     adapted_weights = []
 
+    # Special case for LeNet model
+    if len(model_weights) == 10 and len(weights) > 10:
+        logging.info("Attempting to adapt weights for LeNet model")
+        try:
+            # For LeNet, we'll try to use just the first 10 weight arrays if they match in shape
+            lenet_weights = weights[:10]
+
+            # Check if the shapes match
+            shapes_match = True
+            for i, (model_w, w) in enumerate(zip(model_weights, lenet_weights)):
+                if model_w.shape != w.shape:
+                    logging.warning(f"LeNet adaptation: Shape mismatch at layer {i}: model shape {model_w.shape}, received shape {w.shape}")
+                    shapes_match = False
+                    break
+
+            if shapes_match:
+                logging.info("Successfully adapted weights for LeNet model")
+                return lenet_weights
+
+            # If shapes don't match, try to adapt each tensor
+            adapted_lenet_weights = []
+            for i, (model_w, w) in enumerate(zip(model_weights, lenet_weights)):
+                if model_w.shape == w.shape:
+                    adapted_lenet_weights.append(w)
+                elif len(model_w.shape) == len(w.shape):
+                    try:
+                        adapted_w = adapt_tensor(w, model_w.shape)
+                        adapted_lenet_weights.append(adapted_w)
+                    except Exception as e:
+                        logging.error(f"Error adapting tensor at layer {i}: {e}")
+                        return None
+                else:
+                    logging.error(f"Cannot adapt tensor at layer {i}: different dimensions")
+                    return None
+
+            if len(adapted_lenet_weights) == len(model_weights):
+                logging.info("Successfully adapted weights for LeNet model with tensor adaptation")
+                return adapted_lenet_weights
+        except Exception as e:
+            logging.error(f"Error during LeNet weight adaptation: {e}")
+            return None
+
     # Check if we can adapt the weights
     if len(model_weights) != len(weights):
         # Try to handle the case where the server model has fewer layers
@@ -210,7 +301,9 @@ def adapt_weights(model, weights):
             for i, w in enumerate(weights):
                 if i < len(model_weights) and model_weights[i].shape == w.shape:
                     adapted_weights[i] = w
+            logging.info(f"Adapted weights by filling in missing layers: {len(adapted_weights)} layers")
             return adapted_weights
+        logging.error(f"Cannot adapt weights: model has {len(model_weights)} layers, received {len(weights)} layers")
         return None
 
     # Try to adapt each weight array
@@ -224,12 +317,15 @@ def adapt_weights(model, weights):
                 # Try to pad or truncate
                 adapted_w = adapt_tensor(w, model_w.shape)
                 adapted_weights.append(adapted_w)
-            except Exception:
+            except Exception as e:
+                logging.error(f"Error adapting tensor at layer {i}: {e}")
                 return None
         else:
             # Different dimensions, cannot adapt
+            logging.error(f"Cannot adapt tensor at layer {i}: different dimensions")
             return None
 
+    logging.info(f"Successfully adapted all {len(adapted_weights)} weight arrays")
     return adapted_weights
 
 def adapt_tensor(tensor, target_shape):

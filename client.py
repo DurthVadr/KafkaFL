@@ -15,7 +15,7 @@ import gc
 
 # Import common modules
 from common.logger import get_client_logger
-from common.model import create_cifar10_model, are_weights_compatible, adapt_weights
+from common.model import create_lenet_model, are_weights_compatible, adapt_weights
 from common.data import load_cifar10_data
 from common.serialization import serialize_weights, deserialize_weights
 from common.kafka_utils import create_producer, create_consumer, send_message, receive_messages, close_kafka_resources
@@ -150,10 +150,10 @@ class FederatedClient:
         # Run garbage collection before training
         gc.collect()
 
-        # Create model
-        model = create_cifar10_model()
+        # Create LeNet model
+        model = create_lenet_model()
         if model is None:
-            self.logger.error("Failed to create model")
+            self.logger.error("Failed to create LeNet model")
             return None
 
         try:
@@ -300,7 +300,7 @@ class FederatedClient:
 
                     # Evaluate the model if TensorFlow is available
                     if TENSORFLOW_AVAILABLE:
-                        model = create_cifar10_model()
+                        model = create_lenet_model()
                         if model is not None:
                             model.set_weights(local_weights)
                             test_size = min(1000, len(self.X_test))

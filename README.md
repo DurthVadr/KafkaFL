@@ -13,8 +13,7 @@ Federated Learning is a machine learning approach where multiple clients (e.g., 
 - `client.py`: Implements the `FederatedClient` class, which trains a local model on the CIFAR-10 dataset and communicates with the server.
 
 ### Common Modules
-- `common/model.py`: Defines the CNN model architecture for CIFAR-10 classification.
-- `common/lightweight_model.py`: Provides a smaller model option that uses fewer resources.
+- `common/model.py`: Defines model architectures for CIFAR-10 classification, including a standard CNN and LeNet.
 - `common/data.py`: Handles loading and preprocessing the CIFAR-10 dataset.
 - `common/serialization.py`: Provides utilities for serializing and deserializing model weights.
 - `common/kafka_utils.py`: Contains functions for Kafka communication.
@@ -26,18 +25,18 @@ Federated Learning is a machine learning approach where multiple clients (e.g., 
 - `Dockerfile.client`: Docker configuration for the clients.
 
 ### Utilities
-- `run_local_kafka.py`: Alternative to Docker for running the system with less resource usage.
+- `run_local_kafka_no_docker.py`: Alternative to Docker for running the system with less resource usage. Supports command line options for customizing the run parameters.
 - `scripts/start_kafka.sh`: Helper script for starting Kafka manually.
 - `test_federated_learning.sh`: Script for testing the federated learning system.
 
 ## Features
 
 - **Federated Averaging**: Implements the FedAvg algorithm to aggregate model updates from multiple clients.
+- **Multiple Model Architectures**: Supports different model architectures including a standard CNN and LeNet for CIFAR-10 classification.
 - **Weight Compatibility**: Includes mechanisms to handle and adapt weights when there are minor architecture differences between server and client models.
 - **Robust Communication**: Uses Kafka for reliable message passing between server and clients.
 - **Model Serialization**: Efficient serialization and deserialization of model weights for transmission over Kafka.
 - **Accuracy Evaluation**: Clients evaluate model performance on test data after training.
-- **Lightweight Model Option**: Provides a smaller model that uses fewer resources for constrained environments.
 - **Comprehensive Logging**: Includes a custom logging system with colored output and file logging.
 - **Resource Optimization**: Includes options to reduce memory usage and optimize performance.
 
@@ -77,8 +76,22 @@ This will start:
 For environments with limited resources, you can use the local script:
 
 ```bash
-python run_local_kafka.py
+python run_local_kafka_no_docker.py
 ```
+
+You can customize the run with command line options:
+
+```bash
+python run_local_kafka_no_docker.py --duration 30 --aggregation-interval 20 --training-interval 40 --num-clients 2
+```
+
+Available options:
+- `--duration`: Duration in minutes to run the system (default: 30)
+- `--aggregation-interval`: Interval in seconds between server aggregations (default: 30)
+- `--min-updates`: Minimum updates required for aggregation (default: 1)
+- `--training-interval`: Base interval in seconds between client training cycles (default: 60)
+- `--num-clients`: Number of clients to start (default: 3)
+- `--reduced-data`: Use reduced dataset size (default: True)
 
 This script:
 - Checks if Kafka is running locally
@@ -166,7 +179,7 @@ The system supports several environment variables for configuration:
 
 - `BOOTSTRAP_SERVERS`: Kafka bootstrap servers (default: "localhost:9094")
 - `CLIENT_ID`: ID for the client (default: randomly generated)
-- `USE_LIGHTWEIGHT_MODEL`: Set to "1" to use the lightweight model (default: "0")
+
 - `REDUCED_DATA_SIZE`: Set to "1" to use a smaller dataset for faster training (default: "0")
 - `TF_CPP_MIN_LOG_LEVEL`: TensorFlow logging level (default: "2" for warnings only)
 
@@ -179,8 +192,9 @@ The system supports several environment variables for configuration:
 ### Model and Training Configuration
 
 - **Training Parameters**: Adjust batch size, learning rate, and other parameters in the client code.
-- **Model Architecture**: Modify the model architecture in `common/model.py` or use the lightweight model option.
+- **Model Architecture**: Choose between the standard CNN and LeNet models in `common/model.py`. The system currently uses LeNet by default.
 - **Number of Rounds**: Change the number of federated learning rounds in `server.py`.
+- **Weight Adaptation**: The system includes enhanced weight adaptation mechanisms to handle different model architectures.
 
 ## Troubleshooting
 
@@ -193,14 +207,12 @@ The system supports several environment variables for configuration:
 
 2. **Weight Compatibility Errors**:
    - If you see errors about incompatible weights, check that the model architectures in server.py and client.py match exactly.
-   - Try setting `USE_LIGHTWEIGHT_MODEL=1` for both server and clients to ensure consistent architecture.
    - Check the model version in `common/model.py` to ensure all components are using the same version.
 
 3. **Memory Issues**:
    - If you encounter memory problems with Docker, try reducing the memory limits in `docker-compose.yml`
-   - Use the lightweight model option by setting `USE_LIGHTWEIGHT_MODEL=1`
    - Reduce the dataset size by setting `REDUCED_DATA_SIZE=1`
-   - Use `run_local_kafka.py` instead of Docker for a more resource-efficient setup
+   - Use `run_local_kafka_no_docker.py` instead of Docker for a more resource-efficient setup
 
 4. **TensorFlow Errors**:
    - If you see CUDA or GPU-related errors, try setting `CUDA_VISIBLE_DEVICES=-1` to force CPU-only mode
@@ -214,17 +226,18 @@ The system supports several environment variables for configuration:
 ## Future Work
 
 1. ✅ Fix the server-client communication
-2. Get the synchronous FL benchmarks and compare with Flower
-3. Improve async capabilities - kafka-python library has limitations for async tasks compared to the Java library. Consider aiokafka if the current architecture needs async support.
-4. Implement advanced async methods like Heartbeat or buffer mechanisms
-5. Successfully implement an Async module
-6. Create comprehensive tests and benchmarks
-7. Add support for differential privacy
-8. Implement secure aggregation protocols
-9. Add support for more complex model architectures
-10. Implement client selection strategies
-11. Add support for heterogeneous client devices
-12. Implement model compression techniques to reduce communication overhead
+2. ✅ Add support for LeNet model architecture
+3. Get the synchronous FL benchmarks and compare with Flower
+4. Improve async capabilities - kafka-python library has limitations for async tasks compared to the Java library. Consider aiokafka if the current architecture needs async support.
+5. Implement advanced async methods like Heartbeat or buffer mechanisms
+6. Successfully implement an Async module
+7. Create comprehensive tests and benchmarks
+8. Add support for differential privacy
+9. Implement secure aggregation protocols
+10. Add support for more complex model architectures
+11. Implement client selection strategies
+12. Add support for heterogeneous client devices
+13. Implement model compression techniques to reduce communication overhead
 
 ## Documentation
 
