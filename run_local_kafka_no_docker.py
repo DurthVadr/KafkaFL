@@ -199,7 +199,7 @@ def parse_arguments():
                         help="Base interval in seconds between client training cycles (default: 60)")
     parser.add_argument("--num-clients", type=int, default=3,
                         help="Number of clients to start (default: 3)")
-    parser.add_argument("--reduced-data", action="store_true", default=True,
+    parser.add_argument("--reduced-data", action="store_true", default=False,
                         help="Use reduced dataset size (default: True)")
 
     return parser.parse_args()

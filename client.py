@@ -64,9 +64,7 @@ class FederatedClient:
 
         # Initialize model and data
         self.model = None
-        self.X_train, self.y_train, self.X_test, self.y_test = load_cifar10_data(
-            subset_size=5000, test_size=1000, logger=self.logger
-        )
+        self.X_train, self.y_train, self.X_test, self.y_test = load_cifar10_data(logger=self.logger)
 
         # Initialize metrics tracking
         self.metrics = {
@@ -187,8 +185,8 @@ class FederatedClient:
             else:
                 model.set_weights(global_weights)
 
-            # Use a subset of data for training
-            train_size = min(5000, len(self.X_train))
+            # Use a random subset of data for training
+            train_size = min(16000, len(self.X_train))
             indices = np.random.choice(len(self.X_train), train_size, replace=False)
             X_subset = self.X_train[indices]
             y_subset = self.y_train[indices]

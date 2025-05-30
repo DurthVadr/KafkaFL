@@ -22,7 +22,7 @@ except ImportError:
     logging.warning("TensorFlow not available in data.py")
     TENSORFLOW_AVAILABLE = False
 
-def load_cifar10_data(subset_size=5000, test_size=1000, logger=None):
+def load_cifar10_data(subset_size=50000, test_size=10000, logger=None):
     """
     Load and preprocess CIFAR-10 data.
     Uses reduced data size if specified in environment variable.
@@ -35,12 +35,26 @@ def load_cifar10_data(subset_size=5000, test_size=1000, logger=None):
     Returns:
         Tuple of (X_train, y_train, X_test, y_test)
     """
-    # Apply reduced data size if specified
+    # Load CIFAR-10 data first to get actual sizes
+    if TENSORFLOW_AVAILABLE:
+        (X_train_full, y_train_full), (X_test_full, y_test_full) = cifar10.load_data()
+        max_train_size = len(X_train_full)  # 50,000
+        max_test_size = len(X_test_full)    # 10,000
+    else:
+        max_train_size = 5000
+        max_test_size = 1000
+
+    # Set default sizes based on reduced data flag
     if REDUCED_DATA_SIZE:
-        subset_size = min(subset_size, 1000)  # Reduce to 1000 samples
-        test_size = min(test_size, 200)       # Reduce to 200 samples
+        subset_size = subset_size or 1000    # Reduced: 1000 samples
+        test_size = test_size or 200         # Reduced: 200 samples
         if logger:
             logger.info(f"Using reduced data size: {subset_size} training samples, {test_size} test samples")
+    else:
+        subset_size = subset_size or max_train_size  # Full: 50,000 samples
+        test_size = test_size or max_test_size       # Full: 10,000 samples
+        if logger:
+            logger.info(f"Using FULL dataset: {subset_size} training samples, {test_size} test samples")
 
     # Use random data if TensorFlow is not available
     if not TENSORFLOW_AVAILABLE:

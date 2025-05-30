@@ -318,11 +318,22 @@ def plot_convergence_visualization(weight_history, layer_idx=0, logger=None):
             reshaped_changes = weight_changes
 
         # Create a heatmap-like visualization
-        im = axes[0].imshow(np.array(reshaped_changes), aspect='auto', cmap='viridis')
-        axes[0].set_xlabel('Weight Index')
-        axes[0].set_ylabel('Round')
-        axes[0].set_title(f'Weight Changes Over Time (Layer {layer_idx})')
-        fig.colorbar(im, ax=axes[0], label='Absolute Change')
+        try:
+            # Try to stack as a 2D array for heatmap
+            heatmap_data = np.vstack([change.flatten() for change in reshaped_changes])
+            im = axes[0].imshow(heatmap_data, aspect='auto', cmap='viridis')
+            axes[0].set_xlabel('Weight Index')
+            axes[0].set_ylabel('Round')
+            axes[0].set_title(f'Weight Changes Over Time (Layer {layer_idx})')
+            fig.colorbar(im, ax=axes[0], label='Absolute Change')
+        except (ValueError, MemoryError) as e:
+            # Fallback: just plot the average change per round as a line plot
+            avg_changes_per_round = [np.mean(change) for change in reshaped_changes]
+            axes[0].plot(range(1, len(avg_changes_per_round) + 1), avg_changes_per_round, 'r-o')
+            axes[0].set_xlabel('Round')
+            axes[0].set_ylabel('Average Weight Change')
+            axes[0].set_title(f'Weight Changes Over Time (Layer {layer_idx}) - Fallback View')
+            axes[0].grid(True, linestyle='--', alpha=0.7)
     else:
         axes[0].text(0.5, 0.5, "Not enough rounds for heatmap",
                     horizontalalignment='center', verticalalignment='center')

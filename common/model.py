@@ -51,7 +51,9 @@ def create_lenet_model():
             # Fully connected layers
             Flatten(),
             Dense(120, activation='relu'),
+            Dropout(0.2),
             Dense(84, activation='relu'),
+            Dropout(0.2),
             Dense(10, activation='softmax')
         ])
 

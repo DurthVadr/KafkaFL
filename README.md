@@ -86,7 +86,7 @@ python run_local_kafka_no_docker.py
 You can customize the run with command line options:
 
 ```bash
-python run_local_kafka_no_docker.py --duration 30 --aggregation-interval 20 --training-interval 40 --num-clients 2
+python run_local_kafka_no_docker.py --duration 10 --aggregation-interval 20 --training-interval 40 --num-clients 5
 ```
 
 Available options:
