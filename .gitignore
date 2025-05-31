@@ -5,3 +5,6 @@
 /data
 /common/__pycache__
 /plots
+/flower_implementation/__pycache__
+/flower_implementation/logs
+/flower_implementation/plots
