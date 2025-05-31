@@ -1,0 +1,1971 @@
+Flower Federated Learning Output
+==================================================
+Generated: 2025-05-31 20:48:23.217021
+
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/utils/file_utils.py:117: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+archive.extractall(
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/layers/convolutional/base_conv.py:107: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.server.start_server() is deprecated.
+Instead, use the `flower-superlink` CLI command to start a SuperLink as shown below:
+
+$ flower-superlink --insecure
+
+To view usage and all available options, run:
+
+$ flower-superlink --help
+
+Using `start_server()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+WARNING:flwr:DEPRECATED FEATURE: flwr.server.start_server() is deprecated.
+Instead, use the `flower-superlink` CLI command to start a SuperLink as shown below:
+
+$ flower-superlink --insecure
+
+To view usage and all available options, run:
+
+$ flower-superlink --help
+
+Using `start_server()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+[92mINFO [0m:      Starting Flower server, config: num_rounds=25, no round_timeout
+INFO:flwr:Starting Flower server, config: num_rounds=25, no round_timeout
+[92mINFO [0m:      Flower ECE: gRPC server running (25 rounds), SSL is disabled
+INFO:flwr:Flower ECE: gRPC server running (25 rounds), SSL is disabled
+[92mINFO [0m:      [INIT]
+INFO:flwr:[INIT]
+[92mINFO [0m:      Requesting initial parameters from one random client
+INFO:flwr:Requesting initial parameters from one random client
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/utils/file_utils.py:117: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+archive.extractall(
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/utils/file_utils.py:117: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+archive.extractall(
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/layers/convolutional/base_conv.py:107: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/layers/convolutional/base_conv.py:107: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/utils/file_utils.py:117: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+archive.extractall(
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.client.start_numpy_client() is deprecated.
+Instead, use `flwr.client.start_client()` by ensuring you first call the `.to_client()` method as shown below:
+flwr.client.start_client(
+server_address='<IP>:<PORT>',
+client=FlowerClient().to_client(), # <-- where FlowerClient is of type flwr.client.NumPyClient object
+)
+Using `start_numpy_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+WARNING:flwr:DEPRECATED FEATURE: flwr.client.start_numpy_client() is deprecated.
+Instead, use `flwr.client.start_client()` by ensuring you first call the `.to_client()` method as shown below:
+flwr.client.start_client(
+server_address='<IP>:<PORT>',
+client=FlowerClient().to_client(), # <-- where FlowerClient is of type flwr.client.NumPyClient object
+)
+Using `start_numpy_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+$ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+To view all available options, run:
+
+$ flower-supernode --help
+
+Using `start_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+WARNING:flwr:DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+$ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+To view all available options, run:
+
+$ flower-supernode --help
+
+Using `start_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.client.start_numpy_client() is deprecated.
+Instead, use `flwr.client.start_client()` by ensuring you first call the `.to_client()` method as shown below:
+flwr.client.start_client(
+server_address='<IP>:<PORT>',
+client=FlowerClient().to_client(), # <-- where FlowerClient is of type flwr.client.NumPyClient object
+)
+Using `start_numpy_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+WARNING:flwr:DEPRECATED FEATURE: flwr.client.start_numpy_client() is deprecated.
+Instead, use `flwr.client.start_client()` by ensuring you first call the `.to_client()` method as shown below:
+flwr.client.start_client(
+server_address='<IP>:<PORT>',
+client=FlowerClient().to_client(), # <-- where FlowerClient is of type flwr.client.NumPyClient object
+)
+Using `start_numpy_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+$ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+To view all available options, run:
+
+$ flower-supernode --help
+
+Using `start_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+WARNING:flwr:DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+$ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+To view all available options, run:
+
+$ flower-supernode --help
+
+Using `start_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+DEBUG:flwr:Opened insecure gRPC connection (no certificates were passed)
+DEBUG:flwr:Opened insecure gRPC connection (no certificates were passed)
+DEBUG:flwr:ChannelConnectivity.IDLE
+DEBUG:flwr:ChannelConnectivity.IDLE
+DEBUG:flwr:ChannelConnectivity.CONNECTING
+DEBUG:flwr:ChannelConnectivity.CONNECTING
+DEBUG:flwr:ChannelConnectivity.READY
+DEBUG:flwr:ChannelConnectivity.READY
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: get_parameters message 999eb17d-23a3-499a-b1ab-901108915338
+INFO:flwr:Received: get_parameters message 999eb17d-23a3-499a-b1ab-901108915338
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Received initial parameters from one random client
+INFO:flwr:Received initial parameters from one random client
+[92mINFO [0m:      Starting evaluation of initial global parameters
+INFO:flwr:Starting evaluation of initial global parameters
+[92mINFO [0m:      initial parameters (loss, other metrics): 2.3077361583709717, {'accuracy': 0.10700000077486038}
+INFO:flwr:initial parameters (loss, other metrics): 2.3077361583709717, {'accuracy': 0.10700000077486038}
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 1]
+INFO:flwr:[ROUND 1]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 2)
+INFO:flwr:configure_fit: strategy sampled 2 clients (out of 2)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message ceae48b7-6176-47b9-a060-02f0579b9b8e
+INFO:flwr:Received: train message ceae48b7-6176-47b9-a060-02f0579b9b8e
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 6361ac63-c084-46ac-9b54-19add6310719
+INFO:flwr:Received: train message 6361ac63-c084-46ac-9b54-19add6310719
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+INFO:flwr:aggregate_fit: received 2 results and 0 failures
+[93mWARNING [0m:   No fit_metrics_aggregation_fn provided
+WARNING:flwr:No fit_metrics_aggregation_fn provided
+[92mINFO [0m:      fit progress: (1, 2.020906925201416, {'accuracy': 0.3330000042915344}, 4.0559748749947175)
+INFO:flwr:fit progress: (1, 2.020906925201416, {'accuracy': 0.3330000042915344}, 4.0559748749947175)
+[92mINFO [0m:      configure_evaluate: strategy sampled 2 clients (out of 2)
+INFO:flwr:configure_evaluate: strategy sampled 2 clients (out of 2)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 1eb5705b-f2f8-4806-b200-f745ec1c8df8
+INFO:flwr:Received: evaluate message 1eb5705b-f2f8-4806-b200-f745ec1c8df8
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 68f70a20-da10-440b-9d27-228173c60c08
+INFO:flwr:Received: evaluate message 68f70a20-da10-440b-9d27-228173c60c08
+/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/keras/src/layers/convolutional/base_conv.py:107: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 2 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 2 results and 0 failures
+[93mWARNING [0m:   No evaluate_metrics_aggregation_fn provided
+WARNING:flwr:No evaluate_metrics_aggregation_fn provided
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 2]
+INFO:flwr:[ROUND 2]
+[92mINFO [0m:      configure_fit: strategy sampled 2 clients (out of 2)
+INFO:flwr:configure_fit: strategy sampled 2 clients (out of 2)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 06fc700c-be7f-4d01-8b4a-b34039427652
+INFO:flwr:Received: train message 06fc700c-be7f-4d01-8b4a-b34039427652
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 88800cdb-4e7e-4019-b211-9920143ce659
+INFO:flwr:Received: train message 88800cdb-4e7e-4019-b211-9920143ce659
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.client.start_numpy_client() is deprecated.
+Instead, use `flwr.client.start_client()` by ensuring you first call the `.to_client()` method as shown below:
+flwr.client.start_client(
+server_address='<IP>:<PORT>',
+client=FlowerClient().to_client(), # <-- where FlowerClient is of type flwr.client.NumPyClient object
+)
+Using `start_numpy_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+WARNING:flwr:DEPRECATED FEATURE: flwr.client.start_numpy_client() is deprecated.
+Instead, use `flwr.client.start_client()` by ensuring you first call the `.to_client()` method as shown below:
+flwr.client.start_client(
+server_address='<IP>:<PORT>',
+client=FlowerClient().to_client(), # <-- where FlowerClient is of type flwr.client.NumPyClient object
+)
+Using `start_numpy_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+$ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+To view all available options, run:
+
+$ flower-supernode --help
+
+Using `start_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+WARNING:flwr:DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+$ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+To view all available options, run:
+
+$ flower-supernode --help
+
+Using `start_client()` is deprecated.
+
+This is a deprecated feature. It will be removed
+entirely in future versions of Flower.
+
+DEBUG:flwr:Opened insecure gRPC connection (no certificates were passed)
+DEBUG:flwr:ChannelConnectivity.IDLE
+DEBUG:flwr:ChannelConnectivity.CONNECTING
+DEBUG:flwr:ChannelConnectivity.READY
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 2 results and 0 failures
+INFO:flwr:aggregate_fit: received 2 results and 0 failures
+[92mINFO [0m:      fit progress: (2, 1.7120050191879272, {'accuracy': 0.37700000405311584}, 7.548428625013912)
+INFO:flwr:fit progress: (2, 1.7120050191879272, {'accuracy': 0.37700000405311584}, 7.548428625013912)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 085f8c08-16a0-4a87-aacf-fcc3d6a88e7b
+INFO:flwr:Received: evaluate message 085f8c08-16a0-4a87-aacf-fcc3d6a88e7b
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message f21bde11-709d-488d-a32e-d81e39cd945b
+INFO:flwr:Received: evaluate message f21bde11-709d-488d-a32e-d81e39cd945b
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 6748a2da-c380-4340-9412-a7ab6c1e7624
+INFO:flwr:Received: evaluate message 6748a2da-c380-4340-9412-a7ab6c1e7624
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 3]
+INFO:flwr:[ROUND 3]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 9254b9f8-c9a7-4089-8362-354fc1d4d4a6
+INFO:flwr:Received: train message 9254b9f8-c9a7-4089-8362-354fc1d4d4a6
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 12c37421-f5b6-4189-8a52-f45de6768611
+INFO:flwr:Received: train message 12c37421-f5b6-4189-8a52-f45de6768611
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 8c80f951-d2fb-4cbc-9198-402df514d02a
+INFO:flwr:Received: train message 8c80f951-d2fb-4cbc-9198-402df514d02a
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (3, 1.6222056150436401, {'accuracy': 0.4230000078678131}, 12.197335458011366)
+INFO:flwr:fit progress: (3, 1.6222056150436401, {'accuracy': 0.4230000078678131}, 12.197335458011366)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 4add1f74-078c-4c03-9544-3d9fc69d91ac
+INFO:flwr:Received: evaluate message 4add1f74-078c-4c03-9544-3d9fc69d91ac
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 669e246c-a386-45d0-9e66-121bfcb7544f
+INFO:flwr:Received: evaluate message 669e246c-a386-45d0-9e66-121bfcb7544f
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 83e0552b-c9c8-45f2-9ca6-045657df5da4
+INFO:flwr:Received: evaluate message 83e0552b-c9c8-45f2-9ca6-045657df5da4
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 4]
+INFO:flwr:[ROUND 4]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message b0e9a847-40b6-47ae-8332-478a04b986e4
+INFO:flwr:Received: train message b0e9a847-40b6-47ae-8332-478a04b986e4
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 969cf3ac-9725-42c0-8f1a-7850420b96b7
+INFO:flwr:Received: train message 969cf3ac-9725-42c0-8f1a-7850420b96b7
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 4b343b62-a804-4442-be8c-e3bebb3e80be
+INFO:flwr:Received: train message 4b343b62-a804-4442-be8c-e3bebb3e80be
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (4, 1.5388952493667603, {'accuracy': 0.4560000002384186}, 15.57817070800229)
+INFO:flwr:fit progress: (4, 1.5388952493667603, {'accuracy': 0.4560000002384186}, 15.57817070800229)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 4bf83e36-18b3-4d54-88d0-1b0035e671f6
+INFO:flwr:Received: evaluate message 4bf83e36-18b3-4d54-88d0-1b0035e671f6
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message ca35aa05-bbcf-4a81-ad3f-dca9f22346ba
+INFO:flwr:Received: evaluate message ca35aa05-bbcf-4a81-ad3f-dca9f22346ba
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 9e805e20-c8bb-41d6-ac9d-c0323a5f79d8
+INFO:flwr:Received: evaluate message 9e805e20-c8bb-41d6-ac9d-c0323a5f79d8
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 5]
+INFO:flwr:[ROUND 5]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 8cc9e416-310f-48ad-8629-d82984a46ea9
+INFO:flwr:Received: train message 8cc9e416-310f-48ad-8629-d82984a46ea9
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 720334ed-1da7-403a-b7c9-2315eadb4d06
+INFO:flwr:Received: train message 720334ed-1da7-403a-b7c9-2315eadb4d06
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 9c581739-bb86-400b-b75f-99d94f6b1b83
+INFO:flwr:Received: train message 9c581739-bb86-400b-b75f-99d94f6b1b83
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (5, 1.499094009399414, {'accuracy': 0.46799999475479126}, 19.278577791003045)
+INFO:flwr:fit progress: (5, 1.499094009399414, {'accuracy': 0.46799999475479126}, 19.278577791003045)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 9e941117-69fc-4d5d-a58c-4909e87cd9eb
+INFO:flwr:Received: evaluate message 9e941117-69fc-4d5d-a58c-4909e87cd9eb
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 0c6c3914-734a-474c-8b95-48d178d7d23e
+INFO:flwr:Received: evaluate message 0c6c3914-734a-474c-8b95-48d178d7d23e
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 8800415c-bd3e-4986-8ca1-873f131a1ea6
+INFO:flwr:Received: evaluate message 8800415c-bd3e-4986-8ca1-873f131a1ea6
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 6]
+INFO:flwr:[ROUND 6]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message fbe50cce-45c0-4363-9ed0-db818e27937b
+INFO:flwr:Received: train message fbe50cce-45c0-4363-9ed0-db818e27937b
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message aee681c7-0fba-42dc-b657-98e93ea96e45
+INFO:flwr:Received: train message aee681c7-0fba-42dc-b657-98e93ea96e45
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message b79a7343-bb40-4e8f-b05f-f7dbf96e6151
+INFO:flwr:Received: train message b79a7343-bb40-4e8f-b05f-f7dbf96e6151
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (6, 1.4415216445922852, {'accuracy': 0.4749999940395355}, 23.049769540986745)
+INFO:flwr:fit progress: (6, 1.4415216445922852, {'accuracy': 0.4749999940395355}, 23.049769540986745)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message edb4e332-0c27-4b46-a066-afaa9ee5665b
+INFO:flwr:Received: evaluate message edb4e332-0c27-4b46-a066-afaa9ee5665b
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 6888acf5-b253-4e12-a938-7b605171ac0e
+INFO:flwr:Received: evaluate message 6888acf5-b253-4e12-a938-7b605171ac0e
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message bd4b151d-a738-4cde-a75c-14ed6241d6f9
+INFO:flwr:Received: evaluate message bd4b151d-a738-4cde-a75c-14ed6241d6f9
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 7]
+INFO:flwr:[ROUND 7]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message d0c81c0e-d83d-4957-8e44-23bdebc8abab
+INFO:flwr:Received: train message d0c81c0e-d83d-4957-8e44-23bdebc8abab
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message d4975f47-8414-4dbe-9656-640d90eee9e1
+INFO:flwr:Received: train message d4975f47-8414-4dbe-9656-640d90eee9e1
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message f52be91c-4a85-46ea-9f58-de4de6672f2b
+INFO:flwr:Received: train message f52be91c-4a85-46ea-9f58-de4de6672f2b
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (7, 1.4249415397644043, {'accuracy': 0.492000013589859}, 26.623429041006602)
+INFO:flwr:fit progress: (7, 1.4249415397644043, {'accuracy': 0.492000013589859}, 26.623429041006602)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 03181d22-5f34-49d6-984c-764a9259cdb2
+INFO:flwr:Received: evaluate message 03181d22-5f34-49d6-984c-764a9259cdb2
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message a5a7e167-7622-4fb1-bea8-cc40fc2e5ad4
+INFO:flwr:Received: evaluate message a5a7e167-7622-4fb1-bea8-cc40fc2e5ad4
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 9f9d933d-5a07-4e09-a6f9-3d211e6edb23
+INFO:flwr:Received: evaluate message 9f9d933d-5a07-4e09-a6f9-3d211e6edb23
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 8]
+INFO:flwr:[ROUND 8]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 0c00fa4d-025c-44b8-a4b5-dc203cc6a9f5
+INFO:flwr:Received: train message 0c00fa4d-025c-44b8-a4b5-dc203cc6a9f5
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 6e6805a6-29ef-4dbc-ba6e-88232270159a
+INFO:flwr:Received: train message 6e6805a6-29ef-4dbc-ba6e-88232270159a
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message c1202a27-8552-4c02-9fe4-7f66c0119530
+INFO:flwr:Received: train message c1202a27-8552-4c02-9fe4-7f66c0119530
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (8, 1.3901894092559814, {'accuracy': 0.5070000290870667}, 30.507345207995968)
+INFO:flwr:fit progress: (8, 1.3901894092559814, {'accuracy': 0.5070000290870667}, 30.507345207995968)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message b736689b-3d73-4554-b10d-845b1f4945b0
+INFO:flwr:Received: evaluate message b736689b-3d73-4554-b10d-845b1f4945b0
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message a94fa0d7-d0a2-40ae-a0dc-22fe1c82f055
+INFO:flwr:Received: evaluate message a94fa0d7-d0a2-40ae-a0dc-22fe1c82f055
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 9f156174-c231-46d8-96fe-adde112272e1
+INFO:flwr:Received: evaluate message 9f156174-c231-46d8-96fe-adde112272e1
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 9]
+INFO:flwr:[ROUND 9]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message ed42cd73-3008-4ec4-a83a-0ca425acb2ad
+INFO:flwr:Received: train message ed42cd73-3008-4ec4-a83a-0ca425acb2ad
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 21d8a368-456a-4a46-928f-08d67a98197a
+INFO:flwr:Received: train message 21d8a368-456a-4a46-928f-08d67a98197a
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 222e440f-46f8-4120-8c90-c85a7ecc66ae
+INFO:flwr:Received: train message 222e440f-46f8-4120-8c90-c85a7ecc66ae
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (9, 1.3575613498687744, {'accuracy': 0.5230000019073486}, 34.08876091599814)
+INFO:flwr:fit progress: (9, 1.3575613498687744, {'accuracy': 0.5230000019073486}, 34.08876091599814)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 9db26c64-25ab-452e-9b36-1c4f8e5164b0
+INFO:flwr:Received: evaluate message 9db26c64-25ab-452e-9b36-1c4f8e5164b0
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message ac540184-2fab-45ad-84a0-69ecbfb801f9
+INFO:flwr:Received: evaluate message ac540184-2fab-45ad-84a0-69ecbfb801f9
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 17ad1b3e-956d-43a1-af20-2fc952a392a8
+INFO:flwr:Received: evaluate message 17ad1b3e-956d-43a1-af20-2fc952a392a8
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 10]
+INFO:flwr:[ROUND 10]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 749c7fb5-4d48-4267-8362-4a4dd517369f
+INFO:flwr:Received: train message 749c7fb5-4d48-4267-8362-4a4dd517369f
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 6d0cc35f-ce91-418b-87f9-5abc5d33cece
+INFO:flwr:Received: train message 6d0cc35f-ce91-418b-87f9-5abc5d33cece
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 61ce7225-1577-4a52-93ff-8784d645e45d
+INFO:flwr:Received: train message 61ce7225-1577-4a52-93ff-8784d645e45d
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (10, 1.3439316749572754, {'accuracy': 0.531000018119812}, 37.713781583006494)
+INFO:flwr:fit progress: (10, 1.3439316749572754, {'accuracy': 0.531000018119812}, 37.713781583006494)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 60dd3821-1529-4b94-88da-fe676b360deb
+INFO:flwr:Received: evaluate message 60dd3821-1529-4b94-88da-fe676b360deb
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 724cea9e-1db3-4930-a8bb-d0962d4d2f4b
+INFO:flwr:Received: evaluate message 724cea9e-1db3-4930-a8bb-d0962d4d2f4b
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message b3cd51ff-015f-4f7e-b9ee-2b1d0fa1ea84
+INFO:flwr:Received: evaluate message b3cd51ff-015f-4f7e-b9ee-2b1d0fa1ea84
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 11]
+INFO:flwr:[ROUND 11]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 7cb22fa3-4d0c-4303-af0a-c276025764dc
+INFO:flwr:Received: train message 7cb22fa3-4d0c-4303-af0a-c276025764dc
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message ed68d86f-97db-47dc-bbd6-970a55e9dae9
+INFO:flwr:Received: train message ed68d86f-97db-47dc-bbd6-970a55e9dae9
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 4d4b461d-a6de-42a0-b95c-ac81c4774fd9
+INFO:flwr:Received: train message 4d4b461d-a6de-42a0-b95c-ac81c4774fd9
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (11, 1.3081371784210205, {'accuracy': 0.5419999957084656}, 41.207212083012564)
+INFO:flwr:fit progress: (11, 1.3081371784210205, {'accuracy': 0.5419999957084656}, 41.207212083012564)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 9f896df5-950d-4b71-890c-f3f035afef2e
+INFO:flwr:Received: evaluate message 9f896df5-950d-4b71-890c-f3f035afef2e
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 45e76ca0-60ce-45cd-b615-88a20fd4d9ba
+INFO:flwr:Received: evaluate message 45e76ca0-60ce-45cd-b615-88a20fd4d9ba
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message bdcd03c2-2a14-439b-9be4-24b9c75dcaf0
+INFO:flwr:Received: evaluate message bdcd03c2-2a14-439b-9be4-24b9c75dcaf0
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 12]
+INFO:flwr:[ROUND 12]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 61a3ee30-418c-432c-bd56-75ecd1c68a44
+INFO:flwr:Received: train message 61a3ee30-418c-432c-bd56-75ecd1c68a44
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 194a1cc6-797e-461c-bcd5-e8d0b1fa8077
+INFO:flwr:Received: train message 194a1cc6-797e-461c-bcd5-e8d0b1fa8077
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 3bc0a48c-6192-45ed-8a0c-ee4db01c0e07
+INFO:flwr:Received: train message 3bc0a48c-6192-45ed-8a0c-ee4db01c0e07
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (12, 1.3343287706375122, {'accuracy': 0.515999972820282}, 44.6786867910123)
+INFO:flwr:fit progress: (12, 1.3343287706375122, {'accuracy': 0.515999972820282}, 44.6786867910123)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message a59418fe-080b-4d10-af90-917a82f2ee05
+INFO:flwr:Received: evaluate message a59418fe-080b-4d10-af90-917a82f2ee05
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 62f75fe5-057a-480c-aa3f-2e443a463dca
+INFO:flwr:Received: evaluate message 62f75fe5-057a-480c-aa3f-2e443a463dca
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 3504f7e7-c36b-4396-9954-f31f97185fe9
+INFO:flwr:Received: evaluate message 3504f7e7-c36b-4396-9954-f31f97185fe9
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 13]
+INFO:flwr:[ROUND 13]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message b4e3a9d2-0d40-4ba4-aad7-825658c566c5
+INFO:flwr:Received: train message b4e3a9d2-0d40-4ba4-aad7-825658c566c5
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 057b6830-2070-43cf-9e51-7b38ece36495
+INFO:flwr:Received: train message 057b6830-2070-43cf-9e51-7b38ece36495
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 66aa43f0-5d95-420a-ae73-fead85b7f8cf
+INFO:flwr:Received: train message 66aa43f0-5d95-420a-ae73-fead85b7f8cf
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (13, 1.2767058610916138, {'accuracy': 0.5540000200271606}, 48.333901166013675)
+INFO:flwr:fit progress: (13, 1.2767058610916138, {'accuracy': 0.5540000200271606}, 48.333901166013675)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 95166462-8504-4620-a5ef-1923cd00a77d
+INFO:flwr:Received: evaluate message 95166462-8504-4620-a5ef-1923cd00a77d
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 1c37f230-b414-4be4-b575-726e32de822b
+INFO:flwr:Received: evaluate message 1c37f230-b414-4be4-b575-726e32de822b
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message f98de406-6016-4a5a-82ad-e0938cdb1621
+INFO:flwr:Received: evaluate message f98de406-6016-4a5a-82ad-e0938cdb1621
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 14]
+INFO:flwr:[ROUND 14]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message f798e7d9-9f13-47f5-bd04-817b211807d3
+INFO:flwr:Received: train message f798e7d9-9f13-47f5-bd04-817b211807d3
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 4a8a34f3-d874-4be8-b5b6-8cc699f66455
+INFO:flwr:Received: train message 4a8a34f3-d874-4be8-b5b6-8cc699f66455
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 4a64e404-f421-46b9-bf49-2cf0a2dbb1d3
+INFO:flwr:Received: train message 4a64e404-f421-46b9-bf49-2cf0a2dbb1d3
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (14, 1.2757564783096313, {'accuracy': 0.5320000052452087}, 51.803076624986716)
+INFO:flwr:fit progress: (14, 1.2757564783096313, {'accuracy': 0.5320000052452087}, 51.803076624986716)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message e0e62fce-2199-4929-a295-27161921de3c
+INFO:flwr:Received: evaluate message e0e62fce-2199-4929-a295-27161921de3c
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 631b0588-50cc-46c5-98ae-f26a1bf75092
+INFO:flwr:Received: evaluate message 631b0588-50cc-46c5-98ae-f26a1bf75092
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 0b983a57-8292-4ec2-aaf2-4a454404bb79
+INFO:flwr:Received: evaluate message 0b983a57-8292-4ec2-aaf2-4a454404bb79
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 15]
+INFO:flwr:[ROUND 15]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 9dc24857-2a1c-4942-a317-915fd62ae4ce
+INFO:flwr:Received: train message 9dc24857-2a1c-4942-a317-915fd62ae4ce
+[92mINFO [0m:      Received: train message 4f41d393-4750-47ed-ae14-4cd2b47db073
+INFO:flwr:Received: train message 4f41d393-4750-47ed-ae14-4cd2b47db073
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message bb3b2845-5432-4591-b1bb-00e7ad74b23a
+INFO:flwr:Received: train message bb3b2845-5432-4591-b1bb-00e7ad74b23a
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (15, 1.2607314586639404, {'accuracy': 0.550000011920929}, 55.33875137500581)
+INFO:flwr:fit progress: (15, 1.2607314586639404, {'accuracy': 0.550000011920929}, 55.33875137500581)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 2d366c16-b9b4-43f9-a880-f710459d7524
+INFO:flwr:Received: evaluate message 2d366c16-b9b4-43f9-a880-f710459d7524
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message d927f0cb-d8d2-4687-9048-b122aef3d459
+INFO:flwr:Received: evaluate message d927f0cb-d8d2-4687-9048-b122aef3d459
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message b6d28276-d404-462f-8f97-698880a59b98
+INFO:flwr:Received: evaluate message b6d28276-d404-462f-8f97-698880a59b98
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 16]
+INFO:flwr:[ROUND 16]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 1f989318-836d-4200-ba1d-c9a493ce5733
+INFO:flwr:Received: train message 1f989318-836d-4200-ba1d-c9a493ce5733
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 259a85b7-87ee-4741-828a-b1fd28940165
+INFO:flwr:Received: train message 259a85b7-87ee-4741-828a-b1fd28940165
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 7557be94-b31a-4f2a-833e-cfe947a3f253
+INFO:flwr:Received: train message 7557be94-b31a-4f2a-833e-cfe947a3f253
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (16, 1.2559707164764404, {'accuracy': 0.5450000166893005}, 61.1534966249892)
+INFO:flwr:fit progress: (16, 1.2559707164764404, {'accuracy': 0.5450000166893005}, 61.1534966249892)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message cfbbc808-4781-4a7d-ba93-b4a282d3ff89
+INFO:flwr:Received: evaluate message cfbbc808-4781-4a7d-ba93-b4a282d3ff89
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message bc023dff-f79a-4e5b-9ca9-9d424bac2521
+INFO:flwr:Received: evaluate message bc023dff-f79a-4e5b-9ca9-9d424bac2521
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message a7dd395a-10a1-4091-b8cc-58bcbcc289bd
+INFO:flwr:Received: evaluate message a7dd395a-10a1-4091-b8cc-58bcbcc289bd
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 17]
+INFO:flwr:[ROUND 17]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message b4667145-7dfa-4c48-80a6-42523a318b94
+INFO:flwr:Received: train message b4667145-7dfa-4c48-80a6-42523a318b94
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message a489dbae-bcd9-4f72-a772-2e75dd60bf35
+INFO:flwr:Received: train message a489dbae-bcd9-4f72-a772-2e75dd60bf35
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message c635f3be-26ed-40e1-a753-a01b07258ceb
+INFO:flwr:Received: train message c635f3be-26ed-40e1-a753-a01b07258ceb
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (17, 1.2510817050933838, {'accuracy': 0.5540000200271606}, 64.51287433301331)
+INFO:flwr:fit progress: (17, 1.2510817050933838, {'accuracy': 0.5540000200271606}, 64.51287433301331)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 0d90358e-5d61-4144-9082-7b67fe730778
+INFO:flwr:Received: evaluate message 0d90358e-5d61-4144-9082-7b67fe730778
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 94022e72-348b-47ea-9119-b16cd32e1668
+INFO:flwr:Received: evaluate message 94022e72-348b-47ea-9119-b16cd32e1668
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 5e1d61fb-7b2c-4fb0-81c3-c5b978b70d91
+INFO:flwr:Received: evaluate message 5e1d61fb-7b2c-4fb0-81c3-c5b978b70d91
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 18]
+INFO:flwr:[ROUND 18]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 84a1f44d-5fde-462f-b2a6-aa33d80ecce8
+INFO:flwr:Received: train message 84a1f44d-5fde-462f-b2a6-aa33d80ecce8
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 04a9a0d4-d125-48f3-93be-253a60700c72
+INFO:flwr:Received: train message 04a9a0d4-d125-48f3-93be-253a60700c72
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 6f888ef8-8a53-4e36-84d8-9a7f357cf914
+INFO:flwr:Received: train message 6f888ef8-8a53-4e36-84d8-9a7f357cf914
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (18, 1.2342870235443115, {'accuracy': 0.5730000138282776}, 68.02835079099168)
+INFO:flwr:fit progress: (18, 1.2342870235443115, {'accuracy': 0.5730000138282776}, 68.02835079099168)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 8f8e98be-e294-4b6e-8ff4-8959cb16f96b
+INFO:flwr:Received: evaluate message 8f8e98be-e294-4b6e-8ff4-8959cb16f96b
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 004282d6-d189-4e47-83dd-617c43b997c5
+INFO:flwr:Received: evaluate message 004282d6-d189-4e47-83dd-617c43b997c5
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message a603d7cf-693a-4ba6-9307-c2905c99d119
+INFO:flwr:Received: evaluate message a603d7cf-693a-4ba6-9307-c2905c99d119
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 19]
+INFO:flwr:[ROUND 19]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 4ebef71e-39c7-4ec0-84c4-5db7bfce2081
+INFO:flwr:Received: train message 4ebef71e-39c7-4ec0-84c4-5db7bfce2081
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message d7869392-cf2a-4e4f-9b3d-66b9fdede6dc
+INFO:flwr:Received: train message d7869392-cf2a-4e4f-9b3d-66b9fdede6dc
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message d7a0eb39-42a1-4b16-94bf-d3031dbc3e8e
+INFO:flwr:Received: train message d7a0eb39-42a1-4b16-94bf-d3031dbc3e8e
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (19, 1.217429518699646, {'accuracy': 0.5550000071525574}, 71.48321883298922)
+INFO:flwr:fit progress: (19, 1.217429518699646, {'accuracy': 0.5550000071525574}, 71.48321883298922)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message c804e383-b52e-4407-951e-73448e0922f4
+INFO:flwr:Received: evaluate message c804e383-b52e-4407-951e-73448e0922f4
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 51a8bf88-b1f0-4434-a382-020289fd5785
+INFO:flwr:Received: evaluate message 51a8bf88-b1f0-4434-a382-020289fd5785
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 7c5979ad-819e-4ea7-8a30-6ebe6fb48246
+INFO:flwr:Received: evaluate message 7c5979ad-819e-4ea7-8a30-6ebe6fb48246
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 20]
+INFO:flwr:[ROUND 20]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 73cf2cf7-1d70-4743-a608-ba1026e1d615
+INFO:flwr:Received: train message 73cf2cf7-1d70-4743-a608-ba1026e1d615
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message c1347a4c-b596-442f-a8b4-268c158c0102
+INFO:flwr:Received: train message c1347a4c-b596-442f-a8b4-268c158c0102
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 3668401c-2e47-4ed2-a257-3c7705bd9080
+INFO:flwr:Received: train message 3668401c-2e47-4ed2-a257-3c7705bd9080
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (20, 1.2273300886154175, {'accuracy': 0.5540000200271606}, 75.09740366600454)
+INFO:flwr:fit progress: (20, 1.2273300886154175, {'accuracy': 0.5540000200271606}, 75.09740366600454)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 74ecf606-f4e7-456c-b747-ee4f7a5418a1
+INFO:flwr:Received: evaluate message 74ecf606-f4e7-456c-b747-ee4f7a5418a1
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 9e03004a-0566-4748-8e15-95996c0f9313
+INFO:flwr:Received: evaluate message 9e03004a-0566-4748-8e15-95996c0f9313
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message ec4ba4c8-fc65-4e1e-b491-dcd703fed7c5
+INFO:flwr:Received: evaluate message ec4ba4c8-fc65-4e1e-b491-dcd703fed7c5
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 21]
+INFO:flwr:[ROUND 21]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 972f8d88-e2c5-4c95-ba82-36a8bff91bd0
+INFO:flwr:Received: train message 972f8d88-e2c5-4c95-ba82-36a8bff91bd0
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 39f557d0-f61c-42d7-ac73-beb25c81408f
+INFO:flwr:Received: train message 39f557d0-f61c-42d7-ac73-beb25c81408f
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 8904cb5a-1ba3-4efd-b71f-4a98996b0ae3
+INFO:flwr:Received: train message 8904cb5a-1ba3-4efd-b71f-4a98996b0ae3
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (21, 1.210417628288269, {'accuracy': 0.5559999942779541}, 78.68710183299845)
+INFO:flwr:fit progress: (21, 1.210417628288269, {'accuracy': 0.5559999942779541}, 78.68710183299845)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 272f21aa-11eb-4af8-ae6e-978b0b967efc
+INFO:flwr:Received: evaluate message 272f21aa-11eb-4af8-ae6e-978b0b967efc
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message b1bfb002-2bc2-4e27-ad17-cac7a121f688
+INFO:flwr:Received: evaluate message b1bfb002-2bc2-4e27-ad17-cac7a121f688
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 2bed9910-6135-479e-977b-5477ac8e1910
+INFO:flwr:Received: evaluate message 2bed9910-6135-479e-977b-5477ac8e1910
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 22]
+INFO:flwr:[ROUND 22]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message c4aaf47e-ffc6-4eda-b73a-f3a9dde6b4d2
+INFO:flwr:Received: train message c4aaf47e-ffc6-4eda-b73a-f3a9dde6b4d2
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 4a4dea32-1fb9-4597-87e1-fd65f31993a5
+INFO:flwr:Received: train message 4a4dea32-1fb9-4597-87e1-fd65f31993a5
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 8e26b9e2-f64a-455a-807d-d6c4bb39f637
+INFO:flwr:Received: train message 8e26b9e2-f64a-455a-807d-d6c4bb39f637
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (22, 1.2052184343338013, {'accuracy': 0.5879999995231628}, 82.51769700000295)
+INFO:flwr:fit progress: (22, 1.2052184343338013, {'accuracy': 0.5879999995231628}, 82.51769700000295)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message e27a3a40-5325-4a46-9de8-c6b13da6fc31
+INFO:flwr:Received: evaluate message e27a3a40-5325-4a46-9de8-c6b13da6fc31
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 73074733-b6a1-4f61-ade9-167cd7ff61c7
+INFO:flwr:Received: evaluate message 73074733-b6a1-4f61-ade9-167cd7ff61c7
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message af6553a9-018c-4d3e-8fdd-04ecffe39770
+INFO:flwr:Received: evaluate message af6553a9-018c-4d3e-8fdd-04ecffe39770
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 23]
+INFO:flwr:[ROUND 23]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 00583599-78da-43ac-8ae1-a0640d6e6aca
+INFO:flwr:Received: train message 00583599-78da-43ac-8ae1-a0640d6e6aca
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 022c9ccf-b1a1-42f4-b8ae-27d15d9511af
+INFO:flwr:Received: train message 022c9ccf-b1a1-42f4-b8ae-27d15d9511af
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message be10775a-bc01-4049-9947-3953d7699686
+INFO:flwr:Received: train message be10775a-bc01-4049-9947-3953d7699686
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (23, 1.2191927433013916, {'accuracy': 0.5540000200271606}, 86.00670170798548)
+INFO:flwr:fit progress: (23, 1.2191927433013916, {'accuracy': 0.5540000200271606}, 86.00670170798548)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message c1b9fa64-1bb9-4811-a118-235e7f977b8c
+INFO:flwr:Received: evaluate message c1b9fa64-1bb9-4811-a118-235e7f977b8c
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 9abbd24d-10da-4506-aa0e-ff05e41390c4
+INFO:flwr:Received: evaluate message 9abbd24d-10da-4506-aa0e-ff05e41390c4
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message d0dbed65-e586-4104-ba95-a533c247c06b
+INFO:flwr:Received: evaluate message d0dbed65-e586-4104-ba95-a533c247c06b
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 24]
+INFO:flwr:[ROUND 24]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message ead3de05-3b9a-4481-b8ae-f77f7ed1512c
+INFO:flwr:Received: train message ead3de05-3b9a-4481-b8ae-f77f7ed1512c
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message ba751570-db9c-43c9-a28b-5abf4e18394c
+INFO:flwr:Received: train message ba751570-db9c-43c9-a28b-5abf4e18394c
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 515a81ca-512e-4b4b-9e71-b519b9ea93f9
+INFO:flwr:Received: train message 515a81ca-512e-4b4b-9e71-b519b9ea93f9
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (24, 1.2442883253097534, {'accuracy': 0.5559999942779541}, 89.67734487500275)
+INFO:flwr:fit progress: (24, 1.2442883253097534, {'accuracy': 0.5559999942779541}, 89.67734487500275)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 24395a62-703d-451b-a7ea-66a277748eb0
+INFO:flwr:Received: evaluate message 24395a62-703d-451b-a7ea-66a277748eb0
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message a914b965-bd7a-48a6-bce1-53472595f716
+INFO:flwr:Received: evaluate message a914b965-bd7a-48a6-bce1-53472595f716
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 8b14927b-2855-4291-bf24-3c7d383f9ff1
+INFO:flwr:Received: evaluate message 8b14927b-2855-4291-bf24-3c7d383f9ff1
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [ROUND 25]
+INFO:flwr:[ROUND 25]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message eaf066bb-1f28-411f-a21c-4cb097996ebc
+INFO:flwr:Received: train message eaf066bb-1f28-411f-a21c-4cb097996ebc
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 89d44e7b-872e-4d1e-93b2-050541de8bf5
+INFO:flwr:Received: train message 89d44e7b-872e-4d1e-93b2-050541de8bf5
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: train message 31577931-82f1-4d1d-876a-447bbba2ca45
+INFO:flwr:Received: train message 31577931-82f1-4d1d-876a-447bbba2ca45
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+INFO:flwr:aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (25, 1.2143027782440186, {'accuracy': 0.5600000023841858}, 93.30375412499416)
+INFO:flwr:fit progress: (25, 1.2143027782440186, {'accuracy': 0.5600000023841858}, 93.30375412499416)
+[92mINFO [0m:      configure_evaluate: strategy sampled 3 clients (out of 3)
+INFO:flwr:configure_evaluate: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message b3b23e8b-1039-42ec-8c43-5e4e83d5ba0e
+INFO:flwr:Received: evaluate message b3b23e8b-1039-42ec-8c43-5e4e83d5ba0e
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 66fd9a95-42d7-4642-9996-7565631eda5b
+INFO:flwr:Received: evaluate message 66fd9a95-42d7-4642-9996-7565631eda5b
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: evaluate message 8dcbc541-6535-45c4-b08d-5f58b156f5ee
+INFO:flwr:Received: evaluate message 8dcbc541-6535-45c4-b08d-5f58b156f5ee
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      Sent reply
+INFO:flwr:Sent reply
+[92mINFO [0m:      aggregate_evaluate: received 3 results and 0 failures
+INFO:flwr:aggregate_evaluate: received 3 results and 0 failures
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      [SUMMARY]
+INFO:flwr:[SUMMARY]
+[92mINFO [0m:      Run finished 25 round(s) in 93.59s
+INFO:flwr:Run finished 25 round(s) in 93.59s
+[92mINFO [0m:      	History (loss, distributed):
+INFO:flwr:	History (loss, distributed):
+[92mINFO [0m:      		round 1: 2.017933487892151
+INFO:flwr:		round 1: 2.017933487892151
+[92mINFO [0m:      		round 2: 1.7189667622248332
+INFO:flwr:		round 2: 1.7189667622248332
+[92mINFO [0m:      		round 3: 1.6233330567677815
+INFO:flwr:		round 3: 1.6233330567677815
+[92mINFO [0m:      		round 4: 1.5439197222391765
+INFO:flwr:		round 4: 1.5439197222391765
+[92mINFO [0m:      		round 5: 1.5022565523783367
+INFO:flwr:		round 5: 1.5022565523783367
+[92mINFO [0m:      		round 6: 1.4618665774663289
+INFO:flwr:		round 6: 1.4618665774663289
+[92mINFO [0m:      		round 7: 1.4324447711308796
+INFO:flwr:		round 7: 1.4324447711308796
+[92mINFO [0m:      		round 8: 1.4053296248118083
+INFO:flwr:		round 8: 1.4053296248118083
+[92mINFO [0m:      		round 9: 1.3894038200378418
+INFO:flwr:		round 9: 1.3894038200378418
+[92mINFO [0m:      		round 10: 1.3744062582651775
+INFO:flwr:		round 10: 1.3744062582651775
+[92mINFO [0m:      		round 11: 1.3403222560882568
+INFO:flwr:		round 11: 1.3403222560882568
+[92mINFO [0m:      		round 12: 1.3689617315928142
+INFO:flwr:		round 12: 1.3689617315928142
+[92mINFO [0m:      		round 13: 1.3127137819925945
+INFO:flwr:		round 13: 1.3127137819925945
+[92mINFO [0m:      		round 14: 1.3034212589263916
+INFO:flwr:		round 14: 1.3034212589263916
+[92mINFO [0m:      		round 15: 1.2904637257258098
+INFO:flwr:		round 15: 1.2904637257258098
+[92mINFO [0m:      		round 16: 1.2937613328297932
+INFO:flwr:		round 16: 1.2937613328297932
+[92mINFO [0m:      		round 17: 1.2700337171554565
+INFO:flwr:		round 17: 1.2700337171554565
+[92mINFO [0m:      		round 18: 1.2637982765833538
+INFO:flwr:		round 18: 1.2637982765833538
+[92mINFO [0m:      		round 19: 1.252371112505595
+INFO:flwr:		round 19: 1.252371112505595
+[92mINFO [0m:      		round 20: 1.2603321472803752
+INFO:flwr:		round 20: 1.2603321472803752
+[92mINFO [0m:      		round 21: 1.2376537720362346
+INFO:flwr:		round 21: 1.2376537720362346
+[92mINFO [0m:      		round 22: 1.2346471945444744
+INFO:flwr:		round 22: 1.2346471945444744
+[92mINFO [0m:      		round 23: 1.2401802937189739
+INFO:flwr:		round 23: 1.2401802937189739
+[92mINFO [0m:      		round 24: 1.2555415232976277
+INFO:flwr:		round 24: 1.2555415232976277
+[92mINFO [0m:      		round 25: 1.2384628852208455
+INFO:flwr:		round 25: 1.2384628852208455
+[92mINFO [0m:      	History (loss, centralized):
+INFO:flwr:	History (loss, centralized):
+[92mINFO [0m:      		round 0: 2.3077361583709717
+INFO:flwr:		round 0: 2.3077361583709717
+[92mINFO [0m:      		round 1: 2.020906925201416
+INFO:flwr:		round 1: 2.020906925201416
+[92mINFO [0m:      		round 2: 1.7120050191879272
+INFO:flwr:		round 2: 1.7120050191879272
+[92mINFO [0m:      		round 3: 1.6222056150436401
+INFO:flwr:		round 3: 1.6222056150436401
+[92mINFO [0m:      		round 4: 1.5388952493667603
+INFO:flwr:		round 4: 1.5388952493667603
+[92mINFO [0m:      		round 5: 1.499094009399414
+INFO:flwr:		round 5: 1.499094009399414
+[92mINFO [0m:      		round 6: 1.4415216445922852
+INFO:flwr:		round 6: 1.4415216445922852
+[92mINFO [0m:      		round 7: 1.4249415397644043
+INFO:flwr:		round 7: 1.4249415397644043
+[92mINFO [0m:      		round 8: 1.3901894092559814
+INFO:flwr:		round 8: 1.3901894092559814
+[92mINFO [0m:      		round 9: 1.3575613498687744
+INFO:flwr:		round 9: 1.3575613498687744
+[92mINFO [0m:      		round 10: 1.3439316749572754
+INFO:flwr:		round 10: 1.3439316749572754
+[92mINFO [0m:      		round 11: 1.3081371784210205
+INFO:flwr:		round 11: 1.3081371784210205
+[92mINFO [0m:      		round 12: 1.3343287706375122
+INFO:flwr:		round 12: 1.3343287706375122
+[92mINFO [0m:      		round 13: 1.2767058610916138
+INFO:flwr:		round 13: 1.2767058610916138
+[92mINFO [0m:      		round 14: 1.2757564783096313
+INFO:flwr:		round 14: 1.2757564783096313
+[92mINFO [0m:      		round 15: 1.2607314586639404
+INFO:flwr:		round 15: 1.2607314586639404
+[92mINFO [0m:      		round 16: 1.2559707164764404
+INFO:flwr:		round 16: 1.2559707164764404
+[92mINFO [0m:      		round 17: 1.2510817050933838
+INFO:flwr:		round 17: 1.2510817050933838
+[92mINFO [0m:      		round 18: 1.2342870235443115
+INFO:flwr:		round 18: 1.2342870235443115
+[92mINFO [0m:      		round 19: 1.217429518699646
+INFO:flwr:		round 19: 1.217429518699646
+[92mINFO [0m:      		round 20: 1.2273300886154175
+INFO:flwr:		round 20: 1.2273300886154175
+[92mINFO [0m:      		round 21: 1.210417628288269
+INFO:flwr:		round 21: 1.210417628288269
+[92mINFO [0m:      		round 22: 1.2052184343338013
+INFO:flwr:		round 22: 1.2052184343338013
+[92mINFO [0m:      		round 23: 1.2191927433013916
+INFO:flwr:		round 23: 1.2191927433013916
+[92mINFO [0m:      		round 24: 1.2442883253097534
+INFO:flwr:		round 24: 1.2442883253097534
+[92mINFO [0m:      		round 25: 1.2143027782440186
+INFO:flwr:		round 25: 1.2143027782440186
+[92mINFO [0m:      	History (metrics, centralized):
+INFO:flwr:	History (metrics, centralized):
+[92mINFO [0m:      	{'accuracy': [(0, 0.10700000077486038),
+INFO:flwr:	{'accuracy': [(0, 0.10700000077486038),
+[92mINFO [0m:      	              (1, 0.3330000042915344),
+INFO:flwr:	              (1, 0.3330000042915344),
+[92mINFO [0m:      	              (2, 0.37700000405311584),
+INFO:flwr:	              (2, 0.37700000405311584),
+[92mINFO [0m:      	              (3, 0.4230000078678131),
+INFO:flwr:	              (3, 0.4230000078678131),
+[92mINFO [0m:      	              (4, 0.4560000002384186),
+INFO:flwr:	              (4, 0.4560000002384186),
+[92mINFO [0m:      	              (5, 0.46799999475479126),
+INFO:flwr:	              (5, 0.46799999475479126),
+[92mINFO [0m:      	              (6, 0.4749999940395355),
+INFO:flwr:	              (6, 0.4749999940395355),
+[92mINFO [0m:      	              (7, 0.492000013589859),
+INFO:flwr:	              (7, 0.492000013589859),
+[92mINFO [0m:      	              (8, 0.5070000290870667),
+INFO:flwr:	              (8, 0.5070000290870667),
+[92mINFO [0m:      	              (9, 0.5230000019073486),
+INFO:flwr:	              (9, 0.5230000019073486),
+[92mINFO [0m:      	              (10, 0.531000018119812),
+INFO:flwr:	              (10, 0.531000018119812),
+[92mINFO [0m:      	              (11, 0.5419999957084656),
+INFO:flwr:	              (11, 0.5419999957084656),
+[92mINFO [0m:      	              (12, 0.515999972820282),
+INFO:flwr:	              (12, 0.515999972820282),
+[92mINFO [0m:      	              (13, 0.5540000200271606),
+INFO:flwr:	              (13, 0.5540000200271606),
+[92mINFO [0m:      	              (14, 0.5320000052452087),
+INFO:flwr:	              (14, 0.5320000052452087),
+[92mINFO [0m:      	              (15, 0.550000011920929),
+INFO:flwr:	              (15, 0.550000011920929),
+[92mINFO [0m:      	              (16, 0.5450000166893005),
+INFO:flwr:	              (16, 0.5450000166893005),
+[92mINFO [0m:      	              (17, 0.5540000200271606),
+INFO:flwr:	              (17, 0.5540000200271606),
+[92mINFO [0m:      	              (18, 0.5730000138282776),
+INFO:flwr:	              (18, 0.5730000138282776),
+[92mINFO [0m:      	              (19, 0.5550000071525574),
+INFO:flwr:	              (19, 0.5550000071525574),
+[92mINFO [0m:      	              (20, 0.5540000200271606),
+INFO:flwr:	              (20, 0.5540000200271606),
+[92mINFO [0m:      	              (21, 0.5559999942779541),
+INFO:flwr:	              (21, 0.5559999942779541),
+[92mINFO [0m:      	              (22, 0.5879999995231628),
+INFO:flwr:	              (22, 0.5879999995231628),
+[92mINFO [0m:      	              (23, 0.5540000200271606),
+INFO:flwr:	              (23, 0.5540000200271606),
+[92mINFO [0m:      	              (24, 0.5559999942779541),
+INFO:flwr:	              (24, 0.5559999942779541),
+[92mINFO [0m:      	              (25, 0.5600000023841858)]}
+INFO:flwr:	              (25, 0.5600000023841858)]}
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: reconnect message 37fed82a-4614-426f-92f8-cb993d2e0f6d
+INFO:flwr:Received: reconnect message 37fed82a-4614-426f-92f8-cb993d2e0f6d
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: reconnect message e1339fa8-2c23-40f5-a0f0-e7cefa47971e
+INFO:flwr:Received: reconnect message e1339fa8-2c23-40f5-a0f0-e7cefa47971e
+[92mINFO [0m:
+INFO:flwr:
+[92mINFO [0m:      Received: reconnect message a22a9b46-6efa-4e97-8a00-64c924d290ef
+INFO:flwr:Received: reconnect message a22a9b46-6efa-4e97-8a00-64c924d290ef
+Starting Simple Flower Server...
+Loading test data...
+Test data loaded: (1000, 32, 32, 3)
+Creating LeNet model...
+Model created: 83126 parameters
+Starting server on localhost:8080...
+Waiting for at least 2 clients...
+Server eval round 0: loss=2.3077, accuracy=0.1070
+Server eval round 1: loss=2.0209, accuracy=0.3330
+Server eval round 2: loss=1.7120, accuracy=0.3770
+Server eval round 3: loss=1.6222, accuracy=0.4230
+Server eval round 4: loss=1.5389, accuracy=0.4560
+Server eval round 5: loss=1.4991, accuracy=0.4680
+Server eval round 6: loss=1.4415, accuracy=0.4750
+Server eval round 7: loss=1.4249, accuracy=0.4920
+Server eval round 8: loss=1.3902, accuracy=0.5070
+Server eval round 9: loss=1.3576, accuracy=0.5230
+Server eval round 10: loss=1.3439, accuracy=0.5310
+Server eval round 11: loss=1.3081, accuracy=0.5420
+Server eval round 12: loss=1.3343, accuracy=0.5160
+Server eval round 13: loss=1.2767, accuracy=0.5540
+Server eval round 14: loss=1.2758, accuracy=0.5320
+Server eval round 15: loss=1.2607, accuracy=0.5500
+Server eval round 16: loss=1.2560, accuracy=0.5450
+Server eval round 17: loss=1.2511, accuracy=0.5540
+Server eval round 18: loss=1.2343, accuracy=0.5730
+Server eval round 19: loss=1.2174, accuracy=0.5550
+Server eval round 20: loss=1.2273, accuracy=0.5540
+Server eval round 21: loss=1.2104, accuracy=0.5560
+Server eval round 22: loss=1.2052, accuracy=0.5880
+Server eval round 23: loss=1.2192, accuracy=0.5540
+Server eval round 24: loss=1.2443, accuracy=0.5560
+Server eval round 25: loss=1.2143, accuracy=0.5600
+DEBUG:flwr:gRPC channel closed
+[92mINFO [0m:      Disconnect and shut down
+INFO:flwr:Disconnect and shut down
+DEBUG:flwr:gRPC channel closed
+DEBUG:flwr:gRPC channel closed
+[92mINFO [0m:      Disconnect and shut down
+INFO:flwr:Disconnect and shut down
+[92mINFO [0m:      Disconnect and shut down
+INFO:flwr:Disconnect and shut down
+Starting Simple Flower Client 1...
+Loading CIFAR-10 data...
+Data loaded - Train: (15000, 32, 32, 3), Test: (3000, 32, 32, 3)
+Partitioning data for client 1...
+Client 1 data - Train: (5000, 32, 32, 3), Test: (1000, 32, 32, 3)
+Creating LeNet model...
+Model created: 83126 parameters
+Connecting to server at localhost:8080...
+Client 1: Starting training...
+Client 1: Training completed - Loss: 2.1712, Accuracy: 0.1842
+Client 1: Evaluation - Loss: 2.0150, Accuracy: 0.3080
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.8711, Accuracy: 0.3054
+Client 1: Evaluation - Loss: 1.7026, Accuracy: 0.3800
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.7327, Accuracy: 0.3558
+Client 1: Evaluation - Loss: 1.6036, Accuracy: 0.4300
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.6737, Accuracy: 0.3774
+Client 1: Evaluation - Loss: 1.5314, Accuracy: 0.4430
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.6069, Accuracy: 0.4036
+Client 1: Evaluation - Loss: 1.4909, Accuracy: 0.4560
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.5688, Accuracy: 0.4200
+Client 1: Evaluation - Loss: 1.4617, Accuracy: 0.4720
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.5086, Accuracy: 0.4508
+Client 1: Evaluation - Loss: 1.4231, Accuracy: 0.4840
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.4867, Accuracy: 0.4634
+Client 1: Evaluation - Loss: 1.4004, Accuracy: 0.4960
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.4326, Accuracy: 0.4776
+Client 1: Evaluation - Loss: 1.4040, Accuracy: 0.4960
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.4123, Accuracy: 0.4786
+Client 1: Evaluation - Loss: 1.3795, Accuracy: 0.4960
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.3945, Accuracy: 0.4970
+Client 1: Evaluation - Loss: 1.3486, Accuracy: 0.5130
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.3546, Accuracy: 0.5140
+Client 1: Evaluation - Loss: 1.3765, Accuracy: 0.5020
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.3426, Accuracy: 0.5130
+Client 1: Evaluation - Loss: 1.3244, Accuracy: 0.5290
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.2948, Accuracy: 0.5310
+Client 1: Evaluation - Loss: 1.3145, Accuracy: 0.5290
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.2798, Accuracy: 0.5406
+Client 1: Evaluation - Loss: 1.3008, Accuracy: 0.5430
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.2588, Accuracy: 0.5462
+Client 1: Evaluation - Loss: 1.3090, Accuracy: 0.5450
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.2287, Accuracy: 0.5636
+Client 1: Evaluation - Loss: 1.2682, Accuracy: 0.5490
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.1993, Accuracy: 0.5808
+Client 1: Evaluation - Loss: 1.2785, Accuracy: 0.5620
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.1863, Accuracy: 0.5786
+Client 1: Evaluation - Loss: 1.2641, Accuracy: 0.5510
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.1696, Accuracy: 0.5788
+Client 1: Evaluation - Loss: 1.2635, Accuracy: 0.5700
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.1297, Accuracy: 0.5938
+Client 1: Evaluation - Loss: 1.2432, Accuracy: 0.5640
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.1283, Accuracy: 0.5986
+Client 1: Evaluation - Loss: 1.2455, Accuracy: 0.5670
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.1146, Accuracy: 0.5964
+Client 1: Evaluation - Loss: 1.2467, Accuracy: 0.5480
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.0791, Accuracy: 0.6146
+Client 1: Evaluation - Loss: 1.2586, Accuracy: 0.5670
+Client 1: Starting training...
+Client 1: Training completed - Loss: 1.0825, Accuracy: 0.6070
+Client 1: Evaluation - Loss: 1.2466, Accuracy: 0.5620
+Starting Simple Flower Client 0...
+Loading CIFAR-10 data...
+Data loaded - Train: (15000, 32, 32, 3), Test: (3000, 32, 32, 3)
+Partitioning data for client 0...
+Client 0 data - Train: (5000, 32, 32, 3), Test: (1000, 32, 32, 3)
+Creating LeNet model...
+Model created: 83126 parameters
+Connecting to server at localhost:8080...
+Client 0: Starting training...
+Client 0: Training completed - Loss: 2.1299, Accuracy: 0.1958
+Client 0: Evaluation - Loss: 2.0209, Accuracy: 0.3330
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.8535, Accuracy: 0.3230
+Client 0: Evaluation - Loss: 1.7120, Accuracy: 0.3770
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.7249, Accuracy: 0.3664
+Client 0: Evaluation - Loss: 1.6222, Accuracy: 0.4230
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.6476, Accuracy: 0.3918
+Client 0: Evaluation - Loss: 1.5389, Accuracy: 0.4560
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.5864, Accuracy: 0.4240
+Client 0: Evaluation - Loss: 1.4991, Accuracy: 0.4680
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.5375, Accuracy: 0.4462
+Client 0: Evaluation - Loss: 1.4415, Accuracy: 0.4750
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.4957, Accuracy: 0.4644
+Client 0: Evaluation - Loss: 1.4249, Accuracy: 0.4920
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.4696, Accuracy: 0.4780
+Client 0: Evaluation - Loss: 1.3902, Accuracy: 0.5070
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.4500, Accuracy: 0.4846
+Client 0: Evaluation - Loss: 1.3576, Accuracy: 0.5230
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.3960, Accuracy: 0.4956
+Client 0: Evaluation - Loss: 1.3439, Accuracy: 0.5310
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.3739, Accuracy: 0.5032
+Client 0: Evaluation - Loss: 1.3081, Accuracy: 0.5420
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.3557, Accuracy: 0.5118
+Client 0: Evaluation - Loss: 1.3343, Accuracy: 0.5160
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.3343, Accuracy: 0.5242
+Client 0: Evaluation - Loss: 1.2767, Accuracy: 0.5540
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.2954, Accuracy: 0.5382
+Client 0: Evaluation - Loss: 1.2758, Accuracy: 0.5320
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.2598, Accuracy: 0.5522
+Client 0: Evaluation - Loss: 1.2607, Accuracy: 0.5500
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.2499, Accuracy: 0.5558
+Client 0: Evaluation - Loss: 1.2560, Accuracy: 0.5450
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.2276, Accuracy: 0.5714
+Client 0: Evaluation - Loss: 1.2511, Accuracy: 0.5540
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.1982, Accuracy: 0.5792
+Client 0: Evaluation - Loss: 1.2343, Accuracy: 0.5730
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.1901, Accuracy: 0.5780
+Client 0: Evaluation - Loss: 1.2174, Accuracy: 0.5550
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.1780, Accuracy: 0.5858
+Client 0: Evaluation - Loss: 1.2273, Accuracy: 0.5540
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.1259, Accuracy: 0.6028
+Client 0: Evaluation - Loss: 1.2104, Accuracy: 0.5560
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.1377, Accuracy: 0.5920
+Client 0: Evaluation - Loss: 1.2052, Accuracy: 0.5880
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.1029, Accuracy: 0.6044
+Client 0: Evaluation - Loss: 1.2192, Accuracy: 0.5540
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.0877, Accuracy: 0.6148
+Client 0: Evaluation - Loss: 1.2443, Accuracy: 0.5560
+Client 0: Starting training...
+Client 0: Training completed - Loss: 1.0621, Accuracy: 0.6246
+Client 0: Evaluation - Loss: 1.2143, Accuracy: 0.5600
+ERROR:grpc._server:Exception iterating responses:
+Traceback (most recent call last):
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/grpc/_server.py", line 654, in _take_response_from_response_iterator
+return next(response_iterator), True
+^^^^^^^^^^^^^^^^^^^^^^^
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/flower_service_servicer.py", line 119, in Join
+ins_wrapper: InsWrapper = next(ins_wrapper_iterator)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/grpc_bridge.py", line 166, in ins_wrapper_iterator
+self._raise_if_closed()
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/grpc_bridge.py", line 82, in _raise_if_closed
+raise GrpcBridgeClosed()
+flwr.server.superlink.fleet.grpc_bidi.grpc_bridge.GrpcBridgeClosed
+ERROR:grpc._server:Exception iterating responses:
+Traceback (most recent call last):
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/grpc/_server.py", line 654, in _take_response_from_response_iterator
+return next(response_iterator), True
+^^^^^^^^^^^^^^^^^^^^^^^
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/flower_service_servicer.py", line 119, in Join
+ins_wrapper: InsWrapper = next(ins_wrapper_iterator)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/grpc_bridge.py", line 166, in ins_wrapper_iterator
+self._raise_if_closed()
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/grpc_bridge.py", line 82, in _raise_if_closed
+raise GrpcBridgeClosed()
+flwr.server.superlink.fleet.grpc_bidi.grpc_bridge.GrpcBridgeClosed
+ERROR:grpc._server:Exception iterating responses:
+Traceback (most recent call last):
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/grpc/_server.py", line 654, in _take_response_from_response_iterator
+return next(response_iterator), True
+^^^^^^^^^^^^^^^^^^^^^^^
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/flower_service_servicer.py", line 119, in Join
+ins_wrapper: InsWrapper = next(ins_wrapper_iterator)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/grpc_bridge.py", line 166, in ins_wrapper_iterator
+self._raise_if_closed()
+File "/Users/mertcansaglam/cs402/.venv/lib/python3.12/site-packages/flwr/server/superlink/fleet/grpc_bidi/grpc_bridge.py", line 82, in _raise_if_closed
+raise GrpcBridgeClosed()
+flwr.server.superlink.fleet.grpc_bidi.grpc_bridge.GrpcBridgeClosed
+Starting Simple Flower Client 2...
+Loading CIFAR-10 data...
+Data loaded - Train: (15000, 32, 32, 3), Test: (3000, 32, 32, 3)
+Partitioning data for client 2...
+Client 2 data - Train: (5000, 32, 32, 3), Test: (1000, 32, 32, 3)
+Creating LeNet model...
+Model created: 83126 parameters
+Connecting to server at localhost:8080...
+Client 2: Evaluation - Loss: 1.7423, Accuracy: 0.3670
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.7634, Accuracy: 0.3568
+Client 2: Evaluation - Loss: 1.6442, Accuracy: 0.4140
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.6803, Accuracy: 0.3880
+Client 2: Evaluation - Loss: 1.5615, Accuracy: 0.4270
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.6310, Accuracy: 0.4084
+Client 2: Evaluation - Loss: 1.5168, Accuracy: 0.4530
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.5868, Accuracy: 0.4250
+Client 2: Evaluation - Loss: 1.4824, Accuracy: 0.4540
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.5457, Accuracy: 0.4354
+Client 2: Evaluation - Loss: 1.4493, Accuracy: 0.4710
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.5105, Accuracy: 0.4508
+Client 2: Evaluation - Loss: 1.4254, Accuracy: 0.4750
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.4814, Accuracy: 0.4688
+Client 2: Evaluation - Loss: 1.4066, Accuracy: 0.4920
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.4350, Accuracy: 0.4844
+Client 2: Evaluation - Loss: 1.3997, Accuracy: 0.4920
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.4134, Accuracy: 0.4934
+Client 2: Evaluation - Loss: 1.3643, Accuracy: 0.5170
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.3734, Accuracy: 0.5082
+Client 2: Evaluation - Loss: 1.3961, Accuracy: 0.4970
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.3507, Accuracy: 0.5196
+Client 2: Evaluation - Loss: 1.3371, Accuracy: 0.5300
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.3298, Accuracy: 0.5342
+Client 2: Evaluation - Loss: 1.3201, Accuracy: 0.5350
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.3047, Accuracy: 0.5292
+Client 2: Evaluation - Loss: 1.3099, Accuracy: 0.5330
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.2780, Accuracy: 0.5424
+Client 2: Evaluation - Loss: 1.3163, Accuracy: 0.5380
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.2495, Accuracy: 0.5554
+Client 2: Evaluation - Loss: 1.2909, Accuracy: 0.5490
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.2252, Accuracy: 0.5662
+Client 2: Evaluation - Loss: 1.2786, Accuracy: 0.5480
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.2107, Accuracy: 0.5708
+Client 2: Evaluation - Loss: 1.2756, Accuracy: 0.5540
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.1928, Accuracy: 0.5768
+Client 2: Evaluation - Loss: 1.2901, Accuracy: 0.5390
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.1612, Accuracy: 0.5938
+Client 2: Evaluation - Loss: 1.2593, Accuracy: 0.5580
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.1465, Accuracy: 0.5854
+Client 2: Evaluation - Loss: 1.2532, Accuracy: 0.5470
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.1265, Accuracy: 0.6000
+Client 2: Evaluation - Loss: 1.2547, Accuracy: 0.5560
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.1155, Accuracy: 0.6016
+Client 2: Evaluation - Loss: 1.2637, Accuracy: 0.5370
+Client 2: Starting training...
+Client 2: Training completed - Loss: 1.0947, Accuracy: 0.6112
+Client 2: Evaluation - Loss: 1.2545, Accuracy: 0.5440
